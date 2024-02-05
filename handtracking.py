@@ -1,6 +1,5 @@
 import cv2
 import mediapipe as mp
-from statistics import mean, variance
 import numpy as np
 
 def distance(a, b):
