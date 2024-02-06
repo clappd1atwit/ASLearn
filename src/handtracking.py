@@ -1,8 +1,8 @@
 import cv2
 import mediapipe as mp
 
-from helpers import *
-from letters import *
+from src.helpers import *
+from src.letters import *
 
 def main():
     mp_hand = mp.solutions.hands

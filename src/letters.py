@@ -1,5 +1,5 @@
 import mediapipe as mp
-from helpers import *
+from src.helpers import *
 
 def is_letter_a(results, landmarks):
     handedness = is_right_hand(results, landmarks)
