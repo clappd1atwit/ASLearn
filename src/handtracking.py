@@ -32,7 +32,7 @@ def main():
             for landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(frame, landmarks, mp_hand.HAND_CONNECTIONS)
                 
-                text = is_letter_a(results, landmarks)
+                text =  'A' if is_letter_a(results, landmarks) else ''
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
                 
 
