@@ -39,6 +39,8 @@ def main():
                     text = 'B'
                 elif is_letter_d(results, landmarks):
                     text = 'D'
+                elif is_letter_f(results, landmarks):
+                    text = 'F'
                 
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
                 

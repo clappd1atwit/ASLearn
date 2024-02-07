@@ -58,7 +58,27 @@ def is_letter_e(results, landmarks):
     return False
 
 def is_letter_f(results, landmarks):
-    return False
+    wrist = wrist_lm(landmarks)
+    thumb_tip = thumb_tip_lm(landmarks)
+    
+    index_pip = index_pip_lm(landmarks)
+    index_dip = index_dip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    
+    middle_pip = middle_pip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+
+    return (is_finger_open(middle_tip, middle_pip, wrist) and
+           is_finger_open(ring_tip, ring_pip, wrist) and
+           is_finger_open(pinky_tip, pinky_pip, wrist) and
+           is_touching(thumb_tip, index_tip, index_dip))
+ 
 
 def is_letter_g(results, landmarks):
     return False
