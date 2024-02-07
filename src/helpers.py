@@ -1,6 +1,6 @@
 import mediapipe as mp
 import numpy as np
-from hand_landma
+from hand_landmarks import *
 def is_hand_open(landmarks):
     # Define the indices for the thumb and index finger landmarks
     wrist = wrist(landmarks)
