@@ -21,8 +21,11 @@ def is_letter_a(results, landmarks):
     else:
         return is_hand_closed(landmarks) and thumb_tip.y < thumb_mcp.y and thumb_tip.x < min(index_mcp.x, index_dip.x)
         
-def is_letter_b(results, landmarks):
-    return False
+def is_letter_b(_, landmarks):
+    thumb_tip = thumb_tip_lm(landmarks)
+    thumb_ip = thumb_ip_lm(landmarks)
+    
+    return is_hand_open(landmarks) and abs(thumb_tip.x - thumb_ip.x) > abs(thumb_tip.y - thumb_ip.y)
 
 def is_letter_c(results, landmarks):
     return False

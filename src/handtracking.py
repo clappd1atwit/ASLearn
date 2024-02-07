@@ -12,10 +12,10 @@ def main():
     cap = cv2.VideoCapture(0)
 
     font = cv2.FONT_HERSHEY_SIMPLEX
-    font_scale = 0.8
-    font_thickness = 2
-    text_position_left = (10, 30)
-    color = (0, 255, 0)
+    font_scale = 3
+    font_thickness = 4
+    text_position_left = (10, 80)
+    color = (255, 50, 255)
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -35,6 +35,8 @@ def main():
                 text = ''
                 if is_letter_a(results, landmarks):
                     text = 'A'
+                elif is_letter_b(results, landmarks):
+                    text = 'B'
                 elif is_letter_d(results, landmarks):
                     text = 'D'
                 
