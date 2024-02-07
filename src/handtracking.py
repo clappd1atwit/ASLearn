@@ -1,8 +1,8 @@
 import cv2
 import mediapipe as mp
 
-from src.helpers import *
-from src.letters import *
+from helpers import *
+from letters import *
 
 def main():
     mp_hand = mp.solutions.hands
@@ -15,7 +15,6 @@ def main():
     font_scale = 0.8
     font_thickness = 2
     text_position_left = (10, 30)
-    text_position_right = (100, 30)
     color = (0, 255, 0)
 
     while cap.isOpened():
@@ -33,12 +32,6 @@ def main():
             for landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(frame, landmarks, mp_hand.HAND_CONNECTIONS)
                 
-                # if is_letter_a(results, landmarks):
-                #     text = "a"
-                #     color = (0, 255, 0)
-                # else:
-                #     text = ""
-                #     color = (0, 0, 255)
                 text = is_letter_a(results, landmarks)
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
                 
