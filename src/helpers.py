@@ -66,4 +66,20 @@ def distance(a, b):
     return ((a.x - b.x)**2 + (a.y - b.y)**2)**0.5
 
 def is_touching(finger1_tip, finger2_tip, finger2_dip):
-    return distance(finger1_tip, finger2_tip) < distance(finger2_tip, finger2_dip)
+    return distance(finger1_tip, finger2_tip) * 1.25 < distance(finger2_tip, finger2_dip)
+
+def is_facing_forward(results, landmarks):
+    handedness = is_right_hand(results, landmarks)
+    
+    thumb_cmc = thumb_cmc_lm(landmarks)
+    thumb_mcp = thumb_mcp_lm(landmarks)
+    index_mcp = index_mcp_lm(landmarks)
+    middle_mcp = middle_mcp_lm(landmarks)
+    ring_mcp = ring_mcp_lm(landmarks)
+    pinky_mcp = pinky_mcp_lm(landmarks)
+    
+    if handedness:
+        return pinky_mcp.x < ring_mcp.x < middle_mcp.x < index_mcp.x and thumb_cmc.y > thumb_mcp.y
+    else:
+        return pinky_mcp.x > ring_mcp.x > middle_mcp.x > index_mcp.x  and thumb_cmc.y > thumb_mcp.y
+    
