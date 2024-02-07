@@ -64,3 +64,6 @@ def is_right_hand(results, landmarks):
     
 def distance(a, b):
     return ((a.x - b.x)**2 + (a.y - b.y)**2)**0.5
+
+def is_touching(finger1_tip, finger2_tip, finger2_dip):
+    return distance(finger1_tip, finger2_tip) < distance(finger2_tip, finger2_dip)
