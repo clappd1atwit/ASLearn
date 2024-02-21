@@ -45,6 +45,47 @@ def main():
                     text = 'E'
                 elif is_letter_f(results, landmarks):
                     text = 'F'
+                elif is_letter_g(results, landmarks):
+                    text = 'G'
+                elif is_letter_h(results, landmarks):
+                    text = 'H'
+                elif is_letter_i(results, landmarks):
+                    text = 'I'
+                elif is_letter_j(results, landmarks):
+                    text = 'J'
+                elif is_letter_k(results, landmarks):
+                    text = 'K'
+                elif is_letter_l(results, landmarks):
+                    text = 'L'
+                elif is_letter_m(results, landmarks):
+                    text = 'M'
+                elif is_letter_n(results, landmarks):
+                    text = 'N'
+                elif is_letter_o(results, landmarks):
+                    text = 'O'
+                elif is_letter_p(results, landmarks):
+                    text = 'P'
+                elif is_letter_q(results, landmarks):
+                    text = 'Q'
+                elif is_letter_r(results, landmarks):
+                    text = 'F'
+                elif is_letter_s(results, landmarks):
+                    text = 'S'
+                elif is_letter_t(results, landmarks):
+                    text = 'T'
+                elif is_letter_u(results, landmarks):
+                    text = 'U'
+                elif is_letter_v(results, landmarks):
+                    text = 'V'
+                elif is_letter_w(results, landmarks):
+                    text = 'W'
+                elif is_letter_x(results, landmarks):
+                    text = 'X'
+                elif is_letter_y(results, landmarks):
+                    text = 'Y'
+                elif is_letter_z(results, landmarks):
+                    text = 'Z'
+                
                 
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
                 
