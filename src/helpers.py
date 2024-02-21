@@ -69,6 +69,8 @@ def distance(a, b):
 def normalized_slope(a, b):
     '''
     Gives a normalized slope from 0 - 1, 0 being horizontal and 1 being vertical.
+    A negative slope is given for negative slopes which can be used to distiguish
+    between left and right hand positions
     '''
     if a.x == b.x:
        return 1
