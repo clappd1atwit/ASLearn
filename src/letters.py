@@ -13,19 +13,19 @@ def is_letter_a(results, landmarks):
     thumb_mcp = thumb_mcp_lm(landmarks)
     index_mcp = index_mcp_lm(landmarks)
     index_dip = index_dip_lm(landmarks)
-        
+            
     # Right Hand
     if handedness:
         return (is_hand_closed(landmarks) and 
                 thumb_tip.y < thumb_mcp.y and 
                 thumb_tip.x > max(index_mcp.x, index_dip.x) and
-                normalized_slope(thumb_mcp, thumb_tip) > .6)
+                normalized_slope(thumb_mcp, thumb_tip) < -.8)
     # Left Hand
     else:
         return (is_hand_closed(landmarks) and 
                 thumb_tip.y < thumb_mcp.y and 
                 thumb_tip.x < min(index_mcp.x, index_dip.x) and 
-                normalized_slope(thumb_mcp, thumb_tip) > .6)
+                normalized_slope(thumb_mcp, thumb_tip) > .8)
         
 def is_letter_b(results, landmarks):
     handedness = is_right_hand(results, landmarks)
@@ -91,7 +91,6 @@ def is_letter_e(results, landmarks):
             thumb_slope > -0.4 and
             thumb_slope < 0.4)
 
-# TODO: is_touching is still finicky
 def is_letter_f(results, landmarks):
     wrist = wrist_lm(landmarks)
     thumb_tip = thumb_tip_lm(landmarks)
