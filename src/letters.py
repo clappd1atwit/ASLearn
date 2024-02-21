@@ -72,6 +72,8 @@ def is_letter_d(results, landmarks):
     
 
 def is_letter_e(results, landmarks):
+    handedness = is_right_hand(results, landmarks)
+
     thumb_ip = thumb_ip_lm(landmarks)
     thumb_tip = thumb_tip_lm(landmarks)
     
@@ -82,14 +84,26 @@ def is_letter_e(results, landmarks):
     
     thumb_slope = normalized_slope(thumb_tip, thumb_ip)
     
-    return (is_facing_forward(results, landmarks) and
+    if handedness:
+        return (is_facing_forward(results, landmarks) and
             is_hand_closed(landmarks) and
             thumb_tip.y > index_tip.y and
             thumb_tip.y > middle_tip.y and
             thumb_tip.y > ring_tip.y and
             thumb_tip.y > pinky_tip.y and
-            thumb_slope > -0.4 and
-            thumb_slope < 0.4)
+            thumb_slope > -0.2 and
+            thumb_slope < 0.2 and 
+            thumb_tip.x < thumb_ip.x)
+    else:
+        return (is_facing_forward(results, landmarks) and
+            is_hand_closed(landmarks) and
+            thumb_tip.y > index_tip.y and
+            thumb_tip.y > middle_tip.y and
+            thumb_tip.y > ring_tip.y and
+            thumb_tip.y > pinky_tip.y and
+            thumb_slope > -0.2 and
+            thumb_slope < 0.2 and
+            thumb_tip.x > thumb_ip.x)
 
 def is_letter_f(results, landmarks):
     wrist = wrist_lm(landmarks)

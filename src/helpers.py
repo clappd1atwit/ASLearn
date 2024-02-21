@@ -79,7 +79,7 @@ def normalized_slope(a, b):
 
 # TODO: is_touching is still finicky
 def is_touching(finger1_tip, finger2_tip, finger2_dip):
-    return distance(finger1_tip, finger2_tip) * 1.25 < distance(finger2_tip, finger2_dip)
+    return distance(finger1_tip, finger2_tip) < distance(finger2_tip, finger2_dip) * 1.25
 
 def is_facing_forward(results, landmarks):
     handedness = is_right_hand(results, landmarks)
