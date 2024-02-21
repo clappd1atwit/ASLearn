@@ -77,7 +77,6 @@ def normalized_slope(a, b):
     slope_value = (a.y - b.y) / (a.x - b.x)
     return math.atan(slope_value) / (math.pi / 2)
 
-# TODO: is_touching is still finicky
 def is_touching(finger1_tip, finger2_tip, finger2_dip):
     return distance(finger1_tip, finger2_tip) < distance(finger2_tip, finger2_dip) * 1.25
 
