@@ -37,8 +37,12 @@ def main():
                     text = 'A'
                 elif is_letter_b(results, landmarks):
                     text = 'B'
+                elif is_letter_c(results, landmarks):
+                    text = 'C'
                 elif is_letter_d(results, landmarks):
                     text = 'D'
+                elif is_letter_e(results, landmarks):
+                    text = 'E'
                 elif is_letter_f(results, landmarks):
                     text = 'F'
                 

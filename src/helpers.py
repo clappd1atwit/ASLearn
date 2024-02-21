@@ -53,7 +53,7 @@ def is_hand_closed(landmarks):
 
 def is_finger_open(finger_tip, finger_pip, wrist):
     if wrist.y < finger_pip.y:
-        return finger_tip.y < finger_pip.y
+        return finger_tip.y > finger_pip.y
     else:
         return finger_tip.y < finger_pip.y
     
