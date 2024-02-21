@@ -16,16 +16,16 @@ def is_letter_a(results, landmarks):
             
     # Right Hand
     if handedness:
-        return (is_hand_closed(landmarks) and 
-                thumb_tip.y < thumb_mcp.y and 
-                thumb_tip.x > max(index_mcp.x, index_dip.x) and
-                normalized_slope(thumb_mcp, thumb_tip) < -.8)
+        return (is_hand_closed(landmarks) and
+                thumb_tip.x > max(index_mcp.x, index_dip.x) and 
+                (normalized_slope(thumb_mcp, thumb_tip) > .7 or
+                normalized_slope(thumb_mcp, thumb_tip) < -.7))
     # Left Hand
     else:
-        return (is_hand_closed(landmarks) and 
-                thumb_tip.y < thumb_mcp.y and 
+        return (is_hand_closed(landmarks) and
                 thumb_tip.x < min(index_mcp.x, index_dip.x) and 
-                normalized_slope(thumb_mcp, thumb_tip) > .8)
+                (normalized_slope(thumb_mcp, thumb_tip) > .7 or
+                normalized_slope(thumb_mcp, thumb_tip) < -.7))
         
 def is_letter_b(results, landmarks):
     handedness = is_right_hand(results, landmarks)
