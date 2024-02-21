@@ -14,12 +14,20 @@ def is_letter_a(results, landmarks):
     index_mcp = index_mcp_lm(landmarks)
     index_dip = index_dip_lm(landmarks)
     
+    print(normalized_slope(thumb_mcp, thumb_tip))
+    
     # Right Hand
     if handedness:
-        return is_hand_closed(landmarks) and thumb_tip.y < thumb_mcp.y and thumb_tip.x > max(index_mcp.x, index_dip.x)
+        return (is_hand_closed(landmarks) and 
+                thumb_tip.y < thumb_mcp.y and 
+                thumb_tip.x > max(index_mcp.x, index_dip.x) and
+                normalized_slope(thumb_mcp, thumb_tip) > .6)
     # Left Hand
     else:
-        return is_hand_closed(landmarks) and thumb_tip.y < thumb_mcp.y and thumb_tip.x < min(index_mcp.x, index_dip.x)
+        return (is_hand_closed(landmarks) and 
+                thumb_tip.y < thumb_mcp.y and 
+                thumb_tip.x < min(index_mcp.x, index_dip.x) and 
+                normalized_slope(thumb_mcp, thumb_tip) > .6)
         
 def is_letter_b(results, landmarks):
     handedness = is_right_hand(results, landmarks)

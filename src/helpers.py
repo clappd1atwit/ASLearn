@@ -1,6 +1,7 @@
 import mediapipe as mp
 import numpy as np
 from hand_landmarks import *
+import math
 
 def is_hand_open(landmarks):
     # Define the indices for the thumb and index finger landmarks
@@ -64,6 +65,15 @@ def is_right_hand(results, landmarks):
     
 def distance(a, b):
     return ((a.x - b.x)**2 + (a.y - b.y)**2)**0.5
+
+def normalized_slope(a, b):
+    '''
+    Gives a normalized slope from 0 - 1, 0 being horizontal and 1 being vertical.
+    '''
+    if a.x == b.x:
+       return 1
+    slope_value = (a.y - b.y) / (a.x - b.x)
+    return math.atan(slope_value) / (math.pi / 2)
 
 def is_touching(finger1_tip, finger2_tip, finger2_dip):
     return distance(finger1_tip, finger2_tip) * 1.25 < distance(finger2_tip, finger2_dip)
