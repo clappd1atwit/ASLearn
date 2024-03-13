@@ -257,7 +257,31 @@ def is_letter_t(results, landmarks):
     return False
 
 def is_letter_u(results, landmarks):
-    return False
+    wrist = wrist_lm(landmarks)
+    
+    index_mcp = index_mcp_lm(landmarks)
+    index_pip = index_pip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    
+    middle_mcp = middle_mcp_lm(landmarks)
+    middle_pip = middle_pip_lm(landmarks)
+    middle_dip = middle_dip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+    
+    thumb_tip = thumb_tip_lm(landmarks)
+    return (is_facing_forward(results, landmarks) and
+            is_finger_open(index_tip, index_pip, wrist) and
+            is_finger_open(middle_tip, middle_pip, wrist) and
+            not is_finger_open(ring_tip, ring_pip, wrist) and
+            not is_finger_open(pinky_tip, pinky_pip, wrist) and 
+            is_touching(index_tip, middle_tip, middle_dip) and
+            thumb_tip.y > index_mcp.y)
 
 def is_letter_v(results, landmarks):
     wrist = wrist_lm(landmarks)
@@ -287,7 +311,34 @@ def is_letter_v(results, landmarks):
             thumb_tip.y > index_mcp.y)
 
 def is_letter_w(results, landmarks):
-    return False
+    wrist = wrist_lm(landmarks)
+    
+    index_mcp = index_mcp_lm(landmarks)
+    index_pip = index_pip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    
+    middle_mcp = middle_mcp_lm(landmarks)
+    middle_pip = middle_pip_lm(landmarks)
+    middle_dip = middle_dip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+    
+    thumb_tip = thumb_tip_lm(landmarks)
+    thumb_dip = thumb_mcp_lm(landmarks)
+    return (is_facing_forward(results, landmarks) and
+            is_finger_open(index_tip, index_pip, wrist) and
+            is_finger_open(middle_tip, middle_pip, wrist) and
+            is_finger_open(ring_tip, ring_pip, wrist) and
+            not is_finger_open(pinky_tip, pinky_pip, wrist) and 
+            not is_touching(ring_tip, middle_tip, middle_dip) and
+            not is_touching(index_tip, middle_tip, middle_dip) and
+            is_touching(pinky_tip, thumb_tip, thumb_dip) and
+            thumb_tip.y > index_mcp.y)
 
 def is_letter_x(results, landmarks):
     return False
