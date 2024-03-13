@@ -158,21 +158,28 @@ def is_letter_i(results, landmarks):
     pinky_tip = pinky_tip_lm(landmarks)
 
     if handedness: # Right hand
-        return (is_hand_closed(results, landmarks) and
+        print(normalized_slope(thumb_mcp, thumb_tip))
+        return (is_facing_forward(results, landmarks) and
                 thumb_tip.x > max(index_mcp.x, index_dip.x) and
+                not (normalized_slope(thumb_mcp, thumb_tip) > -.8 and
+                normalized_slope(thumb_mcp, thumb_tip) < 0) and
+                ##(normalized_slope(thumb_mcp, thumb_tip) < -0.8) and
                 not is_finger_open(middle_tip, middle_pip, wrist) and
                 not is_finger_open(ring_tip, ring_pip, wrist) and
                 is_finger_open(pinky_tip, pinky_pip, wrist) and
-                not is_finger_open(index_tip, index_pip, wrist) and
-                not is_finger_open(thumb_tip, thumb_mcp, wrist)) 
+                not is_finger_open(index_tip, index_pip, wrist))
     else: # Left hand
+        print(normalized_slope(thumb_mcp, thumb_tip))
         return (is_facing_forward(results, landmarks) and
                 thumb_tip.x < min(index_mcp.x, index_dip.x) and
+                not (normalized_slope(thumb_mcp, thumb_tip) < .8 and
+                normalized_slope(thumb_mcp, thumb_tip) > 0) and
+                ##(normalized_slope(thumb_mcp, thumb_tip) > 0.8 or
+                ##normalized_slope(thumb_mcp, thumb_tip) < 0) and
                 not is_finger_open(middle_tip, middle_pip, wrist) and
                 not is_finger_open(ring_tip, ring_pip, wrist) and
                 is_finger_open(pinky_tip, pinky_pip, wrist) and
-                not is_finger_open(index_tip, index_pip, wrist) and
-                not is_finger_open(thumb_tip, thumb_mcp, wrist)) 
+                not is_finger_open(index_tip, index_pip, wrist))
 
 
 def is_letter_j(results, landmarks):
@@ -243,7 +250,44 @@ def is_letter_x(results, landmarks):
     return False
 
 def is_letter_y(results, landmarks):
-    return False
+    handedness = is_right_hand(results, landmarks)
+    wrist = wrist_lm(landmarks)
+    thumb_tip = thumb_tip_lm(landmarks)
+    thumb_mcp = thumb_mcp_lm(landmarks)
+    
+    index_pip = index_pip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    index_mcp = index_mcp_lm(landmarks)
+    index_dip = index_dip_lm(landmarks)
+    
+    middle_pip = middle_pip_lm(landmarks)
+    middle_dip = middle_dip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+
+    if handedness: # Right hand
+        print(normalized_slope(thumb_mcp, thumb_tip))
+        return (is_facing_forward(results, landmarks) and
+                (normalized_slope(thumb_mcp, thumb_tip) > -.7 and
+                normalized_slope(thumb_mcp, thumb_tip) < 0) and
+                not is_finger_open(middle_tip, middle_pip, wrist) and
+                not is_finger_open(ring_tip, ring_pip, wrist) and
+                is_finger_open(pinky_tip, pinky_pip, wrist) and
+                not is_finger_open(index_tip, index_pip, wrist))
+    else: # Left hand
+        print(normalized_slope(thumb_mcp, thumb_tip))
+        return (is_facing_forward(results, landmarks) and
+                (normalized_slope(thumb_mcp, thumb_tip) < .7 and
+                normalized_slope(thumb_mcp, thumb_tip) > 0) and
+                not is_finger_open(middle_tip, middle_pip, wrist) and
+                not is_finger_open(ring_tip, ring_pip, wrist) and
+                is_finger_open(pinky_tip, pinky_pip, wrist) and
+                not is_finger_open(index_tip, index_pip, wrist))
 
 def is_letter_z(results, landmarks):
     return False
