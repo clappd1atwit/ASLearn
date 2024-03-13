@@ -70,7 +70,6 @@ def is_hand_closed_sideways(results, landmarks):
     handedness = is_right_hand(results, landmarks)
 
     # Check if each induvidual finger is closed
-    print(normalized_slope(index_tip, index_pip))
     if handedness:
         index_closed = normalized_slope(index_tip, index_pip) > -0.5
         middle_closed = normalized_slope(middle_tip, middle_pip) > -0.4
