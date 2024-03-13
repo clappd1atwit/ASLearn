@@ -171,8 +171,7 @@ def is_letter_i(results, landmarks):
                 not is_finger_open(middle_tip, middle_pip, wrist) and
                 not is_finger_open(ring_tip, ring_pip, wrist) and
                 is_finger_open(pinky_tip, pinky_pip, wrist) and
-                not is_finger_open(index_tip, index_pip, wrist) and
-                not is_finger_open(thumb_tip, thumb_mcp, wrist)) 
+                not is_finger_open(index_tip, index_pip, wrist)) 
 
 
 def is_letter_j(results, landmarks):
@@ -204,7 +203,8 @@ def is_letter_k(results, landmarks):
             not is_finger_open(pinky_tip, pinky_pip, wrist) and 
             not is_touching(index_tip, middle_tip, middle_dip) and
             thumb_tip.x > min(index_mcp.x, middle_mcp.x) and
-            thumb_tip.x < max(index_mcp.x, middle_mcp.x))
+            thumb_tip.x < max(index_mcp.x, middle_mcp.x) and
+            thumb_tip.y < index_mcp.y)
             
 
 def is_letter_l(results, landmarks):
