@@ -182,8 +182,6 @@ def is_letter_i(results, landmarks):
     
     pinky_pip = pinky_pip_lm(landmarks)
     pinky_tip = pinky_tip_lm(landmarks)
-
-    return False
     
     if handedness: # Right hand
         print(normalized_slope(thumb_mcp, thumb_tip))
