@@ -131,4 +131,25 @@ def is_facing_forward(results, landmarks):
         return (pinky_mcp.x > ring_mcp.x > middle_mcp.x > index_mcp.x  and 
                 thumb_cmc.y > thumb_mcp.y and
                 distance(index_mcp, pinky_mcp) > distance(index_mcp, wrist) / 3)
+        
+def is_facing_back_and_sideways(results, landmarks):
+    handedness = is_right_hand(results, landmarks)
+    wrist = wrist_lm(landmarks)
     
+    index_mcp = index_mcp_lm(landmarks)
+    middle_mcp = middle_mcp_lm(landmarks)
+    ring_mcp = ring_mcp_lm(landmarks)
+    pinky_mcp = pinky_mcp_lm(landmarks)
+    
+    if handedness:
+        return (pinky_mcp.y > ring_mcp.y > middle_mcp.y > index_mcp.y and
+                index_mcp.x > wrist.x)
+    else:
+        return (pinky_mcp.y > ring_mcp.y > middle_mcp.y > index_mcp.y and
+            index_mcp.x < wrist.x)
+    
+def is_finger_open_sideways(finger_tip, finger_mcp, handedness):
+    if handedness:
+        return finger_tip.x > finger_mcp.x
+    else:
+        return finger_tip.x < finger_mcp.x
