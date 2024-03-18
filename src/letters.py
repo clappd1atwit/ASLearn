@@ -13,6 +13,8 @@ def is_letter_a(results, landmarks):
     thumb_mcp = thumb_mcp_lm(landmarks)
     index_mcp = index_mcp_lm(landmarks)
     index_dip = index_dip_lm(landmarks)
+    
+    print(normalized_slope(thumb_mcp, thumb_tip))
             
     # Right Hand
     if handedness:
@@ -48,7 +50,7 @@ def is_letter_b(results, landmarks):
 def is_letter_c(results, landmarks):
     wrist = wrist_lm(landmarks)
     thumb_tip = thumb_tip_lm(landmarks)
-    thumb_mcp = thumb_mcp_lm(landmarks)
+    thumb_ip = thumb_ip_lm(landmarks)
     
     index_pip = index_pip_lm(landmarks)
     index_tip = index_tip_lm(landmarks)
@@ -65,10 +67,10 @@ def is_letter_c(results, landmarks):
     
     return (not is_facing_forward(results, landmarks) and
             is_hand_closed_sideways(results, landmarks) and  
-            not is_touching(index_tip, thumb_tip, thumb_mcp) and
-            not is_touching(middle_tip, thumb_tip, thumb_mcp) and
-            not is_touching(ring_tip, thumb_tip, thumb_mcp) and
-            not is_touching(pinky_tip, thumb_tip, thumb_mcp))
+            not is_touching(index_tip, thumb_tip, thumb_ip) and
+            not is_touching(middle_tip, thumb_tip, thumb_ip) and
+            not is_touching(ring_tip, thumb_tip, thumb_ip) and
+            not is_touching(pinky_tip, thumb_tip, thumb_ip))
 
 def is_letter_d(results, landmarks):
     wrist = wrist_lm(landmarks)
@@ -269,7 +271,7 @@ def is_letter_o(results, landmarks):
     wrist = wrist_lm(landmarks)
     
     thumb_tip = thumb_tip_lm(landmarks)
-    thumb_mcp = thumb_mcp_lm(landmarks)
+    thumb_ip = thumb_ip_lm(landmarks)
     
     index_pip = index_pip_lm(landmarks)
     index_tip = index_tip_lm(landmarks)
@@ -286,10 +288,10 @@ def is_letter_o(results, landmarks):
     
     return (not is_facing_forward(results, landmarks) and
             is_hand_closed_sideways(results, landmarks) and
-            (is_touching(index_tip, thumb_tip, thumb_mcp) or
-             is_touching(middle_tip, thumb_tip, thumb_mcp) or
-             is_touching(ring_tip, thumb_tip, thumb_mcp) or
-             is_touching(pinky_tip, thumb_tip, thumb_mcp)))
+            (is_touching(index_tip, thumb_tip, thumb_ip) or
+             is_touching(middle_tip, thumb_tip, thumb_ip) or
+             is_touching(ring_tip, thumb_tip, thumb_ip) or
+             is_touching(pinky_tip, thumb_tip, thumb_ip)))
 
 def is_letter_p(results, landmarks):
     return False
