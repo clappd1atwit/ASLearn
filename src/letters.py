@@ -368,10 +368,7 @@ def is_letter_t(results, landmarks):
     thumb_tip = thumb_tip_lm(landmarks)
     
     index_pip = index_pip_lm(landmarks)
-    middle_pip = middle_pip_lm(landmarks)
-    
-    print(index_pip.x, thumb_tip.x, middle_pip.x)
-    
+    middle_pip = middle_pip_lm(landmarks)    
     return (is_facing_forward(results, landmarks) and
             is_hand_closed(landmarks) and
             thumb_tip.x < max(index_pip.x, middle_pip.x) and
