@@ -341,14 +341,25 @@ def is_letter_r(results, landmarks):
     pinky_tip = pinky_tip_lm(landmarks)
     
     thumb_tip = thumb_tip_lm(landmarks)
-    if index_tip.x > middle_tip.x:
+
+    handedness = is_right_hand(results, landmarks)
+
+    if handedness: # Right hand
         return (is_facing_forward(results, landmarks) and
             is_finger_open(index_tip, index_pip, wrist) and
             is_finger_open(middle_tip, middle_pip, wrist) and
             not is_finger_open(ring_tip, ring_pip, wrist) and
             not is_finger_open(pinky_tip, pinky_pip, wrist) and 
             is_touching(index_tip, middle_tip, middle_dip) and
-            thumb_tip.y > index_mcp.y)
+            index_tip.x < middle_tip.x)
+    else: # Left hand
+        return (is_facing_forward(results, landmarks) and
+            is_finger_open(index_tip, index_pip, wrist) and
+            is_finger_open(middle_tip, middle_pip, wrist) and
+            not is_finger_open(ring_tip, ring_pip, wrist) and
+            not is_finger_open(pinky_tip, pinky_pip, wrist) and 
+            is_touching(index_tip, middle_tip, middle_dip) and
+            index_tip.x > middle_tip.x)
 
 def is_letter_s(results, landmarks):
     return False
