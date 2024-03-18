@@ -148,8 +148,8 @@ def is_facing_back_and_sideways(results, landmarks):
         return (pinky_mcp.y > ring_mcp.y > middle_mcp.y > index_mcp.y and
             index_mcp.x < wrist.x)
     
-def is_finger_open_sideways(finger_tip, finger_mcp, handedness):
+def is_finger_open_sideways(finger_tip, finger_pip, handedness):
     if handedness:
-        return finger_tip.x > finger_mcp.x
+        return finger_tip.x > finger_pip.x
     else:
-        return finger_tip.x < finger_mcp.x
+        return finger_tip.x < finger_pip.x
