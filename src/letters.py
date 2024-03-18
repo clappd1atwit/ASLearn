@@ -13,9 +13,7 @@ def is_letter_a(results, landmarks):
     thumb_mcp = thumb_mcp_lm(landmarks)
     index_mcp = index_mcp_lm(landmarks)
     index_dip = index_dip_lm(landmarks)
-    
-    print(normalized_slope(thumb_mcp, thumb_tip))
-            
+                
     # Right Hand
     if handedness:
         return (is_facing_forward(results, landmarks) and
@@ -158,9 +156,11 @@ def is_letter_f(results, landmarks):
 
 def is_letter_g(results, landmarks):
     return False
+    return is_facing_back_and_sideways(results, landmarks)
 
 def is_letter_h(results, landmarks):
-    return False
+    handedness = is_right_hand(results, landmarks)
+    return 
 
 def is_letter_i(results, landmarks):
     handedness = is_right_hand(results, landmarks)
@@ -460,4 +460,3 @@ def is_letter_y(results, landmarks):
 
 def is_letter_z(results, landmarks):
     return False
-
