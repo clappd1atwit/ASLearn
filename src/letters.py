@@ -47,23 +47,17 @@ def is_letter_b(results, landmarks):
 
 def is_letter_c(results, landmarks):
     wrist = wrist_lm(landmarks)
+    
     thumb_tip = thumb_tip_lm(landmarks)
     thumb_ip = thumb_ip_lm(landmarks)
     
-    index_pip = index_pip_lm(landmarks)
     index_tip = index_tip_lm(landmarks)
-    
-    middle_pip = middle_pip_lm(landmarks)
-    middle_dip = middle_dip_lm(landmarks)
     middle_tip = middle_tip_lm(landmarks)
-    
-    ring_pip = ring_pip_lm(landmarks)
     ring_tip = ring_tip_lm(landmarks)
-    
-    pinky_pip = pinky_pip_lm(landmarks)
     pinky_tip = pinky_tip_lm(landmarks)
     
     return (not is_facing_forward(results, landmarks) and
+            not is_facing_back_and_sideways(results, landmarks) and
             is_hand_closed_sideways(results, landmarks) and  
             not is_touching(index_tip, thumb_tip, thumb_ip) and
             not is_touching(middle_tip, thumb_tip, thumb_ip) and
@@ -155,12 +149,50 @@ def is_letter_f(results, landmarks):
  
 
 def is_letter_g(results, landmarks):
-    return False
-    return is_facing_back_and_sideways(results, landmarks)
+    handedness = is_right_hand(results, landmarks)
+    
+    thumb_tip = thumb_tip_lm(landmarks)
+    thumb_ip = thumb_ip_lm(landmarks)
+    
+    index_pip = index_pip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    
+    middle_pip = middle_pip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+    
+    return (is_hand_closed_sideways(results, landmarks) and
+            is_finger_open_sideways(thumb_tip, thumb_ip, handedness) and
+            is_finger_open_sideways(index_tip, index_pip, handedness) and
+            not is_finger_open_sideways(middle_tip, middle_pip, handedness) and 
+            not is_finger_open_sideways(ring_tip, ring_pip, handedness) and
+            not is_finger_open_sideways(pinky_tip, pinky_pip, handedness)) 
 
 def is_letter_h(results, landmarks):
     handedness = is_right_hand(results, landmarks)
-    return 
+    
+    index_pip = index_pip_lm(landmarks)
+    index_tip = index_tip_lm(landmarks)
+    
+    middle_pip = middle_pip_lm(landmarks)
+    middle_tip = middle_tip_lm(landmarks)
+    
+    ring_pip = ring_pip_lm(landmarks)
+    ring_tip = ring_tip_lm(landmarks)
+    
+    pinky_pip = pinky_pip_lm(landmarks)
+    pinky_tip = pinky_tip_lm(landmarks)
+    
+    return (is_hand_closed_sideways(results, landmarks) and
+            is_finger_open_sideways(index_tip, index_pip, handedness) and
+            is_finger_open_sideways(middle_tip, middle_pip, handedness) and 
+            not is_finger_open_sideways(ring_tip, ring_pip, handedness) and
+            not is_finger_open_sideways(pinky_tip, pinky_pip, handedness)) 
 
 def is_letter_i(results, landmarks):
     handedness = is_right_hand(results, landmarks)
@@ -268,25 +300,16 @@ def is_letter_n(results, landmarks):
     return False
 
 def is_letter_o(results, landmarks):
-    wrist = wrist_lm(landmarks)
-    
     thumb_tip = thumb_tip_lm(landmarks)
     thumb_ip = thumb_ip_lm(landmarks)
     
-    index_pip = index_pip_lm(landmarks)
     index_tip = index_tip_lm(landmarks)
-    
-    middle_pip = middle_pip_lm(landmarks)
-    middle_dip = middle_dip_lm(landmarks)
     middle_tip = middle_tip_lm(landmarks)
-    
-    ring_pip = ring_pip_lm(landmarks)
     ring_tip = ring_tip_lm(landmarks)
-    
-    pinky_pip = pinky_pip_lm(landmarks)
     pinky_tip = pinky_tip_lm(landmarks)
     
     return (not is_facing_forward(results, landmarks) and
+            not is_facing_back_and_sideways(results, landmarks) and
             is_hand_closed_sideways(results, landmarks) and
             (is_touching(index_tip, thumb_tip, thumb_ip) or
              is_touching(middle_tip, thumb_tip, thumb_ip) or
@@ -342,7 +365,14 @@ def is_letter_s(results, landmarks):
     return False
 
 def is_letter_t(results, landmarks):
-    return False
+    thumb_tip = thumb_tip_lm(landmarks)
+    
+    index_pip = index_pip_lm(landmarks)
+    middle_pip = middle_pip_lm(landmarks)    
+    return (is_facing_forward(results, landmarks) and
+            is_hand_closed(landmarks) and
+            thumb_tip.x < max(index_pip.x, middle_pip.x) and
+            thumb_tip.x > min(index_pip.x, middle_pip.x))
 
 def is_letter_u(results, landmarks):
     wrist = wrist_lm(landmarks)
@@ -350,8 +380,7 @@ def is_letter_u(results, landmarks):
     index_mcp = index_mcp_lm(landmarks)
     index_pip = index_pip_lm(landmarks)
     index_tip = index_tip_lm(landmarks)
-    
-    middle_mcp = middle_mcp_lm(landmarks)
+   
     middle_pip = middle_pip_lm(landmarks)
     middle_dip = middle_dip_lm(landmarks)
     middle_tip = middle_tip_lm(landmarks)
