@@ -453,6 +453,7 @@ def is_letter_y(results, landmarks):
     pinky_tip = pinky_tip_lm(landmarks)
 
     if handedness: # Right hand
+        #print (normalized_slope(thumb_mcp, thumb_tip))
         return (is_facing_forward(results, landmarks) and
                 (normalized_slope(thumb_mcp, thumb_tip) > -.7 and
                 normalized_slope(thumb_mcp, thumb_tip) < 0) and
@@ -461,6 +462,7 @@ def is_letter_y(results, landmarks):
                 is_finger_open(pinky_tip, pinky_pip, wrist) and
                 not is_finger_open(index_tip, index_pip, wrist))
     else: # Left hand
+        #print (normalized_slope(thumb_mcp, thumb_tip))
         return (is_facing_forward(results, landmarks) and
                 (normalized_slope(thumb_mcp, thumb_tip) < .7 and
                 normalized_slope(thumb_mcp, thumb_tip) > 0) and
@@ -471,3 +473,4 @@ def is_letter_y(results, landmarks):
 
 def is_letter_z(results, landmarks):
     return False
+
