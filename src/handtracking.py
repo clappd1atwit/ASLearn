@@ -86,10 +86,7 @@ def main():
                 elif is_letter_z(results, landmarks):
                     text = 'Z'
                 
-                
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
-                
-
         cv2.imshow("Hand Tracking", frame)
 
         # Exit when 'q' key is pressed
