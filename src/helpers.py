@@ -153,3 +153,9 @@ def is_finger_open_sideways(finger_tip, finger_pip, handedness):
         return finger_tip.x > finger_pip.x
     else:
         return finger_tip.x < finger_pip.x
+    
+def is_index_x(index_tip, index_pip, index_mcp):
+    return (normalized_slope(index_tip, index_pip) < .5 and
+            normalized_slope(index_tip, index_pip) > -.5 and
+            (normalized_slope(index_mcp, index_pip) > 0.7 or
+            normalized_slope(index_mcp, index_pip) < -0.7))
