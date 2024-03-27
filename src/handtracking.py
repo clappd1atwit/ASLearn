@@ -68,7 +68,7 @@ def main():
                 elif is_letter_q(results, landmarks):
                     text = 'Q'
                 elif is_letter_r(results, landmarks):
-                    text = 'R'
+                    text = 'F'
                 elif is_letter_s(results, landmarks):
                     text = 'S'
                 elif is_letter_t(results, landmarks):
