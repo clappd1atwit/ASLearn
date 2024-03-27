@@ -5,42 +5,83 @@ from collections import deque
 from helpers import *
 from letters import *
 
+import numpy as np
+
+class KalmanFilter:
+    def __init__(self, process_variance, measurement_variance, estimated_measurement_variance):
+        self.process_variance = process_variance
+        self.measurement_variance = measurement_variance
+        self.estimated_measurement_variance = estimated_measurement_variance
+        self.posteri_estimate = 0.0
+        self.posteri_error_estimate = 1.0
+
+    def update(self, measurement):
+        priori_estimate = self.posteri_estimate
+        priori_error_estimate = self.posteri_error_estimate + self.process_variance
+
+        blending_factor = priori_error_estimate / (priori_error_estimate + self.estimated_measurement_variance)
+        self.posteri_estimate = priori_estimate + blending_factor * (measurement - priori_estimate)
+        self.posteri_error_estimate = (1 - blending_factor) * priori_error_estimate
+
+        return self.posteri_estimate
+
 def detect_z(index_hand_landmarks):
     # Filter out None values
-    index_hand_landmarks = [point for point in index_hand_landmarks if point is not None]
+    index_hand_landmarks = [point for point in index_hand_landmarks if point[0] is not None and point[1] is not None]
 
     # Check if there are enough points to analyze
-    if len(index_hand_landmarks) < 3:
-        return False
+    if len(index_hand_landmarks) < 7:
+        return False, []
 
-    # Extract x and y coordinates of the points
+    # Apply Kalman filter to smooth hand landmark positions
+    kf_x = KalmanFilter(process_variance=1e-5, measurement_variance=0.1, estimated_measurement_variance=0.1)
+    kf_y = KalmanFilter(process_variance=1e-5, measurement_variance=0.1, estimated_measurement_variance=0.1)
+    
+    smoothed_landmarks = []
+    for point in index_hand_landmarks:
+        smoothed_x = kf_x.update(point[0])
+        smoothed_y = kf_y.update(point[1])
+        smoothed_landmarks.append((smoothed_x, smoothed_y))
+
+    # Extract x and y coordinates of the smoothed points
+    # x_values = [point[0] for point in smoothed_landmarks]
+    # y_values = [point[1] for point in smoothed_landmarks]
     x_values = [point[0] for point in index_hand_landmarks]
     y_values = [point[1] for point in index_hand_landmarks]
 
     # Find corners (significant changes in direction)
     corners = []
-    for i in range(1, len(index_hand_landmarks) - 1):
-        dx1 = x_values[i] - x_values[i-1]
-        dy1 = y_values[i] - y_values[i-1]
-        dx2 = x_values[i+1] - x_values[i]
-        dy2 = y_values[i+1] - y_values[i]
-        if dx1 is not None and dy1 is not None and dx2 is not None and dy2 is not None:
-            angle = abs(dx1*dx2 + dy1*dy2) / ((dx1**2 + dy1**2)**0.5 * (dx2**2 + dy2**2)**0.5)
-            if angle < 0.8:  # Tune this threshold based on your requirements
+    corner_indecies = []
+    for i in range(3, len(smoothed_landmarks) - 3):
+        dx1 = x_values[i] - x_values[i-3]
+        dy1 = y_values[i] - y_values[i-3]
+        dx2 = x_values[i] - x_values[i+3]
+        dy2 = y_values[i] - y_values[i+3]
+        if (dx1**2 + dy1**2)**0.5 * (dx2**2 + dy2**2)**0.5 != 0.0: # Avoid division by zero
+            angle = (dx1*dx2 + dy1*dy2) / ((dx1**2 + dy1**2)**0.5 * (dx2**2 + dy2**2)**0.5)
+            angle_degrees = math.degrees(math.acos(angle))
+            if angle_degrees < 70 and (len(corner_indecies) == 0 or i - corner_indecies[-1] > 2):
                 corners.append((x_values[i], y_values[i]))
+                corner_indecies.append(i)
 
     # Check if corners form the shape of a 'Z'
-    if len(corners) >= 2:
+    if len(corners) > 2:
         start = (x_values[0], y_values[0])
-        end = (x_values[-1], y_values[-1])
+        end = corners[2]#(x_values[-1], y_values[-1])
         first_corner = corners[0]
-        last_corner = corners[-1]
+        last_corner = corners[1]
 
         # Check if corners are aligned with the start and end points
-        if (start[1] < first_corner[1]) and (end[1] < last_corner[1]):
-            return True
+        if (start[0] > first_corner[0] and start[0] > end[0] and
+            start[1] < end[1] and start[1] < last_corner[1] and
+            
+            first_corner[0] < last_corner[0] and
+            first_corner[1] < end[1] and last_corner[1] and
+            
+            last_corner[0] > end[1]):
+            return True, corners
 
-    return False
+    return False, corners
 
 def main():
     mp_hand = mp.solutions.hands
@@ -91,8 +132,13 @@ def main():
             
         text = ''
         
-        if detect_z(index_finger_tip_locations):
+        z_found, corners = detect_z(index_finger_tip_locations)
+        
+        if z_found:
             text = 'Z'
+            
+        for corner in corners:
+            cv2.circle(frame, (int(corner[0]), int(corner[1])), 7, (0, 0, 255), -1)
         
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Hand Tracking", frame)
