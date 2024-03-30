@@ -10,12 +10,19 @@ def main():
     mp_drawing = mp.solutions.drawing_utils
 
     cap = cv2.VideoCapture(0)
+    
+    cv2.namedWindow("Hand Tracking", cv2.WINDOW_NORMAL)
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = 3
     font_thickness = 4
     text_position_left = (10, 80)
     color = (255, 50, 255)
+    
+    ret, frame = cap.read()
+    # height, width = frame.shape[:2]
+    # cv2.setWindowProperty("Hand Tracking", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    # cv2.resizeWindow('Hand Tracking', width, height)
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -68,11 +75,11 @@ def main():
                 elif is_letter_q(results, landmarks):
                     text = 'Q'
                 elif is_letter_r(results, landmarks):
-                    text = 'F'
-                elif is_letter_s(results, landmarks):
-                    text = 'S'
+                    text = 'R'
                 elif is_letter_t(results, landmarks):
                     text = 'T'
+                elif is_letter_s(results, landmarks):
+                    text = 'S'
                 elif is_letter_u(results, landmarks):
                     text = 'U'
                 elif is_letter_v(results, landmarks):
