@@ -143,10 +143,12 @@ def is_facing_back_and_sideways(results, landmarks):
     
     if handedness:
         return (pinky_mcp.y > ring_mcp.y > middle_mcp.y > index_mcp.y and
+                abs(normalized_slope(pinky_mcp, index_mcp)) > 0.4 and
                 index_mcp.x > wrist.x)
     else:
         return (pinky_mcp.y > ring_mcp.y > middle_mcp.y > index_mcp.y and
-            index_mcp.x < wrist.x)
+                abs(normalized_slope(pinky_mcp, index_mcp)) > 0.4 and
+                index_mcp.x < wrist.x)
     
 def is_finger_open_sideways(finger_tip, finger_pip, handedness):
     if handedness:
@@ -159,3 +161,6 @@ def is_index_x(index_tip, index_pip, index_mcp):
             normalized_slope(index_tip, index_pip) > -.5 and
             (normalized_slope(index_mcp, index_pip) > 0.7 or
             normalized_slope(index_mcp, index_pip) < -0.7))
+    
+def is_finger_closed_upside_down(finger_tip, finger_pip, wrist):
+    return wrist.y < finger_tip.y < finger_pip.y
