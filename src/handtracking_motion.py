@@ -59,7 +59,10 @@ def detect_z(index_hand_landmarks):
         dy2 = y_values[i] - y_values[i+3]
         if (dx1**2 + dy1**2)**0.5 * (dx2**2 + dy2**2)**0.5 != 0.0: # Avoid division by zero
             angle = (dx1*dx2 + dy1*dy2) / ((dx1**2 + dy1**2)**0.5 * (dx2**2 + dy2**2)**0.5)
-            angle_degrees = math.degrees(math.acos(angle))
+            try:
+                angle_degrees = math.degrees(math.acos(angle))
+            except Exception as e:
+                angle_degrees = 180
             if angle_degrees < 70 and (len(corner_indecies) == 0 or i - corner_indecies[-1] > 2):
                 corners.append((x_values[i], y_values[i]))
                 corner_indecies.append(i)
@@ -98,6 +101,8 @@ def main():
 
     # Queue to store locations of index finger tip for the last 150 frames
     index_finger_tip_locations = deque(maxlen=50)
+    
+    hold_z = 0
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -134,8 +139,12 @@ def main():
         
         z_found, corners = detect_z(index_finger_tip_locations)
         
-        if z_found:
+        if z_found or hold_z > 0:
             text = 'Z'
+            hold_z += 1
+            
+        if hold_z == 0 or hold_z == 50:
+            hold_z = 0
             
         for corner in corners:
             cv2.circle(frame, (int(corner[0]), int(corner[1])), 7, (0, 0, 255), -1)
