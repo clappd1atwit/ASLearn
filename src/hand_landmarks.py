@@ -1,6 +1,6 @@
 import mediapipe as mp
 
-# fingers.py creates a simplified way of calling the mediapipe hand tracking 
+# hand_landmarks.py creates a simplified way of calling the mediapipe hand tracking 
 # locations defined here: https://developers.google.com/mediapipe/solutions/vision/hand_landmarker.
 # Each function has its corresponding index commented above the function definition, takes the set
 # of all landmarks, and returns the specific landmark needed.

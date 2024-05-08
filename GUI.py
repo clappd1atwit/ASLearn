@@ -10,9 +10,9 @@ class MyGUI(QWidget):
         self.setWindowTitle('Simple GUI')
         self.setGeometry(100, 100, 300, 200)
 
-        self.button1 = QPushButton('Button 1', self)
-        self.button2 = QPushButton('Button 2', self)
-        self.button3 = QPushButton('Button 3', self)
+        self.button1 = QPushButton('Tutorials', self)
+        self.button2 = QPushButton('Free Mode Practice', self)
+        self.button3 = QPushButton('Quiz Yourself!', self)
 
         layout = QVBoxLayout()
         layout.addWidget(self.button1)
