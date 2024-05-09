@@ -22,13 +22,13 @@ def module_a(results, lms):
             not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x)) and 
             is_touching(index_mcp(lms), thumb_tip(lms), thumb_ip(lms))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
-        if is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms)):
+        if is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms)):
             hand_colors.set_index_color(hand_colors._GREEN)
-        if is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)):
+        if is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)):
             hand_colors.set_middle_color(hand_colors._GREEN)
-        if is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)):
+        if is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)):
             hand_colors.set_ring_color(hand_colors._GREEN)
-        if is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)):
+        if is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
             hand_colors.set_pinky_color(hand_colors._GREEN)
         landmarks_color = hand_colors.get_current_hand_landmarks_style()
         connections_color = hand_colors.get_current_hand_connections_style()
@@ -55,13 +55,13 @@ def module_b(results, lms):
         if ((handedness and thumb_ip(lms).x - thumb_tip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y)) or 
             (not handedness and thumb_tip(lms).x - thumb_ip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
-        if is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)):
+        if is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)):
             hand_colors.set_index_color(hand_colors._GREEN)
-        if is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)):
+        if is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)):
             hand_colors.set_middle_color(hand_colors._GREEN)
-        if is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms)):
+        if is_finger_open(ring_tip(lms), ring_dip(lms), wrist(lms)):
             hand_colors.set_ring_color(hand_colors._GREEN)
-        if is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
+        if is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)):
             hand_colors.set_pinky_color(hand_colors._GREEN)
         landmarks_color = hand_colors.get_current_hand_landmarks_style()
         connections_color = hand_colors.get_current_hand_connections_style()

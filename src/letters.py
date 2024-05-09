@@ -54,10 +54,10 @@ def is_letter_c(results, lms):
 def is_letter_d(results, lms):
 
     return (is_facing_forward(results, lms) and
-           is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-           is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-           is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
-           is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
+           is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+           is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+           is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
+           is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
            is_touching(thumb_tip(lms), middle_tip(lms), middle_dip(lms)))
     
 
@@ -89,10 +89,10 @@ def is_letter_e(results, lms):
 def is_letter_f(results, lms):
 
     return (is_facing_forward(results, lms) and
-           is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-           is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms)) and
-           is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-           is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms))
+           is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+           is_finger_open(ring_tip(lms), ring_dip(lms), wrist(lms)) and
+           is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+           is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
  and
            is_touching(index_tip(lms), thumb_tip(lms), thumb_ip(lms)))
  
@@ -129,20 +129,20 @@ def is_letter_i(results, lms):
                 thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) and
                 not (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > -.8 and
                 normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < 0) and
-                is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-                is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-                is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-                is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms))
+                is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+                is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+                is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+                is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
 )
     else: # Left hand
         return (is_facing_forward(results, lms) and
                 thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x) and
                 not (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < .8 and
                 normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > 0) and
-                is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-                is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-                is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-                is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms))
+                is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+                is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+                is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+                is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
 )
 
 
@@ -151,10 +151,10 @@ def is_letter_j(results, lms):
 
 def is_letter_k(results, lms):
     return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             thumb_tip(lms).x > min(index_pip(lms).x, middle_pip(lms).x) and
             thumb_tip(lms).x < max(index_pip(lms).x, middle_pip(lms).x) and
@@ -165,10 +165,10 @@ def is_letter_l(results, lms):
     handedness = is_right_hand(results, lms)
 
     return (is_facing_forward(results, lms) and
-           is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-           is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-           is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
-           is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
+           is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+           is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+           is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
+           is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
            abs(normalized_slope(index_mcp(lms), index_tip(lms))) - abs(normalized_slope(thumb_mcp(lms), thumb_tip(lms))) > 0.5)
 
 def is_letter_m(results, lms):
@@ -231,18 +231,18 @@ def is_letter_r(results, lms):
 
     if handedness: # Right hand
         return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             index_tip(lms).x < middle_tip(lms).x)
     else: # Left hand
         return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             index_tip(lms).x > middle_tip(lms).x)
 
@@ -268,10 +268,10 @@ def is_letter_t(results, lms):
 def is_letter_u(results, lms):
     
     return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             not (thumb_tip(lms).x < max(index_pip(lms).x, middle_pip(lms).x) and
             thumb_tip(lms).x > min(index_pip(lms).x, middle_pip(lms).x)))
@@ -279,10 +279,10 @@ def is_letter_u(results, lms):
 def is_letter_v(results, lms):
     
     return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             not (thumb_tip(lms).x < max(index_mcp(lms).x, middle_mcp(lms).x) and
             thumb_tip(lms).x > min(index_mcp(lms).x, middle_mcp(lms).x)))
@@ -290,10 +290,10 @@ def is_letter_v(results, lms):
 def is_letter_w(results, lms):
     
     return (is_facing_forward(results, lms) and
-            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
-            is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-            is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and 
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_open(ring_tip(lms), ring_dip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and 
             not is_touching(ring_tip(lms), middle_tip(lms), middle_dip(lms)) and
             not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
             is_touching(pinky_tip(lms), thumb_tip(lms), thumb_mcp(lms)))
@@ -301,9 +301,9 @@ def is_letter_w(results, lms):
 def is_letter_x(results, lms):
     
     return (is_index_x(index_tip(lms), index_pip(lms), index_mcp(lms)) and
-            is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and 
-            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+            is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
             (is_touching(thumb_tip(lms), middle_pip(lms), middle_dip(lms)) or
              is_touching(thumb_tip(lms), middle_dip(lms), middle_pip(lms))))
 
@@ -314,19 +314,19 @@ def is_letter_y(results, lms):
         return (is_facing_forward(results, lms) and
                 (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > -.7 and
                 normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < 0) and
-                is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-                is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-                is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-                is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms))
+                is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+                is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+                is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+                is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
 )
     else: # Left hand
         return (is_facing_forward(results, lms) and
                 (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < .7 and
                 normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > 0) and
-                is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
-                is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-                is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-                is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms))
+                is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+                is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+                is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
+                is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
 )
 
 def is_letter_z(results, lms):
