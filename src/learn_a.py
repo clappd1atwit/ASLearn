@@ -37,38 +37,20 @@ def main():
 
         # If hands are detected, draw landmarks on the frame
         if results.multi_hand_landmarks:
-            for landmarks in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(frame, landmarks, mp_hand.HAND_CONNECTIONS, landmarks_color, connections_color)
+            for lms in results.multi_hand_landmarks:
+                mp_drawing.draw_landmarks(frame, lms, mp_hand.HAND_CONNECTIONS, landmarks_color, connections_color)
 
                 color = (255, 50, 255)
                 text = 'A'
-                wrist = wrist_lm(landmarks)
                 
-                thumb_tip = thumb_tip_lm(landmarks)
-                thumb_mcp = thumb_mcp_lm(landmarks)
-    
-                index_mcp = index_mcp_lm(landmarks)
-                index_dip = index_dip_lm(landmarks)
-                index_pip = index_pip_lm(landmarks)
-                index_tip = index_tip_lm(landmarks)
+                index_closed = not is_finger_open(index_tip(lms), index_pip(lms), wrist(lms))
+                middle_closed = not is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms))
+                ring_closed = not is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms))
+                pinky_closed = not is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms))
                 
-                middle_pip = middle_pip_lm(landmarks)
-                middle_tip = middle_tip_lm(landmarks)
+                handedness = is_right_hand(results, lms)
                 
-                ring_pip = ring_pip_lm(landmarks)
-                ring_tip = ring_tip_lm(landmarks)
-                
-                pinky_pip = pinky_pip_lm(landmarks)
-                pinky_tip = pinky_tip_lm(landmarks)
-                
-                index_closed = not is_finger_open(index_tip, index_pip, wrist)
-                middle_closed = not is_finger_open(middle_tip, middle_pip, wrist)
-                ring_closed = not is_finger_open(ring_tip, ring_pip, wrist)
-                pinky_closed = not is_finger_open(pinky_tip, pinky_pip, wrist)
-                
-                handedness = is_right_hand(results, landmarks)
-                
-                if is_letter_a(results, landmarks):
+                if is_letter_a(results, lms):
                     text = 'A - Correct!'
                     color = (0, 200, 0)
                     landmarks_color = hand_colors.get_correct_hand_landmarks_style()
@@ -78,14 +60,14 @@ def main():
                     hand_colors.get_incorrect_hand_landmarks_style()
                     hand_colors.get_incorrect_hand_connections_style()
 
-                    if is_facing_forward(results, landmarks):
+                    if is_facing_forward(results, lms):
                         hand_colors.set_palm_color(hand_colors._GREEN)
-                    if ((handedness and thumb_tip.x > max(index_mcp.x, index_dip.x) and 
-                        (normalized_slope(thumb_mcp, thumb_tip) > .7 or
-                        normalized_slope(thumb_mcp, thumb_tip) < -.7)) or 
-                        (not handedness and thumb_tip.x < min(index_mcp.x, index_dip.x) and 
-                        (normalized_slope(thumb_mcp, thumb_tip) > .7 or
-                        normalized_slope(thumb_mcp, thumb_tip) < -.7))):
+                    if ((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) and 
+                        (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
+                        normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7)) or 
+                        (not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x) and 
+                        (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
+                        normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7))):
                         hand_colors.set_thumb_color(hand_colors._GREEN)
                     if index_closed:
                         hand_colors.set_index_color(hand_colors._GREEN)
