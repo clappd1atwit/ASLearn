@@ -11,7 +11,11 @@ def main():
 
     cap = cv2.VideoCapture(0)
     
-    cv2.namedWindow("Hand Tracking", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("Free Mode", cv2.WINDOW_NORMAL)
+    
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    cv2.resizeWindow('Free Mode', frame_width, frame_height)
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = 3
@@ -20,9 +24,6 @@ def main():
     color = (255, 50, 255)
     
     ret, frame = cap.read()
-    # height, width = frame.shape[:2]
-    # cv2.setWindowProperty("Hand Tracking", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    # cv2.resizeWindow('Hand Tracking', width, height)
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -94,10 +95,10 @@ def main():
                     text = 'Z'
                 
                 cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
-        cv2.imshow("Hand Tracking", frame)
+        cv2.imshow("Free Mode", frame)
 
-        # Exit when 'q' key is pressed
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # Exit when 'q' key is pressed or window is x'ed out
+        if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty('Free Mode', cv2.WND_PROP_VISIBLE) < 1:
             break
 
     cap.release()

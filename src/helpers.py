@@ -16,12 +16,10 @@ def is_hand_open(lms):
 def is_hand_closed(lms):
 
     # Check if each induvidual finger is closed
-    index_closed = not is_finger_open(index_tip(lms), index_pip(lms), wrist(lms))
-    middle_closed = not is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms))
-    ring_closed = not is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms))
-    pinky_closed = not is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms))
-
-    return index_closed and middle_closed and ring_closed and pinky_closed
+    return (is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_closed(middle_tip(lms), middle_dip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_dip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)))
 
 def is_hand_closed_sideways(results, lms):
     
@@ -29,23 +27,27 @@ def is_hand_closed_sideways(results, lms):
 
     # Check if each induvidual finger is closed
     if handedness:
-        index_closed = normalized_slope(index_tip(lms), index_pip(lms)) > -0.5
-        middle_closed = normalized_slope(middle_tip(lms), middle_pip(lms)) > -0.4
-        ring_closed = normalized_slope(ring_tip(lms), ring_pip(lms)) > -0.3
-        pinky_closed = normalized_slope(pinky_tip(lms), pinky_pip(lms)) > -0.3
+        return (normalized_slope(index_tip(lms), index_pip(lms)) > -0.5 and
+                normalized_slope(middle_tip(lms), middle_pip(lms)) > -0.4 and
+                normalized_slope(ring_tip(lms), ring_pip(lms)) > -0.3 and
+                normalized_slope(pinky_tip(lms), pinky_pip(lms)) > -0.3)
     else:
-        index_closed = normalized_slope(index_tip(lms), index_pip(lms)) < 0.5
-        middle_closed = normalized_slope(middle_tip(lms), middle_pip(lms)) < 0.4
-        ring_closed = normalized_slope(ring_tip(lms), ring_pip(lms)) < 0.3
-        pinky_closed = normalized_slope(pinky_tip(lms), pinky_pip(lms)) < 0.3
-    
-    return index_closed and middle_closed and ring_closed and pinky_closed
+        return (normalized_slope(index_tip(lms), index_pip(lms)) < 0.5 and
+                normalized_slope(middle_tip(lms), middle_pip(lms)) < 0.4 and
+                normalized_slope(ring_tip(lms), ring_pip(lms)) < 0.3 and
+                normalized_slope(pinky_tip(lms), pinky_pip(lms)) < 0.3)
 
 def is_finger_open(finger_tip, finger_pip, wrist):
-    if wrist.y < finger_pip.y:
-        return finger_tip.y > finger_pip.y
-    else:
+    if wrist.y > finger_pip.y:
         return finger_tip.y < finger_pip.y
+    else:
+        return finger_tip.y > finger_pip.y
+    
+def is_finger_closed(finger_tip, finger_dip, wrist):
+    if wrist.y > finger_dip.y:
+        return finger_tip.y > finger_dip.y
+    else:
+        return finger_tip.y < finger_dip.y
     
 
 def is_right_hand(results, lms):
@@ -99,6 +101,12 @@ def is_finger_open_sideways(finger_tip, finger_pip, handedness):
         return finger_tip.x > finger_pip.x
     else:
         return finger_tip.x < finger_pip.x
+    
+def is_finger_closed_sideways(finger_tip, finger_dip, handedness):
+    if handedness:
+        return finger_tip.x < finger_dip.x
+    else:
+        return finger_tip.x > finger_dip.x
     
 def is_index_x(index_tip, index_pip, index_mcp):
     return (normalized_slope(index_tip, index_pip) < .5 and
