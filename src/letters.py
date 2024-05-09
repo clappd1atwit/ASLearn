@@ -30,12 +30,18 @@ def is_letter_b(results, lms):
     
     if handedness:
         return (is_facing_forward(results, lms) and 
-                is_hand_open(lms) 
-                and thumb_ip(lms).x - thumb_tip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y))
+                is_hand_open(lms) and
+                is_touching(index_dip(lms), middle_dip(lms), middle_pip(lms)) and
+                is_touching(middle_dip(lms), ring_dip(lms), ring_pip(lms)) and
+                is_touching(ring_dip(lms), pinky_tip(lms), pinky_dip(lms)) and
+                thumb_ip(lms).x - thumb_tip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y))
     else:
         return (is_facing_forward(results, lms) and
-                is_hand_open(lms) 
-                and thumb_tip(lms).x - thumb_ip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y))
+                is_hand_open(lms) and
+                is_touching(index_dip(lms), middle_dip(lms), middle_pip(lms)) and
+                is_touching(middle_dip(lms), ring_dip(lms), ring_pip(lms)) and
+                is_touching(ring_dip(lms), pinky_tip(lms), pinky_dip(lms)) and
+                thumb_tip(lms).x - thumb_ip(lms).x > abs(thumb_tip(lms).y - thumb_ip(lms).y))
 
                 
 
@@ -92,8 +98,7 @@ def is_letter_f(results, lms):
            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
            is_finger_open(ring_tip(lms), ring_dip(lms), wrist(lms)) and
            is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
-           is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))
- and
+           is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))and
            is_touching(index_tip(lms), thumb_tip(lms), thumb_ip(lms)))
  
 
