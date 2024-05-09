@@ -16,16 +16,14 @@ def is_letter_a(results, lms):
                 is_hand_closed(lms) and
                 thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) and 
                 index_tip(lms).y > middle_pip(lms).y and
-                (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
-                normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7))
+                is_touching(index_mcp(lms), thumb_tip(lms), thumb_ip(lms)))
     # Left Hand
     else:
         return (is_facing_forward(results, lms) and
                 is_hand_closed(lms) and
                 thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x) and 
                 index_tip(lms).y > middle_pip(lms).y and
-                (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
-                normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7))
+                is_touching(thumb_tip(lms), index_mcp(lms), index_pip(lms)))
         
 def is_letter_b(results, lms):
     handedness = is_right_hand(results, lms)

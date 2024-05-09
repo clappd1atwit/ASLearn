@@ -18,12 +18,9 @@ def module_a(results, lms):
 
         if is_facing_forward(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
-        if ((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) and 
-            (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
-            normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7)) or 
-            (not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x) and 
-            (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > .7 or
-            normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < -.7))):
+        if ((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) or
+            not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x)) and 
+            is_touching(index_mcp(lms), thumb_tip(lms), thumb_ip(lms))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
         if is_finger_closed(index_tip(lms), index_dip(lms), wrist(lms)):
             hand_colors.set_index_color(hand_colors._GREEN)
