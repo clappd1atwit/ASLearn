@@ -74,20 +74,14 @@ def is_letter_e(results, lms):
     if handedness:
         return (is_facing_forward(results, lms) and
             is_hand_closed(lms) and
-            thumb_tip(lms).y > index_tip(lms).y and
-            thumb_tip(lms).y > middle_tip(lms).y and
-            thumb_tip(lms).y > ring_tip(lms).y and
-            thumb_tip(lms).y > pinky_tip(lms).y and
+            thumb_tip(lms).y > max(index_tip(lms).y, middle_tip(lms).y, ring_tip(lms).y, pinky_tip(lms).y) and
             thumb_slope > -0.4 and
             thumb_slope < 0.4 and 
             thumb_tip(lms).x < thumb_ip(lms).x)
     else:
         return (is_facing_forward(results, lms) and
             is_hand_closed(lms) and
-            thumb_tip(lms).y > index_tip(lms).y and
-            thumb_tip(lms).y > middle_tip(lms).y and
-            thumb_tip(lms).y > ring_tip(lms).y and
-            thumb_tip(lms).y > pinky_tip(lms).y and
+            thumb_tip(lms).y > max(index_tip(lms).y, middle_tip(lms).y, ring_tip(lms).y, pinky_tip(lms).y) and
             thumb_slope > -0.4 and
             thumb_slope < 0.4 and
             thumb_tip(lms).x > thumb_ip(lms).x)
@@ -95,11 +89,11 @@ def is_letter_e(results, lms):
 def is_letter_f(results, lms):
 
     return (is_facing_forward(results, lms) and
+           is_touching(index_tip(lms), thumb_tip(lms), thumb_ip(lms)) and #Uses thumb tip and ip to provide more tollerance
+           is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms)) and
            is_finger_open(middle_tip(lms), middle_dip(lms), wrist(lms)) and
            is_finger_open(ring_tip(lms), ring_dip(lms), wrist(lms)) and
-           is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
-           is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms))and
-           is_touching(index_tip(lms), thumb_tip(lms), thumb_ip(lms)))
+           is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)))
  
 
 def is_letter_g(results, lms):
