@@ -60,11 +60,11 @@ def is_letter_c(results, lms):
 def is_letter_d(results, lms):
 
     return (is_facing_forward(results, lms) and
-           is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
-           is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
-           is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
-           is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
-           is_touching(thumb_tip(lms), middle_tip(lms), middle_dip(lms)))
+            is_touching(thumb_tip(lms), middle_tip(lms), middle_dip(lms)) and
+            is_finger_open(index_tip(lms), index_dip(lms), wrist(lms)) and
+            is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
+            is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)))
     
 
 def is_letter_e(results, lms):
