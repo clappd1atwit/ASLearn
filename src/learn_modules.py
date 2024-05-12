@@ -1,3 +1,4 @@
+import sys
 import cv2
 import mediapipe as mp
 import argparse
@@ -64,5 +65,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="runs a learning module for a specified letter")
     parser.add_argument("letter", help="Specify a letter as an argument")
     args = parser.parse_args()
+
+    if len(args.letter) != 1 or not args.letter.isalpha():
+        print("ERROR: letter argument must be a single alphabetical character")
+        sys.exit(1)
 
     run_module(args.letter.lower())

@@ -84,6 +84,18 @@ def is_facing_forward(results, lms):
                 thumb_cmc(lms).y > thumb_mcp(lms).y and
                 distance(index_mcp(lms), pinky_mcp(lms)) > distance(index_mcp(lms), wrist(lms)) / 3)
         
+def is_facing_back_upside_down(results, lms):
+    handedness = is_right_hand(results, lms)
+    
+    if handedness:
+        return (pinky_mcp(lms).x < index_mcp(lms).x and
+                pinky_mcp(lms).y > wrist(lms).y and
+                distance(index_mcp(lms), pinky_mcp(lms)) > distance(index_mcp(lms), wrist(lms)) / 3)
+    else:
+        return (pinky_mcp(lms).x > index_mcp(lms).x and
+                pinky_mcp(lms).y > wrist(lms).y and
+                distance(index_mcp(lms), pinky_mcp(lms)) > distance(index_mcp(lms), wrist(lms)) / 3)
+        
 def is_facing_back_and_sideways(results, lms):
     handedness = is_right_hand(results, lms)
     
@@ -113,6 +125,3 @@ def is_index_x(index_tip, index_pip, index_mcp):
             normalized_slope(index_tip, index_pip) > -.5 and
             (normalized_slope(index_mcp, index_pip) > 0.7 or
             normalized_slope(index_mcp, index_pip) < -0.7))
-    
-def is_finger_closed_upside_down(finger_tip, finger_pip, wrist):
-    return wrist.y < finger_tip.y < finger_pip.y
