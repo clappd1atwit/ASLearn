@@ -628,6 +628,7 @@ def module_p(results, lms):
     return text, text_color, landmarks_color, connections_color
 
 def module_q(results, lms):
+    handedness = is_right_hand(results, lms)
     
     if is_letter_q(results, lms):
         text = 'Q - Correct!'
@@ -644,11 +645,13 @@ def module_q(results, lms):
         if is_facing_back_upside_down(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
             
-        #TODO: Define thumb position
-        if True:
+        if (not is_touching_close(thumb_tip(lms), index_tip(lms), index_dip(lms)) and
+            ((handedness and thumb_tip(lms).x < index_tip(lms).x) or
+            (not handedness and thumb_tip(lms).x > index_tip(lms).x))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
             
-        if is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)):
+        if (not is_touching_close(thumb_tip(lms), index_tip(lms), index_dip(lms)) and
+            is_finger_open(index_tip(lms), index_pip(lms), wrist(lms))):
             hand_colors.set_index_color(hand_colors._GREEN)
             
         if is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)):
@@ -659,7 +662,7 @@ def module_q(results, lms):
             
         if is_finger_closed(pinky_tip(lms), pinky_dip(lms), wrist(lms)):
             hand_colors.set_pinky_color(hand_colors._GREEN)
-            
+        
         landmarks_color = hand_colors.get_current_hand_landmarks_style()
         connections_color = hand_colors.get_current_hand_connections_style()
         
@@ -683,8 +686,8 @@ def module_r(results, lms):
         if is_facing_forward(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
           
-        #TODO: Define thumb position  
-        if True: 
+        if (is_touching(thumb_tip(lms), ring_dip(lms), ring_tip(lms)) or
+            is_touching(thumb_tip(lms), ring_tip(lms), ring_dip(lms))): 
             hand_colors.set_thumb_color(hand_colors._GREEN)
             
         if (is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and
@@ -790,6 +793,8 @@ def module_t(results, lms):
     return text, text_color, landmarks_color, connections_color
 
 def module_u(results, lms):
+    handedness = is_right_hand(results, lms)
+    
     if is_letter_u(results, lms):
         text = 'U - Correct!'
         text_color = correct_color
@@ -805,19 +810,20 @@ def module_u(results, lms):
         if is_facing_forward(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
           
-        #TODO: fix this garbage and make it more precise  
-        if not (thumb_tip(lms).x < max(index_pip(lms).x, middle_pip(lms).x) and
-            thumb_tip(lms).x > min(index_pip(lms).x, middle_pip(lms).x)):
+        if (is_touching_close(thumb_tip(lms), ring_dip(lms), ring_tip(lms)) or
+            is_touching_close(thumb_tip(lms), ring_tip(lms), ring_dip(lms))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
-            
-        #TODO: Check that fingers are not crossed
+                
         if (is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and 
-            is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
+            is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
+            ((handedness and index_tip(lms).x > middle_tip(lms).x) or 
+             (not handedness and index_tip(lms).x < middle_tip(lms).x))):
             hand_colors.set_index_color(hand_colors._GREEN)
-        
-        #TODO: Check that fingers are not crossed    
+          
         if (is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
-            is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
+            is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
+            ((handedness and index_tip(lms).x > middle_tip(lms).x) or 
+             (not handedness and index_tip(lms).x < middle_tip(lms).x))):
             hand_colors.set_middle_color(hand_colors._GREEN)
             
         if is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)):
@@ -846,18 +852,15 @@ def module_v(results, lms):
 
         if is_facing_forward(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
-          
-        #TODO: fix this garbage and make it more precise  
-        if not (thumb_tip(lms).x < max(index_pip(lms).x, middle_pip(lms).x) and
-            thumb_tip(lms).x > min(index_pip(lms).x, middle_pip(lms).x)):
+            
+        if (is_touching_close(thumb_tip(lms), ring_dip(lms), ring_tip(lms)) or
+            is_touching_close(thumb_tip(lms), ring_tip(lms), ring_dip(lms))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
             
-        #TODO: Check that fingers are not crossed
         if (is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and 
             not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
             hand_colors.set_index_color(hand_colors._GREEN)
-        
-        #TODO: Check that fingers are not crossed    
+  
         if (is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
             not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
             hand_colors.set_middle_color(hand_colors._GREEN)
@@ -952,7 +955,6 @@ def module_x(results, lms):
         
     return text, text_color, landmarks_color, connections_color
 
-#TODO: There's a bug somewhere figure it out
 def module_y(results, lms):
     handedness = is_right_hand(results, lms)
     
@@ -971,9 +973,9 @@ def module_y(results, lms):
         if is_facing_forward(results, lms):
             hand_colors.set_palm_color(hand_colors._GREEN)
             
-        if (((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) or
-            not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x))) and 
-            distance(index_mcp(lms), thumb_tip(lms)) > distance(thumb_tip(lms), thumb_ip(lms)) * 1.5):
+        if (((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x)) or
+            (not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x))) and 
+            not is_touching_far(index_mcp(lms), thumb_tip(lms), thumb_ip(lms))):
             hand_colors.set_thumb_color(hand_colors._GREEN)
             
         if is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms)):
