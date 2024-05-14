@@ -299,7 +299,8 @@ def is_letter_w(results, lms):
 
 def is_letter_x(_, lms):
     
-    return (is_index_x(index_tip(lms), index_pip(lms), index_mcp(lms)) and
+    return (abs(normalized_slope(wrist(lms), middle_mcp(lms))) > 0.7 and
+            is_index_x(index_tip(lms), index_pip(lms), index_mcp(lms)) and
             is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
             is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
             is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)) and
@@ -311,8 +312,8 @@ def is_letter_y(results, lms):
 
     if handedness: # Right hand
         return (is_facing_forward(results, lms) and
-                (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > -.7 and
-                normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < 0) and
+                thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x and
+                distance(index_mcp(lms), thumb_tip(lms)) > distance(thumb_tip(lms), thumb_ip(lms)) * 1.5) and
                 is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
                 is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
                 is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and
@@ -320,8 +321,8 @@ def is_letter_y(results, lms):
 )
     else: # Left hand
         return (is_facing_forward(results, lms) and
-                (normalized_slope(thumb_mcp(lms), thumb_tip(lms)) < .7 and
-                normalized_slope(thumb_mcp(lms), thumb_tip(lms)) > 0) and
+                thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x) and 
+                distance(index_mcp(lms), thumb_tip(lms)) > distance(thumb_tip(lms), thumb_ip(lms)) * 1.5 and
                 is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)) and
                 is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
                 is_finger_open(pinky_tip(lms), pinky_dip(lms), wrist(lms)) and

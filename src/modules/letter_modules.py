@@ -832,16 +832,166 @@ def module_u(results, lms):
     return text, text_color, landmarks_color, connections_color
 
 def module_v(results, lms):
-    pass
+    if is_letter_v(results, lms):
+        text = 'V - Correct!'
+        text_color = correct_color
+        landmarks_color = hand_colors.get_correct_hand_landmarks_style()
+        connections_color = hand_colors.get_correct_hand_connections_style()
+        
+    else:
+        text = 'V'
+        text_color = idle_color
+        hand_colors.get_incorrect_hand_landmarks_style()
+        hand_colors.get_incorrect_hand_connections_style()
+
+        if is_facing_forward(results, lms):
+            hand_colors.set_palm_color(hand_colors._GREEN)
+          
+        #TODO: fix this garbage and make it more precise  
+        if not (thumb_tip(lms).x < max(index_pip(lms).x, middle_pip(lms).x) and
+            thumb_tip(lms).x > min(index_pip(lms).x, middle_pip(lms).x)):
+            hand_colors.set_thumb_color(hand_colors._GREEN)
+            
+        #TODO: Check that fingers are not crossed
+        if (is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and 
+            not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
+            hand_colors.set_index_color(hand_colors._GREEN)
+        
+        #TODO: Check that fingers are not crossed    
+        if (is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
+            not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
+            hand_colors.set_middle_color(hand_colors._GREEN)
+            
+        if is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)):
+            hand_colors.set_ring_color(hand_colors._GREEN)
+            
+        if is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
+            hand_colors.set_pinky_color(hand_colors._GREEN)
+            
+        landmarks_color = hand_colors.get_current_hand_landmarks_style()
+        connections_color = hand_colors.get_current_hand_connections_style()
+        
+    return text, text_color, landmarks_color, connections_color
 
 def module_w(results, lms):
-    pass
+    if is_letter_w(results, lms):
+        text = 'W - Correct!'
+        text_color = correct_color
+        landmarks_color = hand_colors.get_correct_hand_landmarks_style()
+        connections_color = hand_colors.get_correct_hand_connections_style()
+        
+    else:
+        text = 'W'
+        text_color = idle_color
+        hand_colors.get_incorrect_hand_landmarks_style()
+        hand_colors.get_incorrect_hand_connections_style()
+
+        if is_facing_forward(results, lms):
+            hand_colors.set_palm_color(hand_colors._GREEN)
+          
+        
+        if is_touching(pinky_tip(lms), thumb_tip(lms), thumb_mcp(lms)):
+            hand_colors.set_thumb_color(hand_colors._GREEN)
+            
+        if (is_finger_open(index_tip(lms), index_pip(lms), wrist(lms)) and 
+            not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms))):
+            hand_colors.set_index_color(hand_colors._GREEN)
+          
+        if (is_finger_open(middle_tip(lms), middle_pip(lms), wrist(lms)) and 
+            not is_touching(index_tip(lms), middle_tip(lms), middle_dip(lms)) and
+            not is_touching(ring_tip(lms), middle_tip(lms), middle_dip(lms))):
+            hand_colors.set_middle_color(hand_colors._GREEN)
+            
+        if (is_finger_open(ring_tip(lms), ring_pip(lms), wrist(lms)) and
+            not is_touching(ring_tip(lms), middle_tip(lms), middle_dip(lms))):
+            hand_colors.set_ring_color(hand_colors._GREEN)
+            
+        if is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
+            hand_colors.set_pinky_color(hand_colors._GREEN)
+            
+        landmarks_color = hand_colors.get_current_hand_landmarks_style()
+        connections_color = hand_colors.get_current_hand_connections_style()
+        
+    return text, text_color, landmarks_color, connections_color
 
 def module_x(results, lms):
-    pass
+    
+    if is_letter_x(results, lms):
+        text = 'X - Correct!'
+        text_color = correct_color
+        landmarks_color = hand_colors.get_correct_hand_landmarks_style()
+        connections_color = hand_colors.get_correct_hand_connections_style()
+        
+    else:
+        text = 'X'
+        text_color = idle_color
+        hand_colors.get_incorrect_hand_landmarks_style()
+        hand_colors.get_incorrect_hand_connections_style()
 
+        if abs(normalized_slope(wrist(lms), middle_mcp(lms))) > 0.7:
+            hand_colors.set_palm_color(hand_colors._GREEN)
+            
+        if (is_touching(thumb_tip(lms), middle_pip(lms), middle_dip(lms)) or
+             is_touching(thumb_tip(lms), middle_dip(lms), middle_pip(lms))):
+            hand_colors.set_thumb_color(hand_colors._GREEN)
+            
+        if is_index_x(index_tip(lms), index_pip(lms), index_mcp(lms)):
+            hand_colors.set_index_color(hand_colors._GREEN)
+            
+        if is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)):
+            hand_colors.set_middle_color(hand_colors._GREEN)
+            
+        if is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)):
+            hand_colors.set_ring_color(hand_colors._GREEN)
+            
+        if is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
+            hand_colors.set_pinky_color(hand_colors._GREEN)
+            
+        landmarks_color = hand_colors.get_current_hand_landmarks_style()
+        connections_color = hand_colors.get_current_hand_connections_style()
+        
+    return text, text_color, landmarks_color, connections_color
+
+#TODO: There's a bug somewhere figure it out
 def module_y(results, lms):
-    pass
+    handedness = is_right_hand(results, lms)
+    
+    if is_letter_y(results, lms):
+        text = 'Y - Correct!'
+        text_color = correct_color
+        landmarks_color = hand_colors.get_correct_hand_landmarks_style()
+        connections_color = hand_colors.get_correct_hand_connections_style()
+        
+    else:
+        text = 'Y'
+        text_color = idle_color
+        hand_colors.get_incorrect_hand_landmarks_style()
+        hand_colors.get_incorrect_hand_connections_style()
+
+        if is_facing_forward(results, lms):
+            hand_colors.set_palm_color(hand_colors._GREEN)
+            
+        if (((handedness and thumb_tip(lms).x > max(index_mcp(lms).x, index_dip(lms).x) or
+            not handedness and thumb_tip(lms).x < min(index_mcp(lms).x, index_dip(lms).x))) and 
+            distance(index_mcp(lms), thumb_tip(lms)) > distance(thumb_tip(lms), thumb_ip(lms)) * 1.5):
+            hand_colors.set_thumb_color(hand_colors._GREEN)
+            
+        if is_finger_closed(index_tip(lms), index_pip(lms), wrist(lms)):
+            hand_colors.set_index_color(hand_colors._GREEN)
+            
+        if is_finger_closed(middle_tip(lms), middle_pip(lms), wrist(lms)):
+            hand_colors.set_middle_color(hand_colors._GREEN)
+            
+        if is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)):
+            hand_colors.set_ring_color(hand_colors._GREEN)
+            
+        if is_finger_open(pinky_tip(lms), pinky_pip(lms), wrist(lms)):
+            hand_colors.set_pinky_color(hand_colors._GREEN)
+            
+        landmarks_color = hand_colors.get_current_hand_landmarks_style()
+        connections_color = hand_colors.get_current_hand_connections_style()
+        
+    return text, text_color, landmarks_color, connections_color
 
 def module_z(results, lms):
     pass
