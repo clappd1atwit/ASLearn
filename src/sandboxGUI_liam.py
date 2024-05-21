@@ -68,7 +68,7 @@ class MainWindow(QMainWindow):
             button = QPushButton(letter)
             button.setFixedSize(button_size)
             button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-            button.clicked.connect(self.run_module(letter)) # broken
+            button.clicked.connect(lambda _, letter=letter: self.run_module(letter))
             row = i // 6  # 6 buttons per row
             col = i % 6   # column index
             self.tutorials_layout.addWidget(button, row, col)
