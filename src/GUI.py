@@ -16,6 +16,22 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.layout = QVBoxLayout(self.central_widget)
 
+        # Login page
+        #login_title = QLabel("Login Form ASLearning")
+        #login_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        #self.layout.addWidget(login_title, 0, 0, 1, 2)
+
+        #username = QLabel("Username: ")
+        #self.username_input = QLineEdit()
+        #password = QLabel("Password: ")
+        #self.password_input = QLineEdit()
+        #self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
+
+        #self.layout.addWidget(username, 1, 0)
+        #self.layout.addWidget(self.username_input, 1, 1)
+        #self.layout.addWidget(password, 2, 0)
+        #self.layout.addWidget(self.password_input, 2, 1)
+
         # Set background image (ASLearning)
         background_label = QLabel(self.central_widget)
         pixmap = QPixmap("ASLearning pic.PNG")
