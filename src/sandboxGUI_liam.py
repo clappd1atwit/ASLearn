@@ -1,4 +1,5 @@
 import sys
+import subprocess
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QStackedWidget, QSizePolicy, QGridLayout
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap
@@ -37,7 +38,7 @@ class MainWindow(QMainWindow):
 
         # Connect buttons to respective functions
         self.tutorials_button.clicked.connect(self.show_tutorials_page)
-        self.free_mode_button.clicked.connect(self.show_free_mode_page)
+        self.free_mode_button.clicked.connect(self.run_free_mode)
         self.quiz_button.clicked.connect(self.show_quiz_page)
 
         self.home_layout.addWidget(background_label)
@@ -76,9 +77,9 @@ class MainWindow(QMainWindow):
 
     def show_tutorials_page(self):
         self.stacked_widget.setCurrentWidget(self.tutorials_page)
-
-    def show_free_mode_page(self):
-        self.stacked_widget.setCurrentWidget(self.free_mode_page)
+    
+    def run_free_mode(self):
+        subprocess.Popen([sys.executable, "handtracking.py"])
 
     def show_quiz_page(self):
         self.stacked_widget.setCurrentWidget(self.quiz_page)
