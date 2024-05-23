@@ -2,6 +2,8 @@ from helpers import *
 from letters import *
 import hand_colors
 
+import handtracking_motion
+
 idle_color = (255, 50, 255)
 correct_color = (0, 200, 0)
 
@@ -374,7 +376,7 @@ def module_i(results, lms):
     return text, text_color, landmarks_color, connections_color
 
 def module_j(results, lms):
-    pass
+    handtracking_motion.run_motion_module('j')
 
 def module_k(results, lms):
     
@@ -996,7 +998,7 @@ def module_y(results, lms):
     return text, text_color, landmarks_color, connections_color
 
 def module_z(results, lms):
-    pass
+    handtracking_motion.run_motion_module('z')
 
 letter_modules = {
     'a': module_a,

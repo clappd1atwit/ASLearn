@@ -8,7 +8,16 @@ from letters import *
 from modules.letter_modules import *
 import hand_colors
 
+def letter_is_dynamic(letter):
+    return letter == 'j' or letter == 'z'
+
 def run_module(letter):
+    if letter_is_dynamic(letter):
+        letter_modules[letter](None, None)
+    else:
+        run_static_module(letter)
+
+def run_static_module(letter):
     mp_hand = mp.solutions.hands
     hands = mp_hand.Hands()
     mp_drawing = mp.solutions.drawing_utils

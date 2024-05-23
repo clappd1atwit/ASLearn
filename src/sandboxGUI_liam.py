@@ -68,18 +68,22 @@ class MainWindow(QMainWindow):
             button = QPushButton(letter)
             button.setFixedSize(button_size)
             button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+            button.clicked.connect(lambda _, letter=letter: self.run_module(letter))
             row = i // 6  # 6 buttons per row
             col = i % 6   # column index
             self.tutorials_layout.addWidget(button, row, col)
 
         self.tutorials_page.setStyleSheet("background-color: lightblue;")
         self.stacked_widget.addWidget(self.tutorials_page)
+    
+    def run_module(self, letter):
+        subprocess.Popen([sys.executable, r"src/learn_modules.py", letter.lower()])
 
     def show_tutorials_page(self):
         self.stacked_widget.setCurrentWidget(self.tutorials_page)
     
     def run_free_mode(self):
-        subprocess.Popen([sys.executable, "handtracking.py"])
+        subprocess.Popen([sys.executable, r"src/handtracking.py"])
 
     def show_quiz_page(self):
         self.stacked_widget.setCurrentWidget(self.quiz_page)

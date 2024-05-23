@@ -1,11 +1,12 @@
+import sys
+import argparse
+
 import cv2
 import mediapipe as mp
 
 from collections import deque
 from helpers import *
 from letters import *
-
-import numpy as np
 
 class KalmanFilter:
     def __init__(self, process_variance, measurement_variance, estimated_measurement_variance):
@@ -44,10 +45,11 @@ def detect_z(index_hand_landmarks):
         smoothed_landmarks.append((smoothed_x, smoothed_y))
 
     # Extract x and y coordinates of the smoothed points
-    # x_values = [point[0] for point in smoothed_landmarks]
-    # y_values = [point[1] for point in smoothed_landmarks]
     x_values = [point[0] for point in index_hand_landmarks]
     y_values = [point[1] for point in index_hand_landmarks]
+    # Uncomment to use Kalman Filter (currently broken)
+    # x_values = [point[0] for point in smoothed_landmarks]
+    # y_values = [point[1] for point in smoothed_landmarks]
 
     # Find corners (significant changes in direction)
     corners = []
@@ -142,7 +144,7 @@ def detect_j(pinky_hand_landmarks):
 
     return False, curves
 
-def main():
+def run_motion_module(letter):
     mp_hand = mp.solutions.hands
     hands = mp_hand.Hands()
     mp_drawing = mp.solutions.drawing_utils
@@ -160,7 +162,15 @@ def main():
     pinky_finger_tip_locations = deque(maxlen=50)
     
     hold_z = 0
-    hold_j =0
+    hold_j = 0
+    
+    run_z = False
+    run_j = False
+    
+    if letter == 'z':
+        run_z = True
+    elif letter == 'j':
+        run_j = True
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -197,40 +207,42 @@ def main():
             index_finger_tip_locations.append((None, None))
             pinky_finger_tip_locations.append((None, None))
 
-        # Draw index finger tip locations from the last 50 frames
-        for x, y in index_finger_tip_locations:
-            cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
+        if run_z:
+            # Draw index finger tip locations from the last 50 frames
+            for x, y in index_finger_tip_locations:
+                cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
+        elif run_j:
+            # Draw pinky finger tip locations from the last 50 frames
+            for x, y in pinky_finger_tip_locations:
+                cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
 
-        # Draw pinky finger tip locations from the last 50 frames
-        for x, y in pinky_finger_tip_locations:
-            cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
-
-            
         text = ''
         
-        z_found, corners = detect_z(index_finger_tip_locations)
-        j_found, curves = detect_j(pinky_finger_tip_locations)
-        
-        if z_found or hold_z > 0:
-            text = 'Z'
-            hold_z += 1
+        if run_z:
+            z_found, corners = detect_z(index_finger_tip_locations)
             
-        if hold_z == 0 or hold_z == 50:
-            hold_z = 0
+            if z_found or hold_z > 0:
+                text = 'Z'
+                hold_z += 1
             
-        for corner in corners:
-            cv2.circle(frame, (int(corner[0]), int(corner[1])), 7, (0, 0, 255), -1)
+            if hold_z == 50:
+                hold_z = 0
+                
+            for corner in corners:
+                cv2.circle(frame, (int(corner[0]), int(corner[1])), 7, (0, 0, 255), -1)
 
-
-        if j_found or hold_j > 0:
-            text = 'J'
-            hold_j += 1
-            
-        if hold_j == 0 or hold_j == 50:
-            hold_j = 0
-            
-        for curve in curves:
-            cv2.circle(frame, (int(curve[0]), int(curve[1])), 7, (0, 0, 255), -1)
+        elif run_j:
+            j_found, curves = detect_j(pinky_finger_tip_locations)
+         
+            if j_found or hold_j > 0:
+                text = 'J'
+                hold_j += 1
+                
+            if hold_j == 50:
+                hold_j = 0
+                
+            for curve in curves:
+                cv2.circle(frame, (int(curve[0]), int(curve[1])), 7, (0, 0, 255), -1)
         
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Hand Tracking", frame)
@@ -243,4 +255,12 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="runs a learning module for a specified letter")
+    parser.add_argument("letter", help="Specify a letter as an argument")
+    args = parser.parse_args()
+
+    if len(args.letter) != 1 or not args.letter.isalpha():
+        print("ERROR: letter argument must be a single alphabetical character")
+        sys.exit(1)
+        
+    run_motion_module(args.letter.lower())
