@@ -47,6 +47,11 @@ class LoginWindow(QWidget):
         container.setGeometry(150,100,300,200)
         container.setStyleSheet("background: transparent;")
 
+    def open_main_window(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
+
     def login(self):
         username = self.username_input.text()
         password = self.password_input.text()
@@ -54,11 +59,16 @@ class LoginWindow(QWidget):
         # Replace the condition with your actual authentication logic
         if username == "habchiy" and password == "yasmina":
             print("Login successful")
+            self.open_main_window()
             #self.parent().show_home_page()
             #self.close()
         else:
             QMessageBox.warning(self, "Login Failed", "Invalid username or password")
 
+    def open_main_window(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
 '''
 class MainWindow(QMainWindow):
     def __init__(self):
