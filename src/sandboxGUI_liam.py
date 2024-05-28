@@ -65,10 +65,10 @@ class MainWindow(QMainWindow):
         # Add buttons A-Z to the tutorials page
         button_size = QSize(50, 50)  # Define the button size for A-Z buttons
         for i, letter in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
-            t_button = QPushButton(letter)
-            t_button.setFixedSize(button_size)
-            t_button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-            # t_button.clicked.connect(self.run_module(letter)) # broken
+            button = QPushButton(letter)
+            button.setFixedSize(button_size)
+            button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+            button.clicked.connect(lambda _, letter=letter: self.run_module(letter))
             row = i // 6  # 6 buttons per row
             col = i % 6   # column index
             self.tutorials_layout.addWidget(t_button, row, col)
