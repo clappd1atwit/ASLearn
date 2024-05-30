@@ -50,18 +50,25 @@ class MainWindow(QMainWindow):
 
         # Create placeholders for other pages
         self.create_tutorials_page()
-        self.free_mode_page = QWidget()
-        self.free_mode_page.setStyleSheet("background-color: lightgreen;")
-        self.stacked_widget.addWidget(self.free_mode_page)
+        self.create_free_mode_page()
+        self.create_quiz_page()
 
-        self.quiz_page = QWidget()
-        self.quiz_page.setStyleSheet("background-color: lightcoral;")
-        self.stacked_widget.addWidget(self.quiz_page)
+    def create_back_button(self, page):
+        back_button = QPushButton("Back")
+        back_button.setFixedSize(QSize(80, 40))
+        back_button.clicked.connect(self.show_home_page)
+        layout = QHBoxLayout()
+        layout.addStretch()
+        layout.addWidget(back_button)
+        page_layout = QVBoxLayout(page)
+        page_layout.addLayout(layout)
+        return page_layout
 
     def create_tutorials_page(self):
         self.tutorials_page = QWidget()
-        self.tutorials_layout = QGridLayout(self.tutorials_page)
-
+        tutorials_layout = self.create_back_button(self.tutorials_page)
+        grid_layout = QGridLayout()
+        
         # Add buttons A-Z to the tutorials page
         button_size = QSize(50, 50)  # Define the button size for A-Z buttons
         for i, letter in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
@@ -71,13 +78,26 @@ class MainWindow(QMainWindow):
             button.clicked.connect(lambda _, letter=letter: self.run_module(letter))
             row = i // 6  # 6 buttons per row
             col = i % 6   # column index
-            self.tutorials_layout.addWidget(t_button, row, col)
-
+            grid_layout.addWidget(button, row, col)
+        
+        tutorials_layout.addLayout(grid_layout)
         self.tutorials_page.setStyleSheet("background-color: lightblue;")
         self.stacked_widget.addWidget(self.tutorials_page)
     
-    def run_module(self, letter):
-        subprocess.Popen([sys.executable, r"src/learn_modules.py", letter.lower()])
+    def create_free_mode_page(self):
+        self.free_mode_page = QWidget()
+        self.create_back_button(self.free_mode_page)
+        self.free_mode_page.setStyleSheet("background-color: lightgreen;")
+        self.stacked_widget.addWidget(self.free_mode_page)
+    
+    def create_quiz_page(self):
+        self.quiz_page = QWidget()
+        self.create_back_button(self.quiz_page)
+        self.quiz_page.setStyleSheet("background-color: lightcoral;")
+        self.stacked_widget.addWidget(self.quiz_page)
+
+    def show_home_page(self):
+        self.stacked_widget.setCurrentWidget(self.home_page)
 
     def show_tutorials_page(self):
         self.stacked_widget.setCurrentWidget(self.tutorials_page)
@@ -87,6 +107,9 @@ class MainWindow(QMainWindow):
 
     def show_quiz_page(self):
         self.stacked_widget.setCurrentWidget(self.quiz_page)
+
+    def run_module(self, letter):
+        subprocess.Popen([sys.executable, r"src/learn_modules.py", letter.lower()])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
