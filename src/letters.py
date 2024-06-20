@@ -1,6 +1,6 @@
 import mediapipe as mp
-from helpers import *
-from hand_landmarks import *
+from helpers.helpers import *
+from helpers.hand_landmarks import *
 
 # Letter 'A'
 # The letter a is defined by the two following propertes:

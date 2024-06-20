@@ -1,6 +1,6 @@
-from helpers import *
+from helpers.helpers import *
 from letters import *
-import hand_colors
+import helpers.hand_colors as hand_colors
 
 import handtracking_motion
 

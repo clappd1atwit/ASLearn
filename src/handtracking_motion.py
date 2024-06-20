@@ -5,7 +5,7 @@ import cv2
 import mediapipe as mp
 
 from collections import deque
-from helpers import *
+from helpers.helpers import *
 from letters import *
 
 class KalmanFilter:

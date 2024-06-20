@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 
-from helpers import *
+from helpers.helpers import *
 from letters import *
 
 def main():
@@ -22,8 +22,6 @@ def main():
     font_thickness = 4
     text_position_left = (10, 80)
     color = (255, 50, 255)
-    
-    ret, frame = cap.read()
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -94,7 +92,7 @@ def main():
                 elif is_letter_z(results, landmarks):
                     text = 'Z'
                 
-                cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
+            cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Free Mode", frame)
 
         # Exit when 'q' key is pressed or window is x'ed out
