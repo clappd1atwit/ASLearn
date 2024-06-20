@@ -1,0 +1,1 @@
+handedness_calibration = 'Left'
