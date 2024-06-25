@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Login")
+        self.setWindowTitle("Main Window")
         self.setGeometry(100,100,600,400)
 
         #BACKGROUND PICTURE
@@ -79,6 +79,7 @@ class MainWindow(QMainWindow):
     def show_about(self):
         self.about_window = AboutUsPage()
         self.about_window.show()
+        self.close()
 '''
     def open_main_window(self):
         self.main_window = MainWindow()
@@ -213,7 +214,7 @@ class AboutUsPage(QWidget):
         #self.setCentralWidget(container)
 
         back_button = QPushButton("Back to Login")
-        back_button.clicked.connect(self.show_login)
+        back_button.clicked.connect(self.show_main)
         layout.addWidget(back_button)
 
         self.setLayout(layout)
