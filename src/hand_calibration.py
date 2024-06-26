@@ -1,5 +1,6 @@
 import mediapipe as mp
 import cv2
+from helpers.hand_landmarks import *
 
 mp_hand = mp.solutions.hands
 hands = mp_hand.Hands()
@@ -36,20 +37,45 @@ while cap.isOpened():
             text = 'Too many hands present'
             wait_frames = 0
 
-        # Give user time to hold up hand on screen
-        elif wait_frames < 50:
+        # Give user time (aka 40 frames) to hold up hand on screen
+        elif wait_frames < 40:
+            text = 'Calibrating . . .'
             wait_frames += 1
             
         else:
-            pass #TODO: write the code to determine the hand and save to config file
-    
+            text ='Complete!'
+            color = (0, 220, 0)
+            
+            # This section of the code is a little tricky. Mediapipe assumes your camera is mirrored.
+            # Therefore, when you hold up your right hand, and it looks like your left on screen, Mediapipe
+            # considers that your 'Right' hand. If your camera does not mirror the image, even though it 
+            # looks like your right hand, it is your 'Left' to Mediapipe.
+            if index_mcp(landmark).x > pinky_mcp(landmark).x:
+                hand = 'handedness_calibration = \'Left\'\n'
+            else:
+                hand = 'handedness_calibration = \'Right\'\n'
+                
+            with open('src/config/config.py', 'r') as file:
+                lines = file.readlines()
+            
+            for i, line in enumerate(lines):
+                if line.strip().startswith("handedness_calibration"):
+                    # Replace line with new calibration
+                    print('found it')
+                    lines[i] = hand
+                    break
+
+            # Write the modified lines back to the config.py file
+            with open('src/config/config.py', 'w') as file:
+                file.writelines(lines)
+            break 
     else:
         wait_frames = 0
         
     cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
     cv2.imshow("Hand Calibration", frame)
 
-            # Exit when 'q' key is pressed or window is x'ed out
+    # Exit when 'q' key is pressed or window is x'ed out
     if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty('Hand Calibration', cv2.WND_PROP_VISIBLE) < 1:
         break
 
