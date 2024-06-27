@@ -162,11 +162,9 @@ class LoginWindow(QWidget):
         container.setGeometry(150, 100, 300, 200)
         container.setStyleSheet("background: transparent;")
 
-        back_button = QPushButton("Back to Login")
-        back_button.clicked.connect(self.show_main)
-        layout.addWidget(back_button)
-
-        self.setLayout(layout)
+        self.back_button = QPushButton("Back",self)
+        self.back_button.setGeometry(10,10,50,50)
+        self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
         self.main_window = MainWindow()
@@ -208,27 +206,26 @@ class AboutUsPage(QWidget):
         self.background_label.setScaledContents(True)
 
         layout = QVBoxLayout()
-        label = QLabel("ASLearning: About Us")
+        self.label = QLabel("ASLearning: About Us",self)
 
-        label.setFont(font1)
-        layout.addWidget(label)
+
+        self.label.setFont(font1)
+        layout.addWidget(self.label)
+        self.label.setGeometry(50,0,200,200)
         self.setLayout(layout)
-
-        label.setFont(font1)
-        layout.addWidget(label)
 
         font2 = QFont()
         font2.setPointSize(16)
 
-        label2 = QLabel("Welcome to ASLearning Tool")
-        label2.setFont(font2)
-        label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(label2)
+        self.label2 = QLabel("Welcome to ASLearning Tool",self)
+        self.label2.setFont(font2)
+        self.label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        layout.addWidget(self.label2)
 
-        label3 = QLabel("Your Go-To Resource for Mastering ASL")
-        label3.setFont(font2)
-        label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(label3)
+        self.label3 = QLabel("Your Go-To Resource for Mastering ASL",self)
+        self.label3.setFont(font2)
+        self.label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        layout.addWidget(self.label3)
 
         font3 = QFont()
         font3.setPointSize(15)
@@ -267,11 +264,9 @@ class AboutUsPage(QWidget):
         #container.setLayout(layout)
         #self.setCentralWidget(container)
 
-        back_button = QPushButton("Back to Login")
-        back_button.clicked.connect(self.show_main)
-        layout.addWidget(back_button)
-
-        self.setLayout(layout)
+        self.back_button = QPushButton("Back",self)
+        #self.back_button.setGeometry(10,10,50,50)
+        self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
         self.main_window = MainWindow()
@@ -396,7 +391,14 @@ class ContactPage(QWidget):
         text_label10.setGeometry(515, 420, 220, 100)
         self.setLayout(layout)
 
+        self.back_button = QPushButton("Back",self)
+        self.back_button.setGeometry(10,10,50,50)
+        self.back_button.clicked.connect(self.show_main)
 
+    def show_main(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
 
 
 
