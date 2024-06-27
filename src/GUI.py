@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtGui import QFont
@@ -63,6 +63,7 @@ class MainWindow(QMainWindow):
 
         self.contact_button = QPushButton("Contact Us")
         self.contact_button.setStyleSheet("font-weight: bold;")
+        self.contact_button.clicked.connect(self.show_contact)
         layout.addWidget(self.contact_button)
 
         self.setLayout(layout)
@@ -85,6 +86,11 @@ class MainWindow(QMainWindow):
     def show_tips(self):
         self.tips_window = TipsPage()
         self.tips_window.show()
+        self.close()
+
+    def show_contact(self):
+        self.contact_window = ContactPage()
+        self.contact_window.show()
         self.close()
 
 '''
@@ -188,7 +194,7 @@ class AboutUsPage(QWidget):
         super().__init__()
         #self.stacked_widget = main_window
         self.setWindowTitle("About Us")
-        self.setGeometry(200, 200, 700, 500)
+        self.setGeometry(100, 100, 700, 500)
 
         font1 = QFont()
         font1.setPointSize(20)
@@ -284,15 +290,112 @@ class ContactPage(QWidget):
     def __init__(self):
         super().__init__()
         #self.stacked_widget = main_window
-        self.setWindowTitle("Tips for ASL")
-        self.setGeometry(100, 100, 600, 400)
+        self.setWindowTitle("Contact Us - Team Members")
+        self.setGeometry(100, 100, 700, 500)
 
+        
         #BACKGROUND PICTURE
-        self.background_label = QLabel(self)
-        self.background_label.setGeometry(400,0,350,250)
-        pixmap = QPixmap("all3.jpg")
-        self.background_label.setPixmap(pixmap)
-        self.background_label.setScaledContents(True)
+        self.pic_label = QLabel(self)
+        self.pic_label.setGeometry(0,0,700,500)
+        pixmap = QPixmap("wallpaper yellow.jpg")
+        self.pic_label.setPixmap(pixmap)
+        self.pic_label.setScaledContents(True)
+
+        #FIRST PICTURE
+        self.pic_label1 = QLabel(self)
+        self.pic_label1.setGeometry(185,0,325,225)
+        pixmap = QPixmap("IMG_8786.jpeg")
+        self.pic_label1.setPixmap(pixmap)
+        self.pic_label1.setScaledContents(True)
+
+        layout = QVBoxLayout()
+
+        font1 = QFont()
+        font1.setPointSize(16)
+        font1.setBold(True)
+
+        text_label1 = QLabel("Meet the CEOs", self)
+        text_label1.setFont(font1)
+        #layout.addWidget(text_label1)
+        #text_label1.setAlignment(Qt.AlignCenter)
+        text_label1.setGeometry(275, 200, 200, 100)
+        #text_label1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setLayout(layout)
+
+        font2 = QFont()
+        font2.setPointSize(13)
+
+        font3 = QFont()
+        font3.setPointSize(10)
+        font3.setItalic(True)
+
+        #Dan's contact and picture
+        self.pic_label2 = QLabel(self)
+        self.pic_label2.setGeometry(50, 300, 125, 125)
+        pixmap = QPixmap("IMG_8777.jpeg")
+        self.pic_label2.setPixmap(pixmap)
+        self.pic_label2.setScaledContents(True)
+
+        text_label2 = QLabel("Dan Clapp", self)
+        text_label2.setFont(font2)
+        text_label2.setGeometry(70, 385, 200, 100)
+        self.setLayout(layout)
+
+        text_label3 = QLabel("clappd1@wit.edu",self)
+        text_label3.setFont(font3)
+        text_label3.setGeometry(55, 405, 220, 100)
+        self.setLayout(layout)
+
+        text_label4 = QLabel("+1 (774) 330-5311",self)
+        text_label4.setFont(font3)
+        text_label4.setGeometry(50, 420, 220, 100)
+        self.setLayout(layout)
+
+        #Yass's contact and picture
+        self.pic_label3 = QLabel(self)
+        self.pic_label3.setGeometry(290, 300, 125, 125)
+        pixmap = QPixmap("IMG_8782.jpeg")
+        self.pic_label3.setPixmap(pixmap)
+        self.pic_label3.setScaledContents(True)
+
+        text_label5 = QLabel("Yasmina Habchi", self)
+        text_label5.setFont(font2)
+        text_label5.setGeometry(295, 385, 200, 100)
+        self.setLayout(layout)
+
+        text_label6 = QLabel("habchiy@wit.edu",self)
+        text_label6.setFont(font3)
+        text_label6.setGeometry(305, 405, 220, 100)
+        self.setLayout(layout)
+
+        text_label7 = QLabel("+1 (617) 356-4991",self)
+        text_label7.setFont(font3)
+        text_label7.setGeometry(300, 420, 220, 100)
+        self.setLayout(layout)
+
+
+        #Liam's contact and picture
+        self.pic_label4 = QLabel(self)
+        self.pic_label4.setGeometry(505, 300, 125, 125)
+        pixmap = QPixmap("IMG_8778.jpeg")
+        self.pic_label4.setPixmap(pixmap)
+        self.pic_label4.setScaledContents(True)
+
+        text_label8 = QLabel("Liam Nasr", self)
+        text_label8.setFont(font2)
+        text_label8.setGeometry(530, 385, 200, 100)
+        self.setLayout(layout)
+
+        text_label9 = QLabel("nasrl@wit.edu",self)
+        text_label9.setFont(font3)
+        text_label9.setGeometry(527, 405, 220, 100)
+        self.setLayout(layout)
+
+        text_label10 = QLabel("+1 (781) 690-0947",self)
+        text_label10.setFont(font3)
+        text_label10.setGeometry(515, 420, 220, 100)
+        self.setLayout(layout)
+
 
 
 
