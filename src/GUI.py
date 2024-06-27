@@ -156,6 +156,17 @@ class LoginWindow(QWidget):
         container.setGeometry(150, 100, 300, 200)
         container.setStyleSheet("background: transparent;")
 
+        back_button = QPushButton("Back to Login")
+        back_button.clicked.connect(self.show_main)
+        layout.addWidget(back_button)
+
+        self.setLayout(layout)
+
+    def show_main(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
+
     def login(self):
         username = self.username_input.text()
         password = self.password_input.text()
@@ -170,6 +181,7 @@ class LoginWindow(QWidget):
         self.main_window = SandboxMainWindow()
         self.main_window.show()
         self.close()
+
 
 class AboutUsPage(QWidget):
     def __init__(self):
@@ -266,6 +278,22 @@ class TipsPage(QWidget):
         #self.stacked_widget = main_window
         self.setWindowTitle("Tips for ASL")
         self.setGeometry(100, 100, 600, 400)
+
+
+class ContactPage(QWidget):
+    def __init__(self):
+        super().__init__()
+        #self.stacked_widget = main_window
+        self.setWindowTitle("Tips for ASL")
+        self.setGeometry(100, 100, 600, 400)
+
+        #BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(400,0,350,250)
+        pixmap = QPixmap("all3.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
 
 
 
