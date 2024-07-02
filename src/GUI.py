@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
 from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtGui import QIcon, QPixmap, QMovie
 from PyQt6.QtGui import QFont
 from sandboxGUI_liam import MainWindow as SandboxMainWindow
 
@@ -22,30 +22,10 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
 
-        #self.sandbox_gui = MainWindow(self.stacked_widget, self.tutorials_page)
-
         self.login_button = QPushButton("Login Account")
         self.login_button.setStyleSheet("font-weight: bold;")
         self.login_button.clicked.connect(self.show_login)
         layout.addWidget(self.login_button)
-
-        '''self.username_label = QLabel("Username: ")
-        self.username_label.setStyleSheet("font-weight: bold;")
-        self.username_input = QLineEdit()
-        layout.addWidget(self.username_label)
-        layout.addWidget(self.username_input)
-
-        self.password_label = QLabel("Password: ")
-        self.password_label.setStyleSheet("font-weight: bold;")
-        self.password_input = QLineEdit()
-        self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
-        layout.addWidget(self.password_label)
-        layout.addWidget(self.password_input)
-
-        self.login_button = QPushButton("Login")
-        self.login_button.setStyleSheet("font-weight: bold;")
-        self.login_button.clicked.connect(self.login)
-        layout.addWidget(self.login_button)'''
 
         self.about_button = QPushButton("About us")
         self.about_button.setStyleSheet("font-weight: bold;")
@@ -59,6 +39,7 @@ class MainWindow(QMainWindow):
 
         self.funfacts_button = QPushButton("What is ASL? Fun Facts")
         self.funfacts_button.setStyleSheet("font-weight: bold;")
+        self.funfacts_button.clicked.connect(self.show_funfacts)
         layout.addWidget(self.funfacts_button)
 
         self.contact_button = QPushButton("Contact Us")
@@ -93,33 +74,11 @@ class MainWindow(QMainWindow):
         self.contact_window.show()
         self.close()
 
-'''
-    def open_main_window(self):
-        self.main_window = MainWindow()
-        self.main_window.show()
-        self.close() '''
+    def show_funfacts(self):
+        self.funfacts_window = FunFactsPage()
+        self.funfacts_window.show()
+        self.close()
 
-   # def open_about_window(self):
-    #    self.about_button = AboutUsPage()
-     #   self.about_button.show()
-      #  self.close()
-
-'''
-    def login(self):
-        username = self.username_input.text()
-        password = self.password_input.text()
-
-        if username == "habchiy" and password == "yasmina":
-            print("Login successful")
-            self.open_main_window()
-
-        else:
-            QMessageBox.warning(self, "Login Failed", "Invalid username or password")
-
-    def open_main_window(self):
-        self.main_window = MainWindow()
-        self.main_window.show()
-        self.close() '''
 
 class LoginWindow(QWidget):
     def __init__(self):
@@ -208,7 +167,6 @@ class AboutUsPage(QWidget):
         layout = QVBoxLayout()
         self.label = QLabel("ASLearning: About Us",self)
 
-
         self.label.setFont(font1)
         layout.addWidget(self.label)
         self.label.setGeometry(50,0,200,200)
@@ -260,12 +218,7 @@ class AboutUsPage(QWidget):
         ans2.setWordWrap(True)
         layout.addWidget(ans2)
 
-        #container = QWidget(self)
-        #container.setLayout(layout)
-        #self.setCentralWidget(container)
-
         self.back_button = QPushButton("Back",self)
-        #self.back_button.setGeometry(10,10,50,50)
         self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
@@ -280,6 +233,104 @@ class TipsPage(QWidget):
         self.setWindowTitle("Tips for ASL")
         self.setGeometry(100, 100, 600, 400)
 
+        #layout = QVBoxLayout()
+
+        self.label = QLabel(self)
+        self.movie = QMovie("200w.gif")
+        self.label.setMovie(self.movie)
+        self.movie.start()
+        self.setFixedSize(self.movie.frameRect().width()+400, self.movie.frameRect().height()+400)
+
+        layout = QVBoxLayout()
+
+        font1 = QFont()
+        font1.setPointSize(20)
+        font1.setBold(True)
+
+        self.text1 = QLabel("Tips for ASL:",self)
+        self.text1.setFont(font1)
+        #self.text1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.text1.setGeometry(200,0,200,200)
+        layout.addWidget(self.text1)
+
+        font2 = QFont()
+        font2.setPointSize(10)
+        
+        self.par1 = QLabel("1. Practice Regularly: Consistent practice helps you remember and improve your signing skills. That includes watching others and learning from native signers by observing and mimicking to improve accuracy and fluency.", self)
+        self.par1.setWordWrap(True)
+        self.par1.setFont(font2)
+        self.par1.setGeometry(0,100,600,200)
+        layout.addWidget(self.par1)
+
+        self.par2 = QLabel("2. Relax your Hands: Relaxing your hands means that you’re able to sign at a greater speed, with more clarity, and for longer. Be clear with your form.", self)
+        self.par2.setWordWrap(True)
+        self.par2.setFont(font2)
+        self.par2.setGeometry(0,180,600,200)
+        layout.addWidget(self.par2)
+
+        self.par3 = QLabel("3. Focus on Facial Expressions: They are a great and crucial tool to use when it comes to communicationin by conveying tone and emotion in ASL. ", self)
+        self.par3.setWordWrap(True)
+        self.par3.setFont(font2)
+        self.par3.setGeometry(0,250,600,200)
+        layout.addWidget(self.par3)
+
+        self.par4 = QLabel("4. Be clear in your form: Keeping your form in check is a considerate way to ensure that your message is completely understood by the end receiver. The dominant hand does most of the signing, while the non-dominant hand supports.", self)
+        self.par4.setWordWrap(True)
+        self.par4.setFont(font2)
+        self.par4.setGeometry(0,320,600,200)
+        layout.addWidget(self.par4)
+
+        self.par5 = QLabel("5. Practice on camera: That's why ASLearning is here for! Recording yourself signing on camera is an effective way to pick up on the points of weakness in your technique which you or others may have not noticed otherwise.", self)
+        self.par5.setWordWrap(True)
+        self.par5.setFont(font2)
+        self.par5.setGeometry(0,395,600,200)
+        layout.addWidget(self.par5)
+
+class FunFactsPage(QWidget):
+    def __init__(self):
+        super().__init__()
+        #self.stacked_widget = main_window
+        self.setWindowTitle("What is ASL? Fun Facts")
+        self.setGeometry(100, 100, 600, 400)
+
+        font1 = QFont()
+        font1.setPointSize(20)
+        font1.setBold(True)
+
+        #BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(400,0,350,250)
+        pixmap = QPixmap("all3.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
+        layout = QVBoxLayout()
+        self.label1 = QLabel("What is ASL?",self)
+        self.label1.setFont(font1)
+        layout.addWidget(self.label1)
+        self.label1.setGeometry(50,0,200,200)
+        self.setLayout(layout)
+
+        font2 = QFont()
+        font2.setPointSize(15)
+
+        self.paragraph1 = QLabel('''<p>American Sign Language is a natural language that is expressed by movements of the hands and face with the same linguistic properties as spoken languages.
+                                 It is the primary language of many North Americans who are deaf and hard of hearing. <\p>''')
+        
+        self.paragraph1.setWordWrap(True)
+        self.paragraph1.setFont(font2)
+        self.paragraph1.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        layout.addWidget(self.paragraph1)
+
+
+        self.back_button = QPushButton("Back",self)
+        self.back_button.clicked.connect(self.show_main)
+
+    def show_main(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
+        
 
 class ContactPage(QWidget):
     def __init__(self):
@@ -311,10 +362,7 @@ class ContactPage(QWidget):
 
         text_label1 = QLabel("Meet the CEOs", self)
         text_label1.setFont(font1)
-        #layout.addWidget(text_label1)
-        #text_label1.setAlignment(Qt.AlignCenter)
         text_label1.setGeometry(275, 200, 200, 100)
-        #text_label1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setLayout(layout)
 
         font2 = QFont()
@@ -399,8 +447,6 @@ class ContactPage(QWidget):
         self.main_window = MainWindow()
         self.main_window.show()
         self.close()
-
-
 
 
 if __name__ == "__main__":
