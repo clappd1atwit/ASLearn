@@ -159,7 +159,7 @@ class AboutUsPage(QWidget):
         #BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(400,0,350,250)
-        pixmap = QPixmap("src/images/all3.jpg")
+        pixmap = QPixmap("src/images/all3_about_us.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -235,7 +235,7 @@ class TipsPage(QWidget):
         #layout = QVBoxLayout()
 
         self.label = QLabel(self)
-        self.movie = QMovie("200w.gif")
+        self.movie = QMovie("src/images/youre_welcome.gif")
         self.label.setMovie(self.movie)
         self.movie.start()
         self.setFixedSize(self.movie.frameRect().width()+400, self.movie.frameRect().height()+400)
@@ -299,7 +299,7 @@ class FunFactsPage(QWidget):
         #BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(400,0,350,250)
-        pixmap = QPixmap("all3.jpg")
+        pixmap = QPixmap("all3_about_us.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -349,7 +349,7 @@ class ContactPage(QWidget):
         #FIRST PICTURE
         self.pic_label1 = QLabel(self)
         self.pic_label1.setGeometry(185,0,325,225)
-        pixmap = QPixmap("src/images/IMG_8786.jpeg")
+        pixmap = QPixmap("src/images/all3_contact_us.jpeg")
         self.pic_label1.setPixmap(pixmap)
         self.pic_label1.setScaledContents(True)
 
@@ -374,7 +374,7 @@ class ContactPage(QWidget):
         #Dan's contact and picture
         self.pic_label2 = QLabel(self)
         self.pic_label2.setGeometry(50, 300, 125, 125)
-        pixmap = QPixmap("src/images/IMG_8777.jpeg")
+        pixmap = QPixmap("src/images/dan_headshot.jpeg")
         self.pic_label2.setPixmap(pixmap)
         self.pic_label2.setScaledContents(True)
 
@@ -396,7 +396,7 @@ class ContactPage(QWidget):
         #Yass's contact and picture
         self.pic_label3 = QLabel(self)
         self.pic_label3.setGeometry(290, 300, 125, 125)
-        pixmap = QPixmap("src/images/IMG_8782.jpeg")
+        pixmap = QPixmap("src/images/yasmina_headshot.jpeg")
         self.pic_label3.setPixmap(pixmap)
         self.pic_label3.setScaledContents(True)
 
@@ -419,7 +419,7 @@ class ContactPage(QWidget):
         #Liam's contact and picture
         self.pic_label4 = QLabel(self)
         self.pic_label4.setGeometry(505, 300, 125, 125)
-        pixmap = QPixmap("src/images/IMG_8778.jpeg")
+        pixmap = QPixmap("src/images/liam_headshot.jpeg")
         self.pic_label4.setPixmap(pixmap)
         self.pic_label4.setScaledContents(True)
 
