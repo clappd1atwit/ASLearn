@@ -79,6 +79,9 @@ def is_touching_close(finger1_tip, finger2_tip, finger2_dip):
 def is_touching_far(finger1_tip, finger2_tip, finger2_dip):
     return distance(finger1_tip, finger2_tip) < distance(finger2_tip, finger2_dip) * 1.5
 
+def is_touching_horizontal(finger1_tip, finger2_tip, finger2_dip):
+    return abs(finger1_tip.x - finger2_tip.x) < distance(finger2_tip, finger2_dip) * 1.25
+
 def is_facing_forward(results, lms):
     handedness = is_right_hand(results, lms)
     

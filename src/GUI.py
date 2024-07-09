@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         #BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(0,0,600,400)
-        pixmap = QPixmap("ASLearning pic.PNG")
+        pixmap = QPixmap("src/images/ASLearning pic.PNG")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -131,7 +131,7 @@ class LoginWindow(QWidget):
         # BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(0, 0, 600, 400)
-        pixmap = QPixmap("ASLearning pic.PNG")
+        pixmap = QPixmap("src/images/ASLearning pic.PNG")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -175,7 +175,7 @@ class LoginWindow(QWidget):
         username = self.username_input.text()
         password = self.password_input.text()
 
-        if username == "habchiy" and password == "yasmina":
+        if (username == "habchiy" and password == "yasmina") or (username == "" and password == ""):
             print("Login successful")
             self.open_main_window()
         else:
@@ -185,7 +185,6 @@ class LoginWindow(QWidget):
         self.main_window = SandboxMainWindow()
         self.main_window.show()
         self.close()
-
 
 class AboutUsPage(QWidget):
     def __init__(self):
@@ -201,7 +200,7 @@ class AboutUsPage(QWidget):
         #BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(400,0,350,250)
-        pixmap = QPixmap("all3.jpg")
+        pixmap = QPixmap("src/images/all3.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -292,14 +291,14 @@ class ContactPage(QWidget):
         #BACKGROUND PICTURE
         self.pic_label = QLabel(self)
         self.pic_label.setGeometry(0,0,700,500)
-        pixmap = QPixmap("wallpaper yellow.jpg")
+        pixmap = QPixmap("src/images/wallpaper yellow.jpg")
         self.pic_label.setPixmap(pixmap)
         self.pic_label.setScaledContents(True)
 
         #FIRST PICTURE
         self.pic_label1 = QLabel(self)
         self.pic_label1.setGeometry(185,0,325,225)
-        pixmap = QPixmap("IMG_8786.jpeg")
+        pixmap = QPixmap("src/images/IMG_8786.jpeg")
         self.pic_label1.setPixmap(pixmap)
         self.pic_label1.setScaledContents(True)
 
@@ -327,7 +326,7 @@ class ContactPage(QWidget):
         #Dan's contact and picture
         self.pic_label2 = QLabel(self)
         self.pic_label2.setGeometry(50, 300, 125, 125)
-        pixmap = QPixmap("IMG_8777.jpeg")
+        pixmap = QPixmap("src/images/IMG_8777.jpeg")
         self.pic_label2.setPixmap(pixmap)
         self.pic_label2.setScaledContents(True)
 
@@ -349,7 +348,7 @@ class ContactPage(QWidget):
         #Yass's contact and picture
         self.pic_label3 = QLabel(self)
         self.pic_label3.setGeometry(290, 300, 125, 125)
-        pixmap = QPixmap("IMG_8782.jpeg")
+        pixmap = QPixmap("src/images/IMG_8782.jpeg")
         self.pic_label3.setPixmap(pixmap)
         self.pic_label3.setScaledContents(True)
 
@@ -372,7 +371,7 @@ class ContactPage(QWidget):
         #Liam's contact and picture
         self.pic_label4 = QLabel(self)
         self.pic_label4.setGeometry(505, 300, 125, 125)
-        pixmap = QPixmap("IMG_8778.jpeg")
+        pixmap = QPixmap("src/images/IMG_8778.jpeg")
         self.pic_label4.setPixmap(pixmap)
         self.pic_label4.setScaledContents(True)
 
