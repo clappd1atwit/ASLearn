@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("GUI Landscape for ASLearning")
         self.setGeometry(100, 100, 800, 600)  # Set window size to 800x600
-        self.setWindowIcon(QIcon("ASLearning pic.PNG"))
+        self.setWindowIcon(QIcon("src/images/ASLearning pic.PNG"))
 
         # Create central widget and layout
         self.central_widget = QWidget()
@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         self.home_layout = QVBoxLayout(self.home_page)
         
         background_label = QLabel(self.home_page)
-        pixmap = QPixmap("ASLearning pic.PNG")
+        pixmap = QPixmap("src/images/ASLearning pic.PNG")
         scaled_pixmap = pixmap.scaled(QSize(800, 600), Qt.AspectRatioMode.KeepAspectRatio)
         background_label.setPixmap(scaled_pixmap)
         background_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
