@@ -285,6 +285,14 @@ class TipsPage(QWidget):
         self.par5.setGeometry(0,395,600,200)
         layout.addWidget(self.par5)
 
+        self.back_button = QPushButton("Back",self)
+        self.back_button.clicked.connect(self.show_main)
+
+    def show_main(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+        self.close()
+
 class FunFactsPage(QWidget):
     def __init__(self):
         super().__init__()
