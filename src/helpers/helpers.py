@@ -44,12 +44,43 @@ def is_finger_open(finger_tip, finger_dip, wrist):
     else:
         return finger_tip.y > finger_dip.y
     
+def is_finger_open_slope(finger_tip, finger_pip, finger_mcp):
+    vector_tip_pip = (finger_tip.x - finger_pip.x, finger_tip.y - finger_pip.y)
+    vector_mcp_pip = (finger_mcp.x - finger_pip.x, finger_mcp.y - finger_pip.y)
+    
+    dot_product = (vector_tip_pip[0] * vector_mcp_pip[0]) + (vector_tip_pip[1] * vector_mcp_pip[1])
+    
+    # Calculate the magnitudes of the vectors
+    magnitude_tip_pip = math.sqrt(vector_tip_pip[0]**2 + vector_tip_pip[1]**2)
+    magnitude_mcp_pip = math.sqrt(vector_mcp_pip[0]**2 + vector_mcp_pip[1]**2)
+    
+    # Calculate the cosine of the angle between the vectors
+    cos_angle = dot_product / (magnitude_tip_pip * magnitude_mcp_pip)
+    angle = math.degrees(math.acos(cos_angle))
+    
+    return angle > 120
+    
 def is_finger_closed(finger_tip, finger_pip, wrist):
     if wrist.y > finger_pip.y:
         return finger_tip.y > finger_pip.y
     else:
         return finger_tip.y < finger_pip.y
     
+def is_finger_closed_slope(finger_tip, finger_pip, finger_mcp):
+    vector_tip_pip = (finger_tip.x - finger_pip.x, finger_tip.y - finger_pip.y)
+    vector_mcp_pip = (finger_mcp.x - finger_pip.x, finger_mcp.y - finger_pip.y)
+    
+    dot_product = (vector_tip_pip[0] * vector_mcp_pip[0]) + (vector_tip_pip[1] * vector_mcp_pip[1])
+    
+    # Calculate the magnitudes of the vectors
+    magnitude_tip_pip = math.sqrt(vector_tip_pip[0]**2 + vector_tip_pip[1]**2)
+    magnitude_mcp_pip = math.sqrt(vector_mcp_pip[0]**2 + vector_mcp_pip[1]**2)
+    
+    # Calculate the cosine of the angle between the vectors
+    cos_angle = dot_product / (magnitude_tip_pip * magnitude_mcp_pip)
+    angle = math.degrees(math.acos(cos_angle))
+    
+    return angle < 100
 
 def is_right_hand(results, lms):
     return results.multi_handedness[
