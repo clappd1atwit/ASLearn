@@ -59,7 +59,7 @@ def run_static_module(letter):
                 
                 text, text_color, landmarks_color, connections_color = letter_modules[letter](results, lms)    
                 
-            cv2.putText(frame, text, text_position_left, font, font_scale, text_color, font_thickness)
+        cv2.putText(frame, text, text_position_left, font, font_scale, text_color, font_thickness)
         cv2.imshow("Learn Module", frame)
 
         # Exit when 'q' key is pressed or window is x'ed out
