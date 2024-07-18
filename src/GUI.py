@@ -233,9 +233,15 @@ class TipsPage(QWidget):
         self.setGeometry(100, 100, 600, 400)
 
         #layout = QVBoxLayout()
+        #src/images/you're welcome yas.mov
+
+        gif_width = 170
+        gif_height = 170
 
         self.label = QLabel(self)
-        self.movie = QMovie("src/images/youre_welcome.gif")
+        self.label.setFixedSize(gif_width,gif_height)
+        self.movie = QMovie("src/images/youre welcome yas.gif")
+        self.movie.setScaledSize(self.label.size())
         self.label.setMovie(self.movie)
         self.movie.start()
         self.setFixedSize(self.movie.frameRect().width()+400, self.movie.frameRect().height()+400)
