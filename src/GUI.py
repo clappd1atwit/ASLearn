@@ -324,7 +324,23 @@ class FunFactsPage(QWidget):
         super().__init__()
         #self.stacked_widget = main_window
         self.setWindowTitle("What is ASL? Fun Facts")
-        self.setGeometry(0, 0, 600, 400)
+        self.setGeometry(100, 100, 600, 350)
+
+        gif_width = 170
+        gif_height = 170
+
+        self.label = QLabel(self)
+        self.label.setFixedSize(gif_width,gif_height)
+        self.movie = QMovie("src/images/what is asl liam.gif")
+        self.movie.setScaledSize(self.label.size())
+        self.label.setMovie(self.movie)
+        self.movie.start()
+        self.setFixedSize(self.movie.frameRect().width()+400, self.movie.frameRect().height()+400)
+        self.label.setGeometry(400,0,200,200)
+
+        layout = QVBoxLayout()
+
+        #layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignLeft)
 
         font1 = QFont()
         font1.setPointSize(18)
@@ -334,7 +350,7 @@ class FunFactsPage(QWidget):
         self.background_label = QLabel(self)
         self.background_label.setGeometry(400,0,350,250)
         pixmap = QPixmap("all3_about_us.jpg")
-        self.background_label.setGeometry(0,0,600,400)
+        self.background_label.setGeometry(0,0,600,350)
         pixmap = QPixmap("wallpaper green.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
@@ -342,51 +358,55 @@ class FunFactsPage(QWidget):
         layout = QVBoxLayout()
         self.label1 = QLabel("What is ASL?",self)
         self.label1.setFont(font1)
-        layout.addWidget(self.label1)
-        self.label1.setGeometry(0,0,200,200)
-        self.setLayout(layout)
+        #self.label1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        #layout.addWidget(self.label1)
+        self.label1.setGeometry(00,0,200,100)
+        #self.setLayout(layout)
 
         font2 = QFont()
         font2.setPointSize(10)
 
-        self.paragraph1 = QLabel('''<p>American Sign Language is a natural language that is expressed by movements of the hands and face with the same linguistic properties as spoken languages.
-                                 It is the primary language of many North Americans who are deaf and hard of hearing. <\p>''', self)
-        
+        self.paragraph1 = QLabel("American Sign Language is a natural language that is expressed by movements of the hands and face with the same linguistic properties as spoken languages. It is the primary language of many North Americans who are deaf and hard of hearing.", self)
         self.paragraph1.setWordWrap(True)
         self.paragraph1.setFont(font2)
-        self.paragraph1.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(self.paragraph1)
-        #self.paragraph1.setGeometry(50,0,600,600)
-        self.setLayout(layout)
+        #self.paragraph1.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.paragraph1.setGeometry(0,100,400,50)
+        #layout.addWidget(self.paragraph1)
+        #self.setLayout(layout)
 
         self.label2 = QLabel("Fun Facts", self)
         self.label2.setFont(font1)
-        layout.addWidget(self.label2)
-        self.setLayout(layout)
+        self.label2.setGeometry(0,100,400,250)
+        #layout.addWidget(self.label2)
+        #self.setLayout(layout)
 
-        self.label3 = QLabel("1. ASL originated in the early 19th century at the American School for Deaf in Hartford, Connecticut. It was influenced by French Sign Language (LSF).")
+        self.label3 = QLabel("1. ASL originated in the early 19th century at the American School for Deaf in Hartford, Connecticut. It was influenced by French Sign Language (LSF).", self)
         self.label3.setFont(font2)
-        layout.addWidget(self.label3)
-        self.setLayout(layout)
+        #layout.addWidget(self.label3)
+        #self.setLayout(layout)
         self.label3.setWordWrap(True)
+        self.label3.setGeometry(0,150,580,300)
 
-        self.label4 = QLabel("2. ASL has its own grammar, syntax, and vocabulary, making it a distinct and complete language.")
+        self.label4 = QLabel("2. ASL has its own grammar, syntax, and vocabulary, making it a distinct and complete language.",self)
         self.label4.setFont(font2)
-        layout.addWidget(self.label4)
-        self.setLayout(layout)
+        #layout.addWidget(self.label4)
+        #self.setLayout(layout)
         self.label4.setWordWrap(True)
+        self.label4.setGeometry(0,200,580,300)
 
-        self.label5 = QLabel("3. Facial expressions and body language play a crucial role in ASL. They can indicate tone and emotions.")
+        self.label5 = QLabel("3. Facial expressions and body language play a crucial role in ASL. They can indicate tone and emotions.",self)
         self.label5.setFont(font2)
-        layout.addWidget(self.label5)
-        self.setLayout(layout)
+        #layout.addWidget(self.label5)
+        #self.setLayout(layout)
         self.label5.setWordWrap(True)
+        self.label5.setGeometry(0,250,580,300)
 
-        self.label6 = QLabel("4. ASL is the third most common native language in the United States.")
+        self.label6 = QLabel("4. ASL is the third most common native language in the United States.",self)
         self.label6.setFont(font2)
-        layout.addWidget(self.label6)
-        self.setLayout(layout)
+        #layout.addWidget(self.label6)
+        #self.setLayout(layout)
         self.label6.setWordWrap(True)
+        self.label6.setGeometry(0,300,580,300)
 
 
         self.back_button = QPushButton("Back",self)
