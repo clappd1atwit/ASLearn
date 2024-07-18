@@ -1,10 +1,27 @@
 import sys
+import sqlite3
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QMovie
 from PyQt6.QtGui import QFont
 from sandboxGUI_liam import MainWindow as SandboxMainWindow
 
+connection = sqlite3.connect("src/Database/Users.db")
+cursor = connection.cursor()
+
+def check_login_credentials(username, password):
+    database = sqlite3.connect("src/Database/Users.db")
+    cursor = database.cursor()
+    # Check if the email and password match in the LOGINS table
+    cursor.execute("SELECT COUNT(*) FROM Users WHERE Username=? AND Password=?", (username, password))
+    login_count = cursor.fetchone()[0]
+
+    if login_count > 0:
+        return True
+    else:
+        return False
+    database.commit()
+    database.close()
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -134,7 +151,10 @@ class LoginWindow(QWidget):
         username = self.username_input.text()
         password = self.password_input.text()
 
-        if (username == "habchiy" and password == "yasmina") or (username == "" and password == ""):
+        DbConnect = sqlite3.connect("src/Database/Users.db")
+        db = DbConnect.cursor()
+
+        if check_login_credentials(username, password):
             print("Login successful")
             self.open_main_window()
         else:

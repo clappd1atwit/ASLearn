@@ -339,3 +339,32 @@ def is_letter_y(results, lms):
 
 def is_letter_z(results, lms):
     return False
+
+letter_functions = {
+    'a': is_letter_a,
+    'b': is_letter_b,
+    'c': is_letter_c,
+    'd': is_letter_d,
+    'e': is_letter_e,
+    'f': is_letter_f,
+    'g': is_letter_g,
+    'h': is_letter_h,
+    'i': is_letter_i,
+    'j': is_letter_j,
+    'k': is_letter_k,
+    'l': is_letter_l,
+    'm': is_letter_m,
+    'n': is_letter_n,
+    'o': is_letter_o,
+    'p': is_letter_p,
+    'q': is_letter_q,
+    'r': is_letter_r,
+    's': is_letter_s,
+    't': is_letter_t,
+    'u': is_letter_u,
+    'v': is_letter_v,
+    'w': is_letter_w,
+    'x': is_letter_x,
+    'y': is_letter_y,
+    'z': is_letter_z
+}

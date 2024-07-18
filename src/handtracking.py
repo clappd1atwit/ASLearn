@@ -32,13 +32,13 @@ def main():
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         results = hands.process(rgb_frame)
-
+        text = ''
+        
         # If hands are detected, draw landmarks on the frame
         if results.multi_hand_landmarks:
             for landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(frame, landmarks, mp_hand.HAND_CONNECTIONS)
                 
-                text = ''
                 if is_letter_a(results, landmarks):
                     text = 'A'
                 elif is_letter_b(results, landmarks):
@@ -92,7 +92,7 @@ def main():
                 elif is_letter_z(results, landmarks):
                     text = 'Z'
                 
-            cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
+        cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Free Mode", frame)
 
         # Exit when 'q' key is pressed or window is x'ed out
