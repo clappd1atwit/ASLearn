@@ -170,7 +170,20 @@ class AboutUsPage(QWidget):
         super().__init__()
         #self.stacked_widget = main_window
         self.setWindowTitle("About Us")
-        self.setGeometry(100, 100, 700, 500)
+        self.setGeometry(0, 0, 700, 500)
+
+        gif_width = 180
+        gif_height = 180
+
+        self.label = QLabel(self)
+        self.label.setFixedSize(gif_width,gif_height)
+        self.movie = QMovie("src/images/about us dan.gif")
+        self.movie.setScaledSize(self.label.size())
+        self.label.setMovie(self.movie)
+        self.movie.start()
+        self.setFixedSize(self.movie.frameRect().width()+600, self.movie.frameRect().height()+400)
+        self.label.setGeometry(550,300,350,250)
+
 
         font1 = QFont()
         font1.setPointSize(20)
@@ -207,20 +220,20 @@ class AboutUsPage(QWidget):
         font3 = QFont()
         font3.setPointSize(15)
 
-        quest1 = QLabel("Why ASLearning Tool?")
-        quest1.setWordWrap(True)
+        self.quest1 = QLabel("Why ASLearning Tool?",self)
+        self.quest1.setWordWrap(True)
+        self.quest1.setGeometry(10,200,200,200)
         #quest1.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(quest1)
+        #layout.addWidget(quest1)
 
-        quest1.setFont(font3)
-        layout.addWidget(quest1)
+        self.quest1.setFont(font3)
+        #layout.addWidget(self.quest1)
         self.setLayout(layout)
 
-        ans1 = QLabel('''<p>Our advanced gesture recognition system provides instant feedback on your signs, helping you correct mistakes on the spot and reinforcing accurate learning.
-                      We have designed our platform to be easy to use, so you can focus on learning without any technical distractions.
-                      Whether you're at home or on the go, ASLearning is available on multiple devices, allowing you to practice and improve your ASL skills whenever it's convenient for you.<\p>''')
-        ans1.setWordWrap(True)
-        layout.addWidget(ans1)
+        self.ans1 = QLabel("Our advanced gesture recognition system provides instant feedback on your signs, helping you correct mistakes on the spot and reinforcing accurate learning. We have designed our platform to be easy to use, so you can focus on learning without any technical distractions. Whether you're at home or on the go, ASLearning is available on multiple devices, allowing you to practice and improve your ASL skills whenever it's convenient for you.", self)
+        self.ans1.setWordWrap(True)
+        self.ans1.setGeometry(5,150,490,400)
+        #layout.addWidget(ans1)
 
         quest2 = QLabel("Our Mission")
         quest2.setWordWrap(True)
