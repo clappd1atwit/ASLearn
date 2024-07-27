@@ -162,7 +162,7 @@ class LoginWindow(QWidget):
         container.setStyleSheet("background: transparent;")
 
         self.back_button = QPushButton("Back",self)
-        self.back_button.setGeometry(10,10,50,50)
+        #self.back_button.setGeometry(10,10,50,50)
         self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
@@ -562,7 +562,7 @@ class ContactPage(QWidget):
         self.setLayout(layout)'''
 
         self.back_button = QPushButton("Back",self)
-        self.back_button.setGeometry(10,10,50,50)
+       # self.back_button.setGeometry(10,10,50,50)
         self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
