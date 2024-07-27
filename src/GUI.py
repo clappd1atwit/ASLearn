@@ -199,7 +199,7 @@ class AboutUsPage(QWidget):
         # BACKGROUND PICTURE
         self.background_label = QLabel(self)
         self.background_label.setGeometry(0, 0, 800, 600)
-        pixmap = QPixmap("src/images/wallpaper red.png")
+        pixmap = QPixmap("src/images/Solid Light Lilac.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
@@ -228,32 +228,35 @@ class AboutUsPage(QWidget):
         self.background_label.setScaledContents(True)
 
         layout = QVBoxLayout()
-        self.label = QLabel("ASLearning: About Us",self)
 
+        self.label = QLabel("ASLearning: About Us",self)
         self.label.setFont(font1)
-        layout.addWidget(self.label)
-        self.label.setGeometry(50,0,200,200)
-        self.setLayout(layout)
+        #layout.addWidget(self.label)
+        self.label.setGeometry(5,0,400,120)
+        #self.setLayout(layout)
 
         font2 = QFont()
         font2.setPointSize(16)
 
         self.label2 = QLabel("Welcome to ASLearning Tool",self)
         self.label2.setFont(font2)
-        self.label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(self.label2)
+        #self.label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        #layout.addWidget(self.label2)
+        self.label2.setGeometry(5,180,300,120)
+
 
         self.label3 = QLabel("Your Go-To Resource for Mastering ASL",self)
         self.label3.setFont(font2)
-        self.label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(self.label3)
+        self.label3.setGeometry(5,50,400,200)
+        #self.label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        #layout.addWidget(self.label3)
 
         font3 = QFont()
         font3.setPointSize(15)
 
         self.quest1 = QLabel("Why ASLearning Tool?",self)
         self.quest1.setWordWrap(True)
-        self.quest1.setGeometry(10,200,200,200)
+        self.quest1.setGeometry(5,200,200,200)
         #quest1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         #layout.addWidget(quest1)
 
@@ -263,23 +266,23 @@ class AboutUsPage(QWidget):
 
         self.ans1 = QLabel("Our advanced gesture recognition system provides instant feedback on your signs, helping you correct mistakes on the spot and reinforcing accurate learning. We have designed our platform to be easy to use, so you can focus on learning without any technical distractions. Whether you're at home or on the go, ASLearning is available on multiple devices, allowing you to practice and improve your ASL skills whenever it's convenient for you.", self)
         self.ans1.setWordWrap(True)
-        self.ans1.setGeometry(5,150,490,400)
+        self.ans1.setGeometry(5,170,500,400)
         #layout.addWidget(ans1)
 
-        quest2 = QLabel("Our Mission")
-        quest2.setWordWrap(True)
+        self.quest2 = QLabel("Our Mission",self)
+        self.quest2.setWordWrap(True)
         #quest1.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(quest2)
+        self.quest2.setGeometry(5,240,500,400)
+        #layout.addWidget(self.quest2)
 
-        quest2.setFont(font3)
-        layout.addWidget(quest2)
-        self.setLayout(layout)
+        self.quest2.setFont(font3)
+        #layout.addWidget(quest2)
+        #self.setLayout(layout)
 
-        ans2 = QLabel('''<p>Our mission is to make ASL accessible and easy to learn for everyone, whether you're a beginner or looking to refine your skills.
-                      Our innovative platform leverages cutting-edge technology to provide an enganing and effective learning experience.
-                      Using Mediapipe, a powerful tool for real-time hand gesture recognition, we can accurately detect your signs and give immediate feedback. <\p>''')
-        ans2.setWordWrap(True)
-        layout.addWidget(ans2)
+        self.ans2 = QLabel("Our mission is to make ASL accessible and easy to learn for everyone, whether you're a beginner or looking to refine your skills. Our innovative platform leverages cutting-edge technology to provide an enganing and effective learning experience. Using Mediapipe, a powerful tool for real-time hand gesture recognition, we can accurately detect your signs and give immediate feedback.",self)
+        self.ans2.setWordWrap(True)
+        self.ans2.setGeometry(5,300,550,400)
+        #layout.addWidget(self.ans2)
 
         self.back_button = QPushButton("Back",self)
         self.back_button.clicked.connect(self.show_main)
