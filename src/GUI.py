@@ -196,6 +196,13 @@ class AboutUsPage(QWidget):
         self.setWindowTitle("About Us")
         self.setGeometry(0, 0, 700, 500)
 
+        # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 800, 600)
+        pixmap = QPixmap("src/images/wallpaper red.png")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
         gif_width = 180
         gif_height = 180
 
@@ -289,8 +296,12 @@ class TipsPage(QWidget):
         self.setWindowTitle("Tips for ASL")
         self.setGeometry(100, 100, 600, 400)
 
-        #layout = QVBoxLayout()
-        #src/images/you're welcome yas.mov
+                # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 700, 700)
+        pixmap = QPixmap("src/images/pinkpastel.png")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
 
         gif_width = 170
         gif_height = 170
@@ -363,6 +374,13 @@ class FunFactsPage(QWidget):
         self.setWindowTitle("What is ASL? Fun Facts")
         self.setGeometry(100, 100, 600, 350)
 
+                # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 600, 600)
+        pixmap = QPixmap("src/images/wallpaper orange.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
         gif_width = 170
         gif_height = 170
 
@@ -397,7 +415,7 @@ class FunFactsPage(QWidget):
         self.label1.setFont(font1)
         #self.label1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         #layout.addWidget(self.label1)
-        self.label1.setGeometry(00,0,200,100)
+        self.label1.setGeometry(170,0,200,100)
         #self.setLayout(layout)
 
         font2 = QFont()
@@ -413,7 +431,7 @@ class FunFactsPage(QWidget):
 
         self.label2 = QLabel("Fun Facts", self)
         self.label2.setFont(font1)
-        self.label2.setGeometry(0,100,400,250)
+        self.label2.setGeometry(175,100,400,250)
         #layout.addWidget(self.label2)
         #self.setLayout(layout)
 
