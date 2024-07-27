@@ -137,13 +137,14 @@ class LoginWindow(QWidget):
         layout = QVBoxLayout()
 
         self.username_label = QLabel("Username: ")
-        self.username_label.setStyleSheet("font-weight: bold;")
+        self.username_label.setStyleSheet("font-weight: bold; border: 2px solid white; background-color: white; color:black; padding: 5px;")
         self.username_input = QLineEdit()
+        self.username_input.setStyleSheet("border: 1px solid black; padding: 5px;")
         layout.addWidget(self.username_label)
         layout.addWidget(self.username_input)
 
         self.password_label = QLabel("Password: ")
-        self.password_label.setStyleSheet("font-weight: bold;")
+        self.password_label.setStyleSheet("font-weight: bold; border: 2px solid white; background-color: white; color:black; padding: 5px;")
         self.password_input = QLineEdit()
         self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
         layout.addWidget(self.password_label)
