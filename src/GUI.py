@@ -37,30 +37,53 @@ class MainWindow(QMainWindow):
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
-        layout = QVBoxLayout()
+        container = QWidget(self)
+        container.setGeometry(150, 100, 300, 200)
+        container.setStyleSheet("background: transparent;")
 
-        self.login_button = QPushButton("Login Account")
-        self.login_button.setStyleSheet("font-weight: bold;")
+        layout = QVBoxLayout(container)
+
+        button_style = """
+            QPushButton {
+                font-weight: bold;
+                border: 2px solid white;  /* White border around the button */
+                border-radius: 5px;      /* Rounded corners */
+                padding: 5px;            /* Space between text and border */
+                background-color: rgba(0, 0, 0, 150); /* Semi-transparent background */
+                color: white;            /* Text color */
+            }
+            QPushButton:hover {
+                background-color: rgba(255, 255, 255, 100); /* Change on hover */
+            }
+        """
+
+        self.login_button = QPushButton("Login Account",self)
+        self.login_button.setStyleSheet(button_style)
+        self.login_button.setGeometry(250,80,100,30)
         self.login_button.clicked.connect(self.show_login)
         layout.addWidget(self.login_button)
 
-        self.about_button = QPushButton("About us")
-        self.about_button.setStyleSheet("font-weight: bold;")
+        self.about_button = QPushButton("About us",self)
+        self.about_button.setStyleSheet(button_style)
+        self.about_button.setGeometry(250,130,100,30)
         self.about_button.clicked.connect(self.show_about)
         layout.addWidget(self.about_button)
 
-        self.tips_button = QPushButton("Tips")
-        self.tips_button.setStyleSheet("font-weight: bold;")
+        self.tips_button = QPushButton("Tips",self)
+        self.tips_button.setStyleSheet(button_style)
+        self.tips_button.setGeometry(250,180,100,30)
         self.tips_button.clicked.connect(self.show_tips)
         layout.addWidget(self.tips_button)
 
-        self.funfacts_button = QPushButton("What is ASL? Fun Facts")
-        self.funfacts_button.setStyleSheet("font-weight: bold;")
+        self.funfacts_button = QPushButton("What is ASL? Fun Facts",self)
+        self.funfacts_button.setStyleSheet(button_style)
+        self.funfacts_button.setGeometry(225,230,150,30)
         self.funfacts_button.clicked.connect(self.show_funfacts)
         layout.addWidget(self.funfacts_button)
 
-        self.contact_button = QPushButton("Contact Us")
-        self.contact_button.setStyleSheet("font-weight: bold;")
+        self.contact_button = QPushButton("Contact Us",self)
+        self.contact_button.setStyleSheet(button_style)
+        self.contact_button.setGeometry(250,280,100,30)
         self.contact_button.clicked.connect(self.show_contact)
         layout.addWidget(self.contact_button)
 
@@ -488,10 +511,10 @@ class ContactPage(QWidget):
         text_label3.setGeometry(55, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label4 = QLabel("+1 (774) 330-5311",self)
+        '''text_label4 = QLabel("+1 (774) 330-5311",self)
         text_label4.setFont(font3)
         text_label4.setGeometry(50, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
         #Yass's contact and picture
         self.pic_label3 = QLabel(self)
@@ -510,10 +533,10 @@ class ContactPage(QWidget):
         text_label6.setGeometry(305, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label7 = QLabel("+1 (617) 356-4991",self)
+        '''text_label7 = QLabel("+1 (617) 356-4991",self)
         text_label7.setFont(font3)
         text_label7.setGeometry(300, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
 
         #Liam's contact and picture
@@ -533,10 +556,10 @@ class ContactPage(QWidget):
         text_label9.setGeometry(527, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label10 = QLabel("+1 (781) 690-0947",self)
+        '''text_label10 = QLabel("+1 (781) 690-0947",self)
         text_label10.setFont(font3)
         text_label10.setGeometry(515, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
         self.back_button = QPushButton("Back",self)
         self.back_button.setGeometry(10,10,50,50)
