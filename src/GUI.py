@@ -37,30 +37,53 @@ class MainWindow(QMainWindow):
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True)
 
-        layout = QVBoxLayout()
+        container = QWidget(self)
+        container.setGeometry(150, 100, 300, 200)
+        container.setStyleSheet("background: transparent;")
 
-        self.login_button = QPushButton("Login Account")
-        self.login_button.setStyleSheet("font-weight: bold;")
+        layout = QVBoxLayout(container)
+
+        button_style = """
+            QPushButton {
+                font-weight: bold;
+                border: 2px solid white;  /* White border around the button */
+                border-radius: 5px;      /* Rounded corners */
+                padding: 5px;            /* Space between text and border */
+                background-color: rgba(0, 0, 0, 150); /* Semi-transparent background */
+                color: white;            /* Text color */
+            }
+            QPushButton:hover {
+                background-color: rgba(255, 255, 255, 100); /* Change on hover */
+            }
+        """
+
+        self.login_button = QPushButton("Login Account",self)
+        self.login_button.setStyleSheet(button_style)
+        self.login_button.setGeometry(250,80,100,30)
         self.login_button.clicked.connect(self.show_login)
         layout.addWidget(self.login_button)
 
-        self.about_button = QPushButton("About us")
-        self.about_button.setStyleSheet("font-weight: bold;")
+        self.about_button = QPushButton("About us",self)
+        self.about_button.setStyleSheet(button_style)
+        self.about_button.setGeometry(250,130,100,30)
         self.about_button.clicked.connect(self.show_about)
         layout.addWidget(self.about_button)
 
-        self.tips_button = QPushButton("Tips")
-        self.tips_button.setStyleSheet("font-weight: bold;")
+        self.tips_button = QPushButton("Tips",self)
+        self.tips_button.setStyleSheet(button_style)
+        self.tips_button.setGeometry(250,180,100,30)
         self.tips_button.clicked.connect(self.show_tips)
         layout.addWidget(self.tips_button)
 
-        self.funfacts_button = QPushButton("What is ASL? Fun Facts")
-        self.funfacts_button.setStyleSheet("font-weight: bold;")
+        self.funfacts_button = QPushButton("What is ASL? Fun Facts",self)
+        self.funfacts_button.setStyleSheet(button_style)
+        self.funfacts_button.setGeometry(225,230,150,30)
         self.funfacts_button.clicked.connect(self.show_funfacts)
         layout.addWidget(self.funfacts_button)
 
-        self.contact_button = QPushButton("Contact Us")
-        self.contact_button.setStyleSheet("font-weight: bold;")
+        self.contact_button = QPushButton("Contact Us",self)
+        self.contact_button.setStyleSheet(button_style)
+        self.contact_button.setGeometry(250,280,100,30)
         self.contact_button.clicked.connect(self.show_contact)
         layout.addWidget(self.contact_button)
 
@@ -114,13 +137,14 @@ class LoginWindow(QWidget):
         layout = QVBoxLayout()
 
         self.username_label = QLabel("Username: ")
-        self.username_label.setStyleSheet("font-weight: bold;")
+        self.username_label.setStyleSheet("font-weight: bold; border: 2px solid white; background-color: white; color:black; padding: 5px;")
         self.username_input = QLineEdit()
+        self.username_input.setStyleSheet("border: 1px solid black; padding: 5px;")
         layout.addWidget(self.username_label)
         layout.addWidget(self.username_input)
 
         self.password_label = QLabel("Password: ")
-        self.password_label.setStyleSheet("font-weight: bold;")
+        self.password_label.setStyleSheet("font-weight: bold; border: 2px solid white; background-color: white; color:black; padding: 5px;")
         self.password_input = QLineEdit()
         self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
         layout.addWidget(self.password_label)
@@ -139,7 +163,7 @@ class LoginWindow(QWidget):
         container.setStyleSheet("background: transparent;")
 
         self.back_button = QPushButton("Back",self)
-        self.back_button.setGeometry(10,10,50,50)
+        #self.back_button.setGeometry(10,10,50,50)
         self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
@@ -170,7 +194,27 @@ class AboutUsPage(QWidget):
         super().__init__()
         #self.stacked_widget = main_window
         self.setWindowTitle("About Us")
-        self.setGeometry(100, 100, 700, 500)
+        self.setGeometry(0, 0, 700, 500)
+
+        # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 800, 600)
+        pixmap = QPixmap("src/images/Solid Light Lilac.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
+        gif_width = 180
+        gif_height = 180
+
+        self.label = QLabel(self)
+        self.label.setFixedSize(gif_width,gif_height)
+        self.movie = QMovie("src/images/about us dan.gif")
+        self.movie.setScaledSize(self.label.size())
+        self.label.setMovie(self.movie)
+        self.movie.start()
+        self.setFixedSize(self.movie.frameRect().width()+600, self.movie.frameRect().height()+400)
+        self.label.setGeometry(550,300,350,250)
+
 
         font1 = QFont()
         font1.setPointSize(20)
@@ -184,58 +228,61 @@ class AboutUsPage(QWidget):
         self.background_label.setScaledContents(True)
 
         layout = QVBoxLayout()
-        self.label = QLabel("ASLearning: About Us",self)
 
+        self.label = QLabel("ASLearning: About Us",self)
         self.label.setFont(font1)
-        layout.addWidget(self.label)
-        self.label.setGeometry(50,0,200,200)
-        self.setLayout(layout)
+        #layout.addWidget(self.label)
+        self.label.setGeometry(5,0,400,120)
+        #self.setLayout(layout)
 
         font2 = QFont()
         font2.setPointSize(16)
 
         self.label2 = QLabel("Welcome to ASLearning Tool",self)
         self.label2.setFont(font2)
-        self.label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(self.label2)
+        #self.label2.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        #layout.addWidget(self.label2)
+        self.label2.setGeometry(5,180,300,120)
+
 
         self.label3 = QLabel("Your Go-To Resource for Mastering ASL",self)
         self.label3.setFont(font2)
-        self.label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        layout.addWidget(self.label3)
+        self.label3.setGeometry(5,50,400,200)
+        #self.label3.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        #layout.addWidget(self.label3)
 
         font3 = QFont()
         font3.setPointSize(15)
 
-        quest1 = QLabel("Why ASLearning Tool?")
-        quest1.setWordWrap(True)
+        self.quest1 = QLabel("Why ASLearning Tool?",self)
+        self.quest1.setWordWrap(True)
+        self.quest1.setGeometry(5,200,200,200)
         #quest1.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(quest1)
+        #layout.addWidget(quest1)
 
-        quest1.setFont(font3)
-        layout.addWidget(quest1)
+        self.quest1.setFont(font3)
+        #layout.addWidget(self.quest1)
         self.setLayout(layout)
 
-        ans1 = QLabel('''<p>Our advanced gesture recognition system provides instant feedback on your signs, helping you correct mistakes on the spot and reinforcing accurate learning.
-                      We have designed our platform to be easy to use, so you can focus on learning without any technical distractions.
-                      Whether you're at home or on the go, ASLearning is available on multiple devices, allowing you to practice and improve your ASL skills whenever it's convenient for you.<\p>''')
-        ans1.setWordWrap(True)
-        layout.addWidget(ans1)
+        self.ans1 = QLabel("Our advanced gesture recognition system provides instant feedback on your signs, helping you correct mistakes on the spot and reinforcing accurate learning. We have designed our platform to be easy to use, so you can focus on learning without any technical distractions. Whether you're at home or on the go, ASLearning is available on multiple devices, allowing you to practice and improve your ASL skills whenever it's convenient for you.", self)
+        self.ans1.setWordWrap(True)
+        self.ans1.setGeometry(5,170,500,400)
+        #layout.addWidget(ans1)
 
-        quest2 = QLabel("Our Mission")
-        quest2.setWordWrap(True)
+        self.quest2 = QLabel("Our Mission",self)
+        self.quest2.setWordWrap(True)
         #quest1.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(quest2)
+        self.quest2.setGeometry(5,240,500,400)
+        #layout.addWidget(self.quest2)
 
-        quest2.setFont(font3)
-        layout.addWidget(quest2)
-        self.setLayout(layout)
+        self.quest2.setFont(font3)
+        #layout.addWidget(quest2)
+        #self.setLayout(layout)
 
-        ans2 = QLabel('''<p>Our mission is to make ASL accessible and easy to learn for everyone, whether you're a beginner or looking to refine your skills.
-                      Our innovative platform leverages cutting-edge technology to provide an enganing and effective learning experience.
-                      Using Mediapipe, a powerful tool for real-time hand gesture recognition, we can accurately detect your signs and give immediate feedback. <\p>''')
-        ans2.setWordWrap(True)
-        layout.addWidget(ans2)
+        self.ans2 = QLabel("Our mission is to make ASL accessible and easy to learn for everyone, whether you're a beginner or looking to refine your skills. Our innovative platform leverages cutting-edge technology to provide an enganing and effective learning experience. Using Mediapipe, a powerful tool for real-time hand gesture recognition, we can accurately detect your signs and give immediate feedback.",self)
+        self.ans2.setWordWrap(True)
+        self.ans2.setGeometry(5,300,550,400)
+        #layout.addWidget(self.ans2)
 
         self.back_button = QPushButton("Back",self)
         self.back_button.clicked.connect(self.show_main)
@@ -252,8 +299,12 @@ class TipsPage(QWidget):
         self.setWindowTitle("Tips for ASL")
         self.setGeometry(100, 100, 600, 400)
 
-        #layout = QVBoxLayout()
-        #src/images/you're welcome yas.mov
+                # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 700, 700)
+        pixmap = QPixmap("src/images/pinkpastel.png")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
 
         gif_width = 170
         gif_height = 170
@@ -326,6 +377,13 @@ class FunFactsPage(QWidget):
         self.setWindowTitle("What is ASL? Fun Facts")
         self.setGeometry(100, 100, 600, 350)
 
+                # BACKGROUND PICTURE
+        self.background_label = QLabel(self)
+        self.background_label.setGeometry(0, 0, 600, 600)
+        pixmap = QPixmap("src/images/wallpaper orange.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True)
+
         gif_width = 170
         gif_height = 170
 
@@ -360,7 +418,7 @@ class FunFactsPage(QWidget):
         self.label1.setFont(font1)
         #self.label1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         #layout.addWidget(self.label1)
-        self.label1.setGeometry(00,0,200,100)
+        self.label1.setGeometry(170,0,200,100)
         #self.setLayout(layout)
 
         font2 = QFont()
@@ -376,7 +434,7 @@ class FunFactsPage(QWidget):
 
         self.label2 = QLabel("Fun Facts", self)
         self.label2.setFont(font1)
-        self.label2.setGeometry(0,100,400,250)
+        self.label2.setGeometry(175,100,400,250)
         #layout.addWidget(self.label2)
         #self.setLayout(layout)
 
@@ -475,10 +533,10 @@ class ContactPage(QWidget):
         text_label3.setGeometry(55, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label4 = QLabel("+1 (774) 330-5311",self)
+        '''text_label4 = QLabel("+1 (774) 330-5311",self)
         text_label4.setFont(font3)
         text_label4.setGeometry(50, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
         #Yass's contact and picture
         self.pic_label3 = QLabel(self)
@@ -497,10 +555,10 @@ class ContactPage(QWidget):
         text_label6.setGeometry(305, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label7 = QLabel("+1 (617) 356-4991",self)
+        '''text_label7 = QLabel("+1 (617) 356-4991",self)
         text_label7.setFont(font3)
         text_label7.setGeometry(300, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
 
         #Liam's contact and picture
@@ -520,13 +578,13 @@ class ContactPage(QWidget):
         text_label9.setGeometry(527, 405, 220, 100)
         self.setLayout(layout)
 
-        text_label10 = QLabel("+1 (781) 690-0947",self)
+        '''text_label10 = QLabel("+1 (781) 690-0947",self)
         text_label10.setFont(font3)
         text_label10.setGeometry(515, 420, 220, 100)
-        self.setLayout(layout)
+        self.setLayout(layout)'''
 
         self.back_button = QPushButton("Back",self)
-        self.back_button.setGeometry(10,10,50,50)
+       # self.back_button.setGeometry(10,10,50,50)
         self.back_button.clicked.connect(self.show_main)
 
     def show_main(self):
