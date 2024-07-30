@@ -1,0 +1,12 @@
+<RCC>
+  <qresource>
+    <file>images/icons8-power-50.png</file>
+    <file>images/ASLearning.png</file>
+    <file>images/icons8-about-us-50.png</file>
+    <file>images/pngtree-sign-language-line-icon-vector-png-image_6682775.png</file>
+    <file>images/icons8-customer-50.png</file>
+    <file>images/icons8-dashboard-50.png</file>
+    <file>images/icons8-lightbulb-50.png</file>
+    <file>images/icons8-menu-50.png</file>
+  </qresource>
+</RCC>
