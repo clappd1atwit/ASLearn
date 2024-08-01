@@ -1,5 +1,7 @@
 <RCC>
   <qresource>
+    <file>images/icons8-quiz-50.png</file>
+    <file>images/icons8-teach-50.png</file>
     <file>images/icons8-power-50.png</file>
     <file>images/ASLearning.png</file>
     <file>images/icons8-about-us-50.png</file>
