@@ -47,6 +47,7 @@ def run_static_module(letter):
         if not ret:
             print("Failed to capture frame")
             break
+        text = letter.upper()
 
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

@@ -116,7 +116,7 @@ def run_motion_module(letter):
             print("Failed to capture frame")
             break
         
-        text = ''
+        text = letter.upper()
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = hands.process(rgb_frame)
         
