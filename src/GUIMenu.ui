@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
-    <height>669</height>
+    <width>909</width>
+    <height>678</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,13 +94,47 @@ QPushButton:checked{
           <number>20</number>
          </property>
          <item>
-          <widget class="QPushButton" name="ModeC">
+          <widget class="QPushButton" name="TutorialC">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/images/icons8-teach-50.png</normaloff>:/images/icons8-teach-50.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="FreeC">
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset resource="resources.qrc">
              <normaloff>:/images/pngtree-sign-language-line-icon-vector-png-image_6682775.png</normaloff>:/images/pngtree-sign-language-line-icon-vector-png-image_6682775.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="QuizC">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/images/icons8-quiz-50.png</normaloff>:/images/icons8-quiz-50.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -278,7 +312,10 @@ text-align:center;
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
-         <widget class="QWidget" name="Mode_Page">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="Tutorial_Page">
           <widget class="QLabel" name="label_8">
            <property name="geometry">
             <rect>
@@ -289,7 +326,255 @@ text-align:center;
             </rect>
            </property>
            <property name="text">
-            <string>Mode Page</string>
+            <string>Tutorial Page</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>430</y>
+             <width>81</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>36</pointsize>
+            </font>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <item>
+            <property name="text">
+             <string>A</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>B</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>C</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>D</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>E</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>F</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>G</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>H</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>I</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>J</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>K</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>L</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>M</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>N</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>O</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>P</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Q</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>R</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>S</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>T</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>U</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>V</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>W</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Z</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QPushButton" name="Tutorial_Start">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>430</y>
+             <width>111</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>START!</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+          </widget>
+          <widget class="QProgressBar" name="progressBar">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>540</y>
+             <width>661</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Free_Page">
+          <widget class="QLabel" name="label_11">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>230</y>
+             <width>49</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Free Mode</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="Free_Start">
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>480</y>
+             <width>111</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>START!</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Quiz_Page">
+          <widget class="QLabel" name="label_12">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>180</y>
+             <width>49</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Quiz Page</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="Quiz_Start">
+           <property name="geometry">
+            <rect>
+             <x>300</x>
+             <y>490</y>
+             <width>111</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>START!</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
            </property>
           </widget>
          </widget>
@@ -305,6 +590,25 @@ text-align:center;
            </property>
            <property name="text">
             <string>Cali_Page</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="Calibrate_Start">
+           <property name="geometry">
+            <rect>
+             <x>300</x>
+             <y>430</y>
+             <width>111</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Calibrate</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
            </property>
           </widget>
          </widget>
@@ -338,7 +642,6 @@ text-align:center;
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="page_5"/>
         </widget>
        </item>
       </layout>
@@ -423,13 +726,47 @@ QPushButton:checked{
           <number>20</number>
          </property>
          <item>
-          <widget class="QPushButton" name="ModeO">
+          <widget class="QPushButton" name="TutorialO">
            <property name="text">
-            <string>Modes</string>
+            <string>Tutorial</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/images/icons8-teach-50.png</normaloff>:/images/icons8-teach-50.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="FreeO">
+           <property name="text">
+            <string>Free Mode</string>
            </property>
            <property name="icon">
             <iconset resource="resources.qrc">
              <normaloff>:/images/pngtree-sign-language-line-icon-vector-png-image_6682775.png</normaloff>:/images/pngtree-sign-language-line-icon-vector-png-image_6682775.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="QuizO">
+           <property name="text">
+            <string>Quiz</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/images/icons8-quiz-50.png</normaloff>:/images/icons8-quiz-50.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -568,12 +905,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>32</x>
-     <y>225</y>
+     <x>42</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>223</y>
+     <x>182</x>
+     <y>337</y>
     </hint>
    </hints>
   </connection>
@@ -584,12 +921,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>35</x>
-     <y>168</y>
+     <x>45</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
-     <x>99</x>
-     <y>171</y>
+     <x>181</x>
+     <y>287</y>
     </hint>
    </hints>
   </connection>
@@ -600,44 +937,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>26</x>
-     <y>127</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>99</x>
-     <y>125</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ModeC</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ModeO</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
      <x>36</x>
-     <y>75</y>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>75</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ModeO</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ModeC</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>163</x>
-     <y>66</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>32</x>
-     <y>71</y>
+     <x>181</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -648,12 +953,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>169</x>
-     <y>123</y>
+     <x>185</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
-     <x>37</x>
-     <y>113</y>
+     <x>47</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -664,12 +969,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>160</y>
+     <x>172</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
-     <x>38</x>
-     <y>166</y>
+     <x>48</x>
+     <y>287</y>
     </hint>
    </hints>
   </connection>
@@ -680,12 +985,12 @@ QPushButton:checked{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>140</x>
-     <y>209</y>
+     <x>185</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
-     <x>46</x>
-     <y>215</y>
+     <x>49</x>
+     <y>337</y>
     </hint>
    </hints>
   </connection>
@@ -701,7 +1006,7 @@ QPushButton:checked{
     </hint>
     <hint type="destinationlabel">
      <x>25</x>
-     <y>689</y>
+     <y>677</y>
     </hint>
    </hints>
   </connection>
@@ -717,7 +1022,103 @@ QPushButton:checked{
     </hint>
     <hint type="destinationlabel">
      <x>108</x>
-     <y>689</y>
+     <y>677</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TutorialO</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TutorialC</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TutorialC</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TutorialO</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>102</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FreeC</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>FreeO</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>102</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FreeO</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>FreeC</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>133</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>QuizO</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QuizC</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>QuizC</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QuizO</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>165</y>
     </hint>
    </hints>
   </connection>
