@@ -64,7 +64,7 @@ def detect_j(pinky_hand_landmarks):
 
     # Check if there are enough points to analyze
     if len(pinky_hand_landmarks) < 7:
-        return False, []
+        return False
     
     y_values = [point[1] for point in pinky_hand_landmarks]
 
@@ -116,7 +116,7 @@ def run_motion_module(letter):
             print("Failed to capture frame")
             break
         
-        text = letter.upper()
+        text = ''
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = hands.process(rgb_frame)
         
@@ -193,7 +193,7 @@ def run_motion_module(letter):
             # Draw pinky finger tip locations from the last 50 frames
             for x, y in pinky_finger_tip_locations:
                 cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
-                
+            
             j_found = detect_j(pinky_finger_tip_locations)
          
             if j_found or hold_j > 0:
