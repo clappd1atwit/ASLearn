@@ -36,6 +36,8 @@ def run_quiz():
     correct_color = (0, 200, 0)
     incorrect_color = (0, 0, 200)
     color = idle_color
+    
+    timer_length = 5
 
     counter = 0
     hold_correct = False
@@ -55,7 +57,7 @@ def run_quiz():
         results = hands.process(rgb_frame)
         
         text = quiz_letters[counter].upper()
-        elapsed_time = 3 - int(time.time() - start_time)
+        elapsed_time = timer_length - int(time.time() - start_time)
         time_text = str(elapsed_time)
         
         if elapsed_time < 1:

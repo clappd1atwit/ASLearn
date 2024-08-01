@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout,
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QMovie
 from PyQt6.QtGui import QFont
-from sandboxGUI_liam import MainWindow as SandboxMainWindow
+from basic_gui import MainWindow as SandboxMainWindow
 
 connection = sqlite3.connect("src/Database/Users.db")
 cursor = connection.cursor()
