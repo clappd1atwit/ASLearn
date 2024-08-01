@@ -11,8 +11,14 @@ class MySidebar(QMainWindow, Ui_MainWindow):
 
         self.Icon_name.setHidden(True)
 
-        self.TutorialO.clicked.connect(self.switch_to_modesPage)
-        self.TutorialC.clicked.connect(self.switch_to_modesPage)
+        self.TutorialO.clicked.connect(self.switch_to_TutorialPage)
+        self.TutorialC.clicked.connect(self.switch_to_TutorialPage)
+
+        self.QuizO.clicked.connect(self.switch_to_QuizPage)
+        self.QuizC.clicked.connect(self.switch_to_QuizPage)
+
+        self.FreeO.clicked.connect(self.switch_to_FreePage)
+        self.FreeC.clicked.connect(self.switch_to_FreePage)
 
         self.CaliO.clicked.connect(self.switch_to_CaliPage)
         self.CaliC.clicked.connect(self.switch_to_CaliPage)
@@ -23,14 +29,20 @@ class MySidebar(QMainWindow, Ui_MainWindow):
         self.TipsO.clicked.connect(self.switch_to_TipsPage)
         self.TipsC.clicked.connect(self.switch_to_TipsPage)
 
-    def switch_to_modesPage(self):
+    def switch_to_TutorialPage(self):
         self.stackedWidget.setCurrentIndex(0)
-    
-    def switch_to_CaliPage(self):
+
+    def switch_to_FreePage(self):
         self.stackedWidget.setCurrentIndex(1)
 
-    def switch_to_ContactPage(self):
+    def switch_to_QuizPage(self):
         self.stackedWidget.setCurrentIndex(2)
+    
+    def switch_to_CaliPage(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+    def switch_to_ContactPage(self):
+        self.stackedWidget.setCurrentIndex(4)
 
     def switch_to_TipsPage(self):
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(5)
