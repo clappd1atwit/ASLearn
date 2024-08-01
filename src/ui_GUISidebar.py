@@ -11,8 +11,8 @@ class MySidebar(QMainWindow, Ui_MainWindow):
 
         self.Icon_name.setHidden(True)
 
-        self..clicked.connect(self.switch_to_modesPage)
-        self.ModeC.clicked.connect(self.switch_to_modesPage)
+        self.TutorialO.clicked.connect(self.switch_to_modesPage)
+        self.TutorialC.clicked.connect(self.switch_to_modesPage)
 
         self.CaliO.clicked.connect(self.switch_to_CaliPage)
         self.CaliC.clicked.connect(self.switch_to_CaliPage)
