@@ -9,6 +9,11 @@
 import subprocess
 import sys
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import QCoreApplication
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
+from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtGui import QIcon, QPixmap, QMovie
+from PyQt6.QtGui import QFont
 
 
 class Ui_MainWindow(object):
@@ -255,12 +260,70 @@ class Ui_MainWindow(object):
         self.label_7.setGeometry(QtCore.QRect(470, 180, 49, 16))
         self.label_7.setObjectName("label_7")
         self.stackedWidget.addWidget(self.Contact_Page)
-        self.Tips_Page = QtWidgets.QWidget()
-        self.Tips_Page.setObjectName("Tips_Page")
-        self.label_9 = QtWidgets.QLabel(parent=self.Tips_Page)
-        self.label_9.setGeometry(QtCore.QRect(270, 140, 49, 16))
-        self.label_9.setObjectName("label_9")
+        #self.Tips_Page = QtWidgets.QWidget()
+        #self.Tips_Page.setObjectName("Tips_Page")
+        #self.label_9 = QtWidgets.QLabel(parent=self.Tips_Page)
+        #self.label_9.setGeometry(QtCore.QRect(270, 140, 49, 16))
+        #self.label_9.setObjectName("label_9")
+        #self.stackedWidget.addWidget(self.Tips_Page)
+
+        self.Tips_Page = QWidget()
+        self.Tips_Page.setObjectName(u"Tips_Page")
+        self.TipsForASL = QLabel(self.Tips_Page)
+        self.TipsForASL.setObjectName(u"TipsForASL")
+        self.TipsForASL.setGeometry(QtCore.QRect(10, 10, 421, 41))
+        font2 = QFont()
+        font2.setPointSize(20)
+        font2.setBold(True)
+        self.TipsForASL.setFont(font2)
+        self.TipsForASL.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.verticalLayoutWidget = QWidget(self.Tips_Page)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 170, 701, 421))
+        self.TipsLineup = QVBoxLayout(self.verticalLayoutWidget)
+        self.TipsLineup.setSpacing(0)
+        self.TipsLineup.setObjectName(u"TipsLineup")
+        self.TipsLineup.setContentsMargins(0, 0, 0, 0)
+        self.Tip1 = QLabel(self.verticalLayoutWidget)
+        self.Tip1.setObjectName(u"Tip1")
+        font3 = QFont()
+        font3.setPointSize(11)
+        font3.setBold(True)
+        self.Tip1.setFont(font3)
+        self.Tip1.setWordWrap(True)
+
+        self.TipsLineup.addWidget(self.Tip1)
+
+        self.Tip2 = QLabel(self.verticalLayoutWidget)
+        self.Tip2.setObjectName(u"Tip2")
+        self.Tip2.setFont(font3)
+        self.Tip2.setWordWrap(True)
+
+        self.TipsLineup.addWidget(self.Tip2)
+
+        self.Tip3 = QLabel(self.verticalLayoutWidget)
+        self.Tip3.setObjectName(u"Tip3")
+        self.Tip3.setFont(font3)
+        self.Tip3.setWordWrap(True)
+
+        self.TipsLineup.addWidget(self.Tip3)
+
+        self.Tip5 = QLabel(self.verticalLayoutWidget)
+        self.Tip5.setObjectName(u"Tip5")
+        self.Tip5.setFont(font3)
+        self.Tip5.setWordWrap(True)
+
+        self.TipsLineup.addWidget(self.Tip5)
+
+        self.Tip4 = QLabel(self.verticalLayoutWidget)
+        self.Tip4.setObjectName(u"Tip4")
+        self.Tip4.setFont(font3)
+        self.Tip4.setWordWrap(True)
+
+        self.TipsLineup.addWidget(self.Tip4)
+
         self.stackedWidget.addWidget(self.Tips_Page)
+
         self.verticalLayout_5.addWidget(self.stackedWidget)
         self.gridLayout.addWidget(self.widget_3, 0, 2, 1, 1)
         self.Icon_name = QtWidgets.QWidget(parent=self.centralwidget)
@@ -416,7 +479,18 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Cali_Page"))
         self.Calibrate_Start.setText(_translate("MainWindow", "Calibrate"))
         self.label_7.setText(_translate("MainWindow", "Contact_Page"))
-        self.label_9.setText(_translate("MainWindow", "Tips"))
+        #self.label_9.setText(_translate("MainWindow", "Tips"))
+
+
+        self.TipsForASL.setText(QCoreApplication.translate("MainWindow", u" Tips for ASL: ", None))
+        self.Tip1.setText(QCoreApplication.translate("MainWindow", u"1. Practice Regularly: Consistent practice helps you remember and improve your signing skills. That includes watching others and learning from native signers by observing and mimicking to improve accuracy and fluency.", None))
+        self.Tip2.setText(QCoreApplication.translate("MainWindow", u"2. Relax your Hands: Relaxing your hands means that you\u2019re able to sign at a greater speed, with more clarity, and for longer. Be clear with your form.", None))
+        self.Tip3.setText(QCoreApplication.translate("MainWindow", u"3. Focus on Facial Expressions: They are a great and crucial tool to use when it comes to communicationin by conveying tone and emotion in ASL.", None))
+        self.Tip5.setText(QCoreApplication.translate("MainWindow", u"4. Be clear in your form: Keeping your form in check is a considerate way to ensure that your message is completely understood by the end receiver. The dominant hand does most of the signing, while the non-dominant hand supports.", None))
+        self.Tip4.setText(QCoreApplication.translate("MainWindow", u"5. Practice on camera: That's why ASLearning is here for! Recording yourself signing on camera is an effective way to pick up on the points of weakness in your technique which you or others may have not noticed otherwise.", None))
+
+
+
         self.label_3.setText(_translate("MainWindow", "Options"))
         self.TutorialO.setText(_translate("MainWindow", "Tutorial"))
         self.FreeO.setText(_translate("MainWindow", "Free Mode"))
