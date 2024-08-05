@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import sqlite3
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QGridLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
@@ -98,6 +99,7 @@ class MainWindow(QMainWindow):
         self.login_window = LoginWindow()
         self.login_window.show()
         self.close()
+        
 
     def show_about(self):
         self.about_window = AboutUsPage()
@@ -185,9 +187,10 @@ class LoginWindow(QWidget):
             QMessageBox.warning(self, "Login Failed", "Invalid username or password")
 
     def open_main_window(self):
-        self.main_window = SandboxMainWindow()
-        self.main_window.show()
+        # self.main_window = SandboxMainWindow()
+        # self.main_window.show()
         self.close()
+        subprocess.Popen([sys.executable, r"src/ui_GUIMain.py"])
 
 class AboutUsPage(QWidget):
     def __init__(self):

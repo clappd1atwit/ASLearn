@@ -533,8 +533,8 @@ class Ui_MainWindow(object):
         self.CaliO.toggled['bool'].connect(self.CaliC.setChecked) # type: ignore
         self.ContactO.toggled['bool'].connect(self.ContactC.setChecked) # type: ignore
         self.TipsO.toggled['bool'].connect(self.TipsC.setChecked) # type: ignore
-        self.pushButton_6.toggled['bool'].connect(MainWindow.close) # type: ignore
-        self.pushButton_11.toggled['bool'].connect(MainWindow.close) # type: ignore
+        self.pushButton_6.toggled['bool'].connect(lambda checked: self.logout(MainWindow)) # type: ignore
+        self.pushButton_11.toggled['bool'].connect(lambda checked: self.logout(MainWindow)) # type: ignore
         self.TutorialO.toggled['bool'].connect(self.TutorialC.setChecked) # type: ignore
         self.TutorialC.toggled['bool'].connect(self.TutorialO.setChecked) # type: ignore
         self.FreeC.toggled['bool'].connect(self.FreeO.setChecked) # type: ignore
@@ -616,6 +616,9 @@ class Ui_MainWindow(object):
         subprocess.Popen([sys.executable, r"src/quiz_mode.py"])
     def update_text(self):
         self.currentLetter = self.comboBox.currentText()
+    def logout(self, MainWindow):
+        MainWindow.close()
+        subprocess.Popen([sys.executable, r"src/GUI.py"])
 
 
 if __name__ == "__main__":
