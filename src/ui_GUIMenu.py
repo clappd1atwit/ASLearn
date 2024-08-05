@@ -231,6 +231,7 @@ class Ui_MainWindow(object):
         self.Free_Start.setCheckable(False)
         self.Free_Start.setAutoExclusive(False)
         self.Free_Start.setObjectName("Free_Start")
+        self.Free_Start.clicked.connect(self.run_free)
         self.stackedWidget.addWidget(self.Free_Page)
         self.Quiz_Page = QtWidgets.QWidget()
         self.Quiz_Page.setObjectName("Quiz_Page")
@@ -242,8 +243,8 @@ class Ui_MainWindow(object):
         self.Quiz_Start.setCheckable(False)
         self.Quiz_Start.setAutoExclusive(False)
         self.Quiz_Start.setObjectName("Quiz_Start")
+        self.Quiz_Start.clicked.connect(self.run_quiz)
         self.stackedWidget.addWidget(self.Quiz_Page)
-
 
         self.Cali_Page = QtWidgets.QWidget()
         self.Cali_Page.setObjectName("Cali_Page")
@@ -255,6 +256,7 @@ class Ui_MainWindow(object):
         self.Calibrate_Start.setCheckable(False)
         self.Calibrate_Start.setAutoExclusive(False)
         self.Calibrate_Start.setObjectName("Calibrate_Start")
+        self.Calibrate_Start.clicked.connect(self.run_calibrate)
         self.stackedWidget.addWidget(self.Cali_Page)
 
 
@@ -606,6 +608,12 @@ class Ui_MainWindow(object):
     
     def run_module(self):
         subprocess.Popen([sys.executable, r"src/learn_modules.py", self.currentLetter.lower()])
+    def run_free(self):
+        subprocess.Popen([sys.executable, r"src/handtracking.py"])
+    def run_calibrate(self):
+        subprocess.Popen([sys.executable, r"src/hand_calibration.py"])
+    def run_quiz(self):
+        subprocess.Popen([sys.executable, r"src/quiz_mode.py"])
     def update_text(self):
         self.currentLetter = self.comboBox.currentText()
 

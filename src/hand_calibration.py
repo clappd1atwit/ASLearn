@@ -61,7 +61,6 @@ while cap.isOpened():
             for i, line in enumerate(lines):
                 if line.strip().startswith("handedness_calibration"):
                     # Replace line with new calibration
-                    print('found it')
                     lines[i] = hand
                     break
 

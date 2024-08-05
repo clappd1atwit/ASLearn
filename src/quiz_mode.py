@@ -7,11 +7,11 @@ from helpers.helpers import *
 from letters import *
 from modules.letter_modules import *
 
-
+num_letters = 10
 # Pick 10 random letters from the alphabet to quiz the user on
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'] # No 'j' or 'z'
 random.shuffle(alphabet)
-quiz_letters = alphabet[:10]
+quiz_letters = alphabet[:num_letters]
 
 def run_quiz():
     mp_hand = mp.solutions.hands
@@ -50,6 +50,11 @@ def run_quiz():
         ret, frame = cap.read()
         if not ret:
             print("Failed to capture frame")
+            break
+        
+        #TODO: Array index out of bounds exception
+        if counter >= num_letters:
+            print("Quiz finished")
             break
 
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -98,9 +103,6 @@ def run_quiz():
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.putText(frame, time_text, text_position_right, font, font_scale, idle_color, font_thickness)
         cv2.imshow("Quiz Mode", frame)
-
-        if counter >= 10:
-            break
 
         # Exit when 'q' key is pressed or window is x'ed out
         if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty('Quiz Mode', cv2.WND_PROP_VISIBLE) < 1:
