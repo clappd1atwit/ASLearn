@@ -64,11 +64,19 @@ def detect_j(pinky_hand_landmarks):
 
     # Check if there are enough points to analyze
     if len(pinky_hand_landmarks) < 7:
-        return False
+        return False, 0, 0, 0
     
+    x_values = [point[0] for point in pinky_hand_landmarks]
     y_values = [point[1] for point in pinky_hand_landmarks]
+    
+    xc, yc, R = fit_circle(x_values, y_values)
+    
+    residuals = np.sqrt((x_values - xc)**2 + (y_values - yc)**2) - R
+    
+    tolerance = 0.1  # Adjust tolerance as needed
+    is_circle_flag = np.all(np.abs(residuals) < tolerance) and is_circle(x_values, y_values, xc, yc, R)
 
-    return y_values[0] < y_values[int(len(y_values) / 2)] and y_values[-1] < y_values[int(len(y_values) / 2)]
+    return is_circle_flag, xc, yc, R
 
 def run_module_z(lms):
     pass
@@ -132,7 +140,8 @@ def run_motion_module(letter):
                         is_finger_closed(ring_tip(lms), ring_pip(lms), wrist(lms)) and
                         is_finger_closed(pinky_tip(lms), pinky_pip(lms), wrist(lms))):
                         
-                        index_finger_tip_locations.append((None, None))
+                        if not hold_z:
+                            index_finger_tip_locations.append((None, None))
                         continue
                     
                     # Get index finger tip location
@@ -141,9 +150,11 @@ def run_motion_module(letter):
                     index_finger_tip_y = int(index_tip(lms).y * image_height)
 
                     # Store index tip location
-                    index_finger_tip_locations.append((index_finger_tip_x, index_finger_tip_y))
+                    if not hold_z:
+                        index_finger_tip_locations.append((index_finger_tip_x, index_finger_tip_y))
             else:
-                index_finger_tip_locations.append((None, None))
+                if not hold_z:
+                    index_finger_tip_locations.append((None, None))
                 
             # Draw index finger tip locations from the last 50 frames
             for x, y in index_finger_tip_locations:
@@ -157,6 +168,7 @@ def run_motion_module(letter):
             
             if hold_z == 50:
                 hold_z = 0
+                index_finger_tip_locations.clear()
                 
             for corner in corners:
                 cv2.circle(frame, (int(corner[0]), int(corner[1])), 7, (0, 0, 255), -1)
@@ -194,7 +206,7 @@ def run_motion_module(letter):
             for x, y in pinky_finger_tip_locations:
                 cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
             
-            j_found = detect_j(pinky_finger_tip_locations)
+            j_found, xc, yc, R = detect_j(pinky_finger_tip_locations)
          
             if j_found or hold_j > 0:
                 text = 'J'
@@ -202,7 +214,8 @@ def run_motion_module(letter):
                 
             if hold_j == 50:
                 hold_j = 0
-        
+            if R > 0:
+                cv2.circle(frame, (xc, yc), R, (200, 0, 0), thickness=2)
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Hand Tracking", frame)
 

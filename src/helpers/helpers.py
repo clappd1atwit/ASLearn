@@ -1,8 +1,36 @@
 import mediapipe as mp
 import numpy as np
+from scipy.optimize import least_squares
 from helpers.hand_landmarks import *
 import math
 import config.config as cfg
+
+def fit_circle(x, y):
+    # Ensure x and y are numpy arrays
+    x = np.array(x)
+    y = np.array(y)
+    
+    def calc_R(xc, yc):
+        return np.sqrt((x - xc)**2 + (y - yc)**2)
+    
+    def residuals(params):
+        xc, yc = params
+        Ri = calc_R(xc, yc)
+        return Ri - Ri.mean()
+    
+    x_m = np.mean(x)
+    y_m = np.mean(y)
+    initial_guess = [x_m, y_m]
+    result = least_squares(residuals, initial_guess)
+    xc, yc = result.x
+    R = calc_R(xc, yc).mean()
+    return xc, yc, R
+
+
+def is_circle(x, y, xc, yc, R):
+    angles = np.arctan2(y - yc, x - xc)
+    angular_range = np.ptp(angles)
+    return np.isclose(angular_range, 2*np.pi, atol=0.1)
 
 def is_hand_open(lms):
 
@@ -58,7 +86,7 @@ def is_finger_open_slope(finger_tip, finger_pip, finger_mcp):
     cos_angle = dot_product / (magnitude_tip_pip * magnitude_mcp_pip)
     angle = math.degrees(math.acos(cos_angle))
     
-    return angle > 120
+    return angle > 100
     
 def is_finger_closed(finger_tip, finger_pip, wrist):
     if wrist.y > finger_pip.y:
@@ -80,7 +108,7 @@ def is_finger_closed_slope(finger_tip, finger_pip, finger_mcp):
     cos_angle = dot_product / (magnitude_tip_pip * magnitude_mcp_pip)
     angle = math.degrees(math.acos(cos_angle))
     
-    return angle < 100
+    return angle < 120
 
 def is_right_hand(results, lms):
     return results.multi_handedness[
