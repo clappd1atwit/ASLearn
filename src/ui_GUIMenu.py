@@ -271,15 +271,28 @@ class Ui_MainWindow(object):
         self.Tips_Page.setObjectName(u"Tips_Page")
         self.TipsForASL = QLabel(self.Tips_Page)
         self.TipsForASL.setObjectName(u"TipsForASL")
-        self.TipsForASL.setGeometry(QtCore.QRect(10, 10, 421, 41))
+        self.TipsForASL.setGeometry(QtCore.QRect(20, 20, 421, 41))
         font2 = QFont()
         font2.setPointSize(20)
         font2.setBold(True)
         self.TipsForASL.setFont(font2)
         self.TipsForASL.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+
+        gif_width = 180
+        gif_height = 180
+
+        self.label = QLabel(self.Tips_Page)
+        self.movie = QMovie(self.Tips_Page)
+        self.label.setGeometry(321,10,gif_width,gif_height)
+        self.movie = QMovie("src/images/youre welcome yas.gif")
+        self.movie.setScaledSize(self.label.size())
+        self.label.setMovie(self.movie)
+        self.movie.start()
+        #self.setFixedSize(self.movie.frameRect().width()+400, self.movie.frameRect().height()+400)
+
         self.verticalLayoutWidget = QWidget(self.Tips_Page)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 170, 701, 421))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 200, 701, 421))
         self.TipsLineup = QVBoxLayout(self.verticalLayoutWidget)
         self.TipsLineup.setSpacing(0)
         self.TipsLineup.setObjectName(u"TipsLineup")
