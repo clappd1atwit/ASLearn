@@ -243,6 +243,8 @@ class Ui_MainWindow(object):
         self.Quiz_Start.setAutoExclusive(False)
         self.Quiz_Start.setObjectName("Quiz_Start")
         self.stackedWidget.addWidget(self.Quiz_Page)
+
+
         self.Cali_Page = QtWidgets.QWidget()
         self.Cali_Page.setObjectName("Cali_Page")
         self.label_6 = QtWidgets.QLabel(parent=self.Cali_Page)
@@ -254,11 +256,97 @@ class Ui_MainWindow(object):
         self.Calibrate_Start.setAutoExclusive(False)
         self.Calibrate_Start.setObjectName("Calibrate_Start")
         self.stackedWidget.addWidget(self.Cali_Page)
+
+
+
         self.Contact_Page = QtWidgets.QWidget()
         self.Contact_Page.setObjectName("Contact_Page")
-        self.label_7 = QtWidgets.QLabel(parent=self.Contact_Page)
-        self.label_7.setGeometry(QtCore.QRect(470, 180, 49, 16))
-        self.label_7.setObjectName("label_7")
+        #self.label_7 = QtWidgets.QLabel(parent=self.Contact_Page)
+        #self.label_7.setGeometry(QtCore.QRect(470, 180, 49, 16))
+        #self.label_7.setObjectName("label_7")
+
+
+        self.pic_label1 = QLabel(self.Contact_Page)
+        self.pic_label1.setGeometry(185,0,325,225)
+        pixmap = QPixmap("src/images/all3_contact_us.jpeg")
+        self.pic_label1.setPixmap(pixmap)
+        self.pic_label1.setScaledContents(True)
+
+        layout = QVBoxLayout(self.Contact_Page)
+
+        font1 = QFont()
+        font1.setPointSize(16)
+        font1.setBold(True)
+
+        text_label1 = QLabel("Meet the Founders", self.Contact_Page)
+        text_label1.setFont(font1)
+        text_label1.setGeometry(255, 240, 200, 25)
+        self.Contact_Page.setLayout(layout)
+
+        font2_Contact = QFont()
+        font2_Contact.setPointSize(13)
+
+        font3_Contact = QFont()
+        font3_Contact.setPointSize(10)
+        font3_Contact.setItalic(True)
+
+        #Dan's contact and picture
+        self.pic_label2 = QLabel(self.Contact_Page)
+        self.pic_label2.setGeometry(50, 300, 125, 125)
+        pixmap = QPixmap("src/images/dan_headshot.jpeg")
+        self.pic_label2.setPixmap(pixmap)
+        self.pic_label2.setScaledContents(True)
+
+        text_label2 = QLabel("Dan Clapp", self.Contact_Page)
+        text_label2.setFont(font2_Contact)
+        text_label2.setGeometry(70, 430, 200, 25)
+        self.Contact_Page.setLayout(layout)
+
+        text_label3 = QLabel("clappd1@wit.edu",self.Contact_Page)
+        text_label3.setFont(font3_Contact)
+        text_label3.setGeometry(55, 450, 220, 25)
+        self.Contact_Page.setLayout(layout)
+
+
+        #Yass's contact and picture
+        self.pic_label3 = QLabel(self.Contact_Page)
+        self.pic_label3.setGeometry(290, 300, 125, 125)
+        pixmap = QPixmap("src/images/yasmina_headshot.jpeg")
+        self.pic_label3.setPixmap(pixmap)
+        self.pic_label3.setScaledContents(True)
+
+        text_label5 = QLabel("Yasmina Habchi", self.Contact_Page)
+        text_label5.setFont(font2_Contact)
+        text_label5.setGeometry(295, 430, 200, 25)
+        self.Contact_Page.setLayout(layout)
+
+        text_label6 = QLabel("habchiy@wit.edu",self.Contact_Page)
+        text_label6.setFont(font3_Contact)
+        text_label6.setGeometry(305, 450, 220, 25)
+        self.Contact_Page.setLayout(layout)
+
+      
+
+
+        #Liam's contact and picture
+        self.pic_label4 = QLabel(self.Contact_Page)
+        self.pic_label4.setGeometry(505, 300, 125, 125)
+        pixmap = QPixmap("src/images/liam_headshot.jpeg")
+        self.pic_label4.setPixmap(pixmap)
+        self.pic_label4.setScaledContents(True)
+
+        text_label8 = QLabel("Liam Nasr", self.Contact_Page)
+        text_label8.setFont(font2_Contact)
+        text_label8.setGeometry(530, 430, 200, 25)
+        self.Contact_Page.setLayout(layout)
+
+        text_label9 = QLabel("nasrl@wit.edu",self.Contact_Page)
+        text_label9.setFont(font3_Contact)
+        text_label9.setGeometry(527, 450, 220, 25)
+        self.Contact_Page.setLayout(layout)
+
+
+
         self.stackedWidget.addWidget(self.Contact_Page)
         #self.Tips_Page = QtWidgets.QWidget()
         #self.Tips_Page.setObjectName("Tips_Page")
@@ -272,10 +360,10 @@ class Ui_MainWindow(object):
         self.TipsForASL = QLabel(self.Tips_Page)
         self.TipsForASL.setObjectName(u"TipsForASL")
         self.TipsForASL.setGeometry(QtCore.QRect(20, 20, 421, 41))
-        font2 = QFont()
-        font2.setPointSize(20)
-        font2.setBold(True)
-        self.TipsForASL.setFont(font2)
+        font2_Tips = QFont()
+        font2_Tips.setPointSize(20)
+        font2_Tips.setBold(True)
+        self.TipsForASL.setFont(font2_Tips)
         self.TipsForASL.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
 
         gif_width = 180
@@ -299,38 +387,38 @@ class Ui_MainWindow(object):
         self.TipsLineup.setContentsMargins(0, 0, 0, 0)
         self.Tip1 = QLabel(self.verticalLayoutWidget)
         self.Tip1.setObjectName(u"Tip1")
-        font3 = QFont()
-        font3.setPointSize(11)
-        font3.setBold(True)
-        self.Tip1.setFont(font3)
+        font3_Tips = QFont()
+        font3_Tips.setPointSize(11)
+        font3_Tips.setBold(True)
+        self.Tip1.setFont(font3_Tips)
         self.Tip1.setWordWrap(True)
 
         self.TipsLineup.addWidget(self.Tip1)
 
         self.Tip2 = QLabel(self.verticalLayoutWidget)
         self.Tip2.setObjectName(u"Tip2")
-        self.Tip2.setFont(font3)
+        self.Tip2.setFont(font3_Tips)
         self.Tip2.setWordWrap(True)
 
         self.TipsLineup.addWidget(self.Tip2)
 
         self.Tip3 = QLabel(self.verticalLayoutWidget)
         self.Tip3.setObjectName(u"Tip3")
-        self.Tip3.setFont(font3)
+        self.Tip3.setFont(font3_Tips)
         self.Tip3.setWordWrap(True)
 
         self.TipsLineup.addWidget(self.Tip3)
 
         self.Tip5 = QLabel(self.verticalLayoutWidget)
         self.Tip5.setObjectName(u"Tip5")
-        self.Tip5.setFont(font3)
+        self.Tip5.setFont(font3_Tips)
         self.Tip5.setWordWrap(True)
 
         self.TipsLineup.addWidget(self.Tip5)
 
         self.Tip4 = QLabel(self.verticalLayoutWidget)
         self.Tip4.setObjectName(u"Tip4")
-        self.Tip4.setFont(font3)
+        self.Tip4.setFont(font3_Tips)
         self.Tip4.setWordWrap(True)
 
         self.TipsLineup.addWidget(self.Tip4)
@@ -491,7 +579,10 @@ class Ui_MainWindow(object):
         self.Quiz_Start.setText(_translate("MainWindow", "START!"))
         self.label_6.setText(_translate("MainWindow", "Cali_Page"))
         self.Calibrate_Start.setText(_translate("MainWindow", "Calibrate"))
-        self.label_7.setText(_translate("MainWindow", "Contact_Page"))
+        #self.label_7.setText(_translate("MainWindow", "Contact_Page"))
+
+
+
         #self.label_9.setText(_translate("MainWindow", "Tips"))
 
 
