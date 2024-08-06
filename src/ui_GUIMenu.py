@@ -290,6 +290,22 @@ class Ui_MainWindow(object):
         self.Calibrate_Start.setAutoExclusive(False)
         self.Calibrate_Start.setObjectName("Calibrate_Start")
         self.Calibrate_Start.clicked.connect(self.run_calibrate)
+        self.CalibrateHead = QLabel(self.Cali_Page)
+        self.CalibrateHead.setObjectName(u"CalibrateHead")
+        self.CalibrateHead.setGeometry(QtCore.QRect(0, 10, 271, 71))
+        self.CalibrateHead.setFont(font1)
+        self.CalibrateDis1 = QLabel(self.Cali_Page)
+        self.CalibrateDis1.setObjectName(u"CalibrateDis1")
+        self.CalibrateDis1.setGeometry(QtCore.QRect(100, 90, 531, 151))
+        self.CalibrateDis1.setFont(fontDis)
+        self.CalibrateDis1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.CalibrateDis1.setWordWrap(True)
+        self.CalibrateDis2 = QLabel(self.Cali_Page)
+        self.CalibrateDis2.setObjectName(u"CalibrateDis1")
+        self.CalibrateDis2.setGeometry(QtCore.QRect(100, 280, 531, 151))
+        self.CalibrateDis2.setFont(fontDis)
+        self.CalibrateDis2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.CalibrateDis2.setWordWrap(True)
         self.stackedWidget.addWidget(self.Cali_Page)
 
 
@@ -608,21 +624,19 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(24, _translate("MainWindow", "Y"))
         self.comboBox.setItemText(25, _translate("MainWindow", "Z"))
         self.Tutorial_Start.setText(_translate("MainWindow", "START!"))
-        self.TutorialDis.setText(QCoreApplication.translate("MainWindow", u"In this page you will select a letter from the box that you wish to practice. The program then responds by promting you on how to corretly position your hand via red and green highlights to determine if the hand is in the correct position. Select the letter of your choice and click start to begin!", None))
+        self.TutorialDis.setText(QCoreApplication.translate("MainWindow", u"In this page you will select a letter from the box that you wish to practice. The program then responds by promting you on how to correctly position your hand via red and green highlights to determine if the hand is in the correct position. Select the letter of your choice and click start to begin!", None))
         self.Free_Start.setText(_translate("MainWindow", "START!"))
         self.FreeHead.setText(QCoreApplication.translate("MainWindow", u"Free Mode!", None))
         self.Freedis.setText(QCoreApplication.translate("MainWindow", u"This page is quite simple, click the start button below to freely practice hand movement with no requirements, practicing to your heart's content!", None))
         self.Quiz_Start.setText(_translate("MainWindow", "START!"))
         self.QuizHead.setText(QCoreApplication.translate("MainWindow", u"Quiz Time!", None))
-        self.QuizDis1.setText(QCoreApplication.translate("MainWindow", u"In this module page you, the user, will be taking part in the Quiz Mode! Once you feel confident in your abilities, click the start button to test your skills!", None))
+        self.QuizDis1.setText(QCoreApplication.translate("MainWindow", u"In this page you, the user, will be taking part in the Quiz Mode! Once you feel confident in your abilities, click the start button to test your skills.", None))
         self.QuizDis2.setText(QCoreApplication.translate("MainWindow", u"How it works: Once you click the start button, you will then be prompted with a letter to sign, you will have a certain amount of time to get the letter correct", None))
-        self.label_6.setText(_translate("MainWindow", "Cali_Page"))
         self.Calibrate_Start.setText(_translate("MainWindow", "Calibrate"))
-        #self.label_7.setText(_translate("MainWindow", "Contact_Page"))
-
-
-
-        #self.label_9.setText(_translate("MainWindow", "Tips"))
+        self.CalibrateHead.setText(QCoreApplication.translate("MainWindow", u"Hand Calibration", None))
+        self.CalibrateDis1.setText(QCoreApplication.translate("MainWindow", u"Here you will calibrate the application to your camera. If your camera is mirrored, it will effect the results of the program, so this calibration is here to fix that!", None))
+        self.CalibrateDis2.setText(QCoreApplication.translate("MainWindow", u"To complete the calibration, simply hold up your right hand facing forward so that it is clearly and fully visible to the camera. ", None))
+  
 
 
         self.TipsForASL.setText(QCoreApplication.translate("MainWindow", u" Tips for ASL: ", None))
@@ -631,7 +645,6 @@ class Ui_MainWindow(object):
         self.Tip3.setText(QCoreApplication.translate("MainWindow", u"3. Focus on Facial Expressions: They are a great and crucial tool to use when it comes to communicationin by conveying tone and emotion in ASL.", None))
         self.Tip5.setText(QCoreApplication.translate("MainWindow", u"4. Be clear in your form: Keeping your form in check is a considerate way to ensure that your message is completely understood by the end receiver. The dominant hand does most of the signing, while the non-dominant hand supports.", None))
         self.Tip4.setText(QCoreApplication.translate("MainWindow", u"5. Practice on camera: That's why ASLearning is here for! Recording yourself signing on camera is an effective way to pick up on the points of weakness in your technique which you or others may have not noticed otherwise.", None))
-
 
 
         self.label_3.setText(_translate("MainWindow", "Options"))
