@@ -57,7 +57,6 @@ def detect_z(index_hand_landmarks):
 
     return False, corners
 
-# TODO: improve j detection module
 def detect_j(pinky_hand_landmarks):
     # Filter out None values
     pinky_hand_landmarks = [point for point in pinky_hand_landmarks if point[0] is not None and point[1] is not None]
@@ -71,10 +70,22 @@ def detect_j(pinky_hand_landmarks):
     
     xc, yc, R = fit_circle(x_values, y_values)
     
+    x_values = [point[0] for point in pinky_hand_landmarks if point[1] > yc]
+    y_values = [point[1] for point in pinky_hand_landmarks if point[1] > yc]
+    
+    # Check again if there are enough points to analyze
+    if not len(x_values):
+        return False, 0, 0, 0
+    
     residuals = np.sqrt((x_values - xc)**2 + (y_values - yc)**2) - R
     
-    tolerance = 0.1  # Adjust tolerance as needed
-    is_circle_flag = np.all(np.abs(residuals) < tolerance) and is_circle(x_values, y_values, xc, yc, R)
+    tolerance = 7.0  # Adjust tolerance as needed
+    #print(np.average(np.abs(residuals)), np.max(np.abs(residuals)), R)
+    is_circle_flag = (len(residuals) > 5 and 
+                      np.average(np.abs(residuals)) < tolerance and
+                      any(x < xc for x in x_values) and
+                      any(x > xc for x in x_values) and
+                      R > 70 and R < 150) #and is_circle(x_values, y_values, xc, yc, R)
 
     return is_circle_flag, xc, yc, R
 
@@ -105,7 +116,7 @@ def run_motion_module(letter):
 
     # Queue to store locations of index and pinky finger tips for the last 150 frames
     index_finger_tip_locations = deque(maxlen=50)
-    pinky_finger_tip_locations = deque(maxlen=50)
+    pinky_finger_tip_locations = deque(maxlen=30)
     
     hold_z = 0
     hold_j = 0
@@ -183,9 +194,9 @@ def run_motion_module(letter):
                     # Get index finger tip location
                     # Using finger_mcp instead of wrist because of the way the hand moves when signing 'j'
                     if not (
-                        is_finger_closed_slope(index_tip(lms), index_pip(lms), index_mcp(lms)) and
-                        is_finger_closed_slope(middle_tip(lms), middle_pip(lms), middle_mcp(lms)) and
-                        is_finger_closed_slope(ring_tip(lms), ring_pip(lms), ring_mcp(lms)) and
+                        # is_finger_closed_slope(index_tip(lms), index_pip(lms), index_mcp(lms)) and
+                        # is_finger_closed_slope(middle_tip(lms), middle_pip(lms), middle_mcp(lms)) and
+                        # is_finger_closed_slope(ring_tip(lms), ring_pip(lms), ring_mcp(lms)) and
                         is_finger_open_slope(pinky_tip(lms), pinky_pip(lms), pinky_mcp(lms))):
                         
                         pinky_finger_tip_locations.append((None, None))
@@ -214,13 +225,14 @@ def run_motion_module(letter):
                 
             if hold_j == 50:
                 hold_j = 0
-            if R > 0:
-                cv2.circle(frame, (xc, yc), R, (200, 0, 0), thickness=2)
+            if False: #R > 0: # Uncomment to show the circle being fit to the points
+                cv2.circle(frame, (int(xc), int(yc)), int(R), (200, 0, 0), thickness=2)
+                
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Hand Tracking", frame)
 
         # Exit when 'q' key is pressed
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty('Hand Tracking', cv2.WND_PROP_VISIBLE) < 1:
             break
 
     cap.release()
