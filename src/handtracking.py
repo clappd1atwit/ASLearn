@@ -1,10 +1,17 @@
 import cv2
 import mediapipe as mp
+import os
 
 from helpers.helpers import *
 from letters import *
 
 def main():
+    # Create a directory on the desktop to save captured frames -- TESTING 
+    desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+    save_dir = os.path.join(desktop, "CapturedFrames")
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
     mp_hand = mp.solutions.hands
     hands = mp_hand.Hands()
     mp_drawing = mp.solutions.drawing_utils
@@ -22,6 +29,8 @@ def main():
     font_thickness = 4
     text_position_left = (10, 80)
     color = (255, 50, 255)
+
+    frame_counter = 0  # Counter for naming saved frames
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -96,8 +105,14 @@ def main():
         cv2.imshow("Free Mode", frame)
 
         # Exit when 'q' key is pressed or window is x'ed out
-        if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty('Free Mode', cv2.WND_PROP_VISIBLE) < 1:
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord('q') or cv2.getWindowProperty('Free Mode', cv2.WND_PROP_VISIBLE) < 1:
             break
+        elif key == ord('c'):  # Save the current frame
+            frame_filename = os.path.join(save_dir, f"frame_{frame_counter:04d}.png")
+            cv2.imwrite(frame_filename, frame)
+            print(f"Frame saved: {frame_filename}")
+            frame_counter += 1
 
     cap.release()
     cv2.destroyAllWindows()

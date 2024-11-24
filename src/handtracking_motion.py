@@ -115,7 +115,7 @@ def run_motion_module(letter):
     color = (255, 50, 255)
 
     # Queue to store locations of index and pinky finger tips for the last 150 frames
-    index_finger_tip_locations = deque(maxlen=50)
+    index_finger_tip_locations = deque(maxlen=70)
     pinky_finger_tip_locations = deque(maxlen=30)
     
     hold_z = 0
