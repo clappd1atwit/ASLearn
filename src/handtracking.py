@@ -4,6 +4,10 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import os
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 def main():
     # Load the trained model
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
