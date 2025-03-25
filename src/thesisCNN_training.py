@@ -1,153 +1,72 @@
+import cv2
+import mediapipe as mp
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
-from tensorflow.keras.utils import to_categorical
-from sklearn.metrics import classification_report
-import os
+import tensorflow as tf
+import pickle
 
-# Path to processed data and label mapping
-desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-processed_data_path = os.path.join(desktop, "ProcessedData")
+# === Step 1: Load Trained Model and Preprocessing Tools ===
+model = tf.keras.models.load_model('asl_keypoint_cnn.h5')
 
-# Load preprocessed data
-print("Loading preprocessed data...")
-X_train = np.load(os.path.join(processed_data_path, "X_train.npy"))
-X_val = np.load(os.path.join(processed_data_path, "X_val.npy"))
-y_train = np.load(os.path.join(processed_data_path, "y_train.npy"))
-y_val = np.load(os.path.join(processed_data_path, "y_val.npy"))
+# Load label encoder
+with open('label_encoder.pkl', 'rb') as le_file:
+    label_encoder = pickle.load(le_file)
 
-# Load the label mapping
-print("Loading label mapping...")
-label_mapping_path = os.path.join(processed_data_path, "label_mapping.npy")
-label_to_int = np.load(label_mapping_path, allow_pickle=True).item()
-int_to_label = {v: k for k, v in label_to_int.items()}  # Reverse the mapping
+# Load scaler
+with open('scaler.pkl', 'rb') as scaler_file:
+    scaler = pickle.load(scaler_file)
 
-# Display the label mapping for verification
-print("Label Mapping:", label_to_int)
+# === Step 2: Initialize MediaPipe Hands ===
+mp_hands = mp.solutions.hands
+mp_drawing = mp.solutions.drawing_utils
+hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.8)
 
-# One-hot encode labels
-print("One-hot encoding labels...")
-num_classes = len(label_to_int)  # Number of classes matches the mapping
-y_train = to_categorical(y_train, num_classes)
-y_val = to_categorical(y_val, num_classes)
+# === Step 3: Start Webcam Capture ===
+cap = cv2.VideoCapture(0)
 
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
 
-model = Sequential([
-    Dense(256, activation='relu', input_shape=(X_train.shape[1],)),
-    BatchNormalization(),
-    Dropout(0.3),
-    Dense(128, activation='relu'),
-    Dropout(0.3),
-    Dense(num_classes, activation='softmax')
-])
-# # Define the CNN model
-# print("Building model...")
-# model = Sequential([
-#     Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
-#     Dropout(0.2),
-#     Dense(64, activation='relu'),
-#     Dropout(0.2),
-#     Dense(num_classes, activation='softmax')  # Output layer
-# ])
+    frame = cv2.flip(frame, 1)
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb_frame)
 
-# Compile the model
-print("Compiling model...")
-model.compile(optimizer='adam',
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+    prediction_text = ""
 
-# Train the model
-print("Training model...")
-history = model.fit(X_train, y_train,
-                    epochs=50,
-                    batch_size=32,
-                    validation_data=(X_val, y_val))
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-# Evaluate the model
-print("Evaluating model...")
-test_loss, test_accuracy = model.evaluate(X_val, y_val)
-print(f"Validation Accuracy: {test_accuracy}")
+            keypoints = []
+            for lm in hand_landmarks.landmark:
+                keypoints.append(lm.x)
+                keypoints.append(lm.y)
 
-# Generate a classification report
-print("Generating classification report...")
-y_pred = model.predict(X_val)
-y_pred_classes = np.argmax(y_pred, axis=1)
-y_true_classes = np.argmax(y_val, axis=1)
+            # Convert keypoints to numpy array and reshape for scaler
+            keypoints_np = np.array(keypoints).reshape(1, -1)
 
-# Map indices back to letter labels for the report
-target_names = [int_to_label[i] for i in range(num_classes)]
-valid_labels = list(range(num_classes))  # Ensure labels match the number of classes
+            # Scale keypoints using the same scaler from training
+            keypoints_scaled = scaler.transform(keypoints_np)
 
-print("\nClassification Report:")
-print(classification_report(y_true_classes, y_pred_classes, target_names=target_names, labels=valid_labels))
+            # Reshape for CNN prediction
+            keypoints_cnn = keypoints_scaled.reshape(-1, 21, 2, 1)
 
-# Save the trained model
-model_save_path = os.path.join(processed_data_path, "gesture_recognition_model.h5")
-model.save(model_save_path)
-print(f"Model saved to {model_save_path}")
+            # Make prediction
+            prediction = model.predict(keypoints_cnn)
+            predicted_class = np.argmax(prediction)
+            predicted_letter = label_encoder.inverse_transform([predicted_class])[0]
 
-# import numpy as np
-# from tensorflow.keras.models import Sequential
-# from tensorflow.keras.layers import Dense, Dropout
-# from tensorflow.keras.utils import to_categorical
-# from sklearn.metrics import classification_report
-# import os
+            prediction_text = f"Prediction: {predicted_letter} ({prediction[0][predicted_class]:.2f})"
 
-# # Path to processed data
-# desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-# processed_data_path = os.path.join(desktop, "ProcessedData")
+    # Display prediction on the screen
+    cv2.putText(frame, prediction_text, (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-# # Load preprocessed data
-# print("Loading preprocessed data...")
-# X_train = np.load(os.path.join(processed_data_path, "X_train.npy"))
-# X_val = np.load(os.path.join(processed_data_path, "X_val.npy"))
-# y_train = np.load(os.path.join(processed_data_path, "y_train.npy"))
-# y_val = np.load(os.path.join(processed_data_path, "y_val.npy"))
+    cv2.imshow("ASL Real-Time Recognition", frame)
 
-# # One-hot encode labels
-# print("One-hot encoding labels...")
-# num_classes = len(np.unique(y_train))+1  # Number of unique gestures (A-Z = 26) CHANGE WHEN DOING ALL LETTERS - ELIM(+1)
-# print(np.unique(y_train))
-# y_train = to_categorical(y_train, num_classes)
-# y_val = to_categorical(y_val, num_classes)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-# # Define the CNN model
-# print("Building model...")
-# model = Sequential([
-#     Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
-#     Dropout(0.2),
-#     Dense(64, activation='relu'),
-#     Dropout(0.2),
-#     Dense(num_classes, activation='softmax')  # Output layer
-# ])
-
-# # Compile the model
-# print("Compiling model...")
-# model.compile(optimizer='adam',
-#               loss='categorical_crossentropy',
-#               metrics=['accuracy'])
-
-# # Train the model
-# print("Training model...")
-# history = model.fit(X_train, y_train,
-#                     epochs=50,
-#                     batch_size=32,
-#                     validation_data=(X_val, y_val))
-
-# # Evaluate the model
-# print("Evaluating model...")
-# test_loss, test_accuracy = model.evaluate(X_val, y_val)
-# print(f"Validation Accuracy: {test_accuracy}")
-
-# # Generate a classification report
-# y_pred = model.predict(X_val)
-# y_pred_classes = np.argmax(y_pred, axis=1)
-# y_true_classes = np.argmax(y_val, axis=1)
-
-# print("\nClassification Report:")
-# print(classification_report(y_true_classes, y_pred_classes, target_names=[chr(i + 65) for i in range(num_classes-3)]))
-
-# # Save the trained model
-# model_save_path = os.path.join(processed_data_path, "gesture_recognition_model.h5")
-# model.save(model_save_path)
-# print(f"Model saved to {model_save_path}")
+cap.release()
+cv2.destroyAllWindows()
