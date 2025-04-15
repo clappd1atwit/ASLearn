@@ -3,6 +3,7 @@ import mediapipe as mp
 import numpy as np
 import tensorflow as tf
 import pickle
+import time  # <-- added
 
 # === Step 1: Load Trained Model and Preprocessing Tools ===
 model = tf.keras.models.load_model('asl_keypoint_cnn.h5')
@@ -22,6 +23,7 @@ hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.8)
 
 # === Step 3: Start Webcam Capture ===
 cap = cv2.VideoCapture(0)
+prev_time = time.time()  # <-- Track time for FPS
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -59,9 +61,17 @@ while cap.isOpened():
 
             prediction_text = f"Prediction: {predicted_letter} ({prediction[0][predicted_class]:.2f})"
 
-    # Display prediction on the screen
+    # === Calculate FPS ===
+    current_time = time.time()
+    fps = 1 / (current_time - prev_time)
+    prev_time = current_time
+
+    # Display prediction and FPS on screen
     cv2.putText(frame, prediction_text, (10, 50),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    cv2.putText(frame, f"FPS: {fps:.2f}", (10, 90),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
 
     cv2.imshow("ASL Real-Time Recognition", frame)
 
