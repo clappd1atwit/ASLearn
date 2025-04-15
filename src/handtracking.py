@@ -92,6 +92,7 @@
 import cv2
 import mediapipe as mp
 import os
+import time
 
 from helpers.helpers import *
 from letters import *
@@ -108,6 +109,7 @@ def main():
     mp_drawing = mp.solutions.drawing_utils
 
     cap = cv2.VideoCapture(0)
+    prev_time = time.time()
     
     cv2.namedWindow("Free Mode", cv2.WINDOW_NORMAL)
     
@@ -121,6 +123,12 @@ def main():
     text_position_left = (10, 80)
     color = (255, 50, 255)
 
+  # === Calculate FPS ===
+    current_time = time.time()
+    fps = 1 / (current_time - prev_time)
+    prev_time = current_time
+
+
     frame_counter = 0  # Counter for naming saved frames
 
     while cap.isOpened():
@@ -128,6 +136,11 @@ def main():
         if not ret:
             print("Failed to capture frame")
             break
+        
+        # === Calculate FPS ===
+        current_time = time.time()
+        fps = 1 / (current_time - prev_time)
+        prev_time = current_time
 
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -191,7 +204,8 @@ def main():
                     text = 'Y'
                 elif is_letter_z(results, landmarks):
                     text = 'Z'
-                
+        cv2.putText(frame, f"FPS: {fps:.2f}", (10, 90),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
         cv2.putText(frame, text, text_position_left, font, font_scale, color, font_thickness)
         cv2.imshow("Free Mode", frame)
 
