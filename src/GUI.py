@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout,
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QMovie
 from PyQt6.QtGui import QFont
-from basic_gui import MainWindow as SandboxMainWindow
+#from basic_gui import MainWindow as SandboxMainWindow
 
 connection = sqlite3.connect("src/Database/Users.db")
 cursor = connection.cursor()
@@ -88,7 +88,7 @@ class MainWindow(QMainWindow):
         self.contact_button.clicked.connect(self.show_contact)
         layout.addWidget(self.contact_button)
 
-        self.setLayout(layout)
+        #self.setLayout(layout)
 
         container = QWidget(self)
         container.setLayout(layout)
@@ -187,10 +187,15 @@ class LoginWindow(QWidget):
             QMessageBox.warning(self, "Login Failed", "Invalid username or password")
 
     def open_main_window(self):
-        # self.main_window = SandboxMainWindow()
-        # self.main_window.show()
+        #self.main_window = SandboxMainWindow()
+        #self.main_window.show()
+        print("Launching main GUI...")
         self.close()
-        subprocess.Popen([sys.executable, r"src/ui_GUIMain.py"])
+        try:
+            print('gg')
+            subprocess.Popen([sys.executable, r"src/ui_GUIMain.py"])
+        except Exception as e:
+            print(f"Failed to launch: {e}")
 
 class AboutUsPage(QWidget):
     def __init__(self):

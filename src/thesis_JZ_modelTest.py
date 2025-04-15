@@ -53,7 +53,7 @@ while cap.isOpened():
                 predicted_label = label_encoder.inverse_transform([predicted_index])[0]
                 confidence = np.max(prediction)
 
-                if confidence > 0.8:  # Optional: confidence threshold
+                if confidence > 0.6:  # Optional: confidence threshold
                     cv2.putText(frame, f"Predicted: {predicted_label} ({confidence:.2f})",
                                 (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2)
     else:
